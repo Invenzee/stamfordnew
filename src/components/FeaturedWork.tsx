@@ -131,9 +131,9 @@ export default function FeaturedWork({
             {books.map((book) => (
               <div
                 key={book.id}
-                className="w-[calc((100%-0px)/1)] min-w-[calc((100%-0px)/1)] shrink-0 rounded-2xl bg-primary-dark p-4 shadow-lg sm:w-[calc((100%-1rem)/2)] sm:min-w-[calc((100%-1rem)/2)] sm:p-5 lg:w-[calc((100%-3.75rem)/4)] lg:min-w-[calc((100%-3.75rem)/4)]"
+                className="w-[calc((100%-0px)/1)] min-w-[calc((100%-0px)/1)] shrink-0 overflow-hidden rounded-2xl shadow-lg sm:w-[calc((100%-1rem)/2)] sm:min-w-[calc((100%-1rem)/2)] lg:w-[calc((100%-3.75rem)/4)] lg:min-w-[calc((100%-3.75rem)/4)]"
               >
-                <div className="aspect-[2/3] w-full overflow-hidden rounded-lg bg-black/15">
+                <div className="aspect-[2/3] w-full">
                   <Image
                     src={book.image}
                     alt={book.alt}

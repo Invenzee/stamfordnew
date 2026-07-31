@@ -89,9 +89,8 @@ export default function CoverDesignShowcase() {
             <span className="h-px w-10 bg-white/50" aria-hidden="true" />
           </div>
 
-          <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-            <span className="text-white">Our Design</span>{" "}
-            <span className="text-highlight">Showcase</span>
+          <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold text-white sm:text-[42px] lg:text-[48px]">
+            Our Design Showcase
           </h2>
 
           <p className="mx-auto mt-4 max-w-lg font-body text-sm leading-relaxed text-white/85 sm:text-[15px]">
@@ -119,13 +118,13 @@ export default function CoverDesignShowcase() {
               return (
                 <div
                   key={cover.id}
-                  className={`w-[calc((100%-0px)/1)] min-w-[calc((100%-0px)/1)] shrink-0 rounded-2xl p-3 transition-all duration-300 sm:w-[calc((100%-1rem)/2)] sm:min-w-[calc((100%-1rem)/2)] sm:p-4 lg:w-[calc((100%-3.75rem)/4)] lg:min-w-[calc((100%-3.75rem)/4)] ${
+                  className={`w-[calc((100%-0px)/1)] min-w-[calc((100%-0px)/1)] shrink-0 overflow-hidden rounded-2xl transition-all duration-300 sm:w-[calc((100%-1rem)/2)] sm:min-w-[calc((100%-1rem)/2)] lg:w-[calc((100%-3.75rem)/4)] lg:min-w-[calc((100%-3.75rem)/4)] ${
                     isFocused
-                      ? "bg-white/15 ring-2 ring-secondary shadow-xl"
-                      : "bg-primary-dark/40 ring-2 ring-white/20 shadow-lg"
+                      ? "shadow-xl"
+                      : "shadow-lg opacity-90"
                   }`}
                 >
-                  <div className="aspect-[2/3] w-full overflow-hidden rounded-xl bg-black/15">
+                  <div className="aspect-[2/3] w-full">
                     <Image
                       src={cover.image}
                       alt={cover.alt}

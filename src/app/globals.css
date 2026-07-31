@@ -26,11 +26,11 @@
   --hero-bg-end: #fde8e8;
   --hero-bg-accent: #fce4e0;
   --border: #e2e8f0;
-  --footer-gradient-start: #0f172b;
-  --footer-gradient-end: #080d18;
+  --footer-gradient-start: #e96a29;
+  --footer-gradient-end: #e62e56;
   --footer-cta-call: #0f172b;
   --footer-cta-chat: #e62e56;
-  --footer-heading-line: #e96a29;
+  --footer-heading-line: rgba(255, 255, 255, 0.45);
 }
 
 @theme inline {
@@ -91,7 +91,9 @@ h6 {
   font-family: var(--font-heading);
 }
 
-/* Dark sections — headings must stay light (global heading color is for light backgrounds) */
+/* Brand gradient sections — all text must stay readable (no dark/gradient-on-gradient) */
+.bg-highlight,
+.bg-footer-gradient,
 .bg-legacy-cta,
 .bg-about-hero,
 .bg-contact-hero,
@@ -99,10 +101,30 @@ h6 {
   color: #ffffff;
 }
 
+.bg-highlight :where(h1, h2, h3, h4, h5, h6),
+.bg-footer-gradient :where(h1, h2, h3, h4, h5, h6),
 .bg-legacy-cta :where(h1, h2, h3, h4, h5, h6),
 .bg-about-hero :where(h1, h2, h3, h4, h5, h6),
 .bg-contact-hero :where(h1, h2, h3, h4, h5, h6),
 .bg-policy-hero :where(h1, h2, h3, h4, h5, h6) {
+  color: #ffffff;
+}
+
+.bg-highlight .text-heading,
+.bg-footer-gradient .text-heading,
+.bg-legacy-cta .text-heading,
+.bg-about-hero .text-heading,
+.bg-contact-hero .text-heading,
+.bg-policy-hero .text-heading,
+.bg-highlight .text-highlight,
+.bg-footer-gradient .text-highlight,
+.bg-legacy-cta .text-highlight,
+.bg-about-hero .text-highlight,
+.bg-contact-hero .text-highlight,
+.bg-policy-hero .text-highlight {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
   color: #ffffff;
 }
 
@@ -147,20 +169,22 @@ h6 {
 }
 
 .bg-footer-gradient {
-  background: linear-gradient(
-    180deg,
-    var(--footer-gradient-start) 0%,
-    var(--footer-gradient-end) 100%
+  background-color: var(--highlight-start);
+  background-image: linear-gradient(
+    165deg,
+    var(--highlight-start) 0%,
+    var(--highlight-end) 55%,
+    var(--accent-dark) 100%
   );
 }
 
 .bg-about-hero {
-  background-color: var(--heading);
+  background-color: var(--highlight-start);
   background-image: linear-gradient(
     135deg,
-    var(--heading) 0%,
-    var(--heading-dark) 55%,
-    var(--footer-gradient-end) 100%
+    var(--highlight-start) 0%,
+    var(--highlight-end) 55%,
+    var(--accent-dark) 100%
   );
 }
 
@@ -201,23 +225,24 @@ h6 {
 }
 
 .bg-contact-hero {
-  background-color: var(--heading);
+  background-color: var(--highlight-start);
   background-image: linear-gradient(
     115deg,
-    var(--heading) 60%,
-    var(--heading-dark) 60%
+    var(--highlight-start) 0%,
+    var(--highlight-end) 65%,
+    var(--accent-dark) 100%
   );
 }
 
 .bg-policy-hero {
-  background-color: var(--heading);
+  background-color: var(--highlight-start);
   background-image: linear-gradient(
     135deg,
-    var(--heading) 0%,
-    var(--heading-dark) 45%,
-    var(--footer-gradient-end) 100%
+    var(--highlight-start) 0%,
+    var(--highlight-end) 50%,
+    var(--accent-dark) 100%
   );
-  border-top: 1px solid rgba(233, 106, 41, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .policy-prose {
@@ -292,12 +317,12 @@ h6 {
 }
 
 .bg-legacy-cta {
-  background-color: var(--heading-dark);
+  background-color: var(--highlight-start);
   background-image: linear-gradient(
     160deg,
-    var(--heading) 0%,
-    #1a2540 45%,
-    var(--footer-gradient-end) 100%
+    var(--highlight-start) 0%,
+    var(--highlight-end) 52%,
+    var(--accent-dark) 100%
   );
 }
 
@@ -313,10 +338,12 @@ h6 {
 }
 
 .bg-highlight {
-  background: linear-gradient(
+  background-color: var(--highlight-start);
+  background-image: linear-gradient(
     135deg,
     var(--highlight-start) 0%,
-    var(--highlight-end) 100%
+    var(--highlight-end) 55%,
+    var(--accent-dark) 100%
   );
 }
 
@@ -425,6 +452,7 @@ h6 {
   border-color: rgba(255, 255, 255, 0.3);
 }
 
+.bg-footer-gradient .btn-secondary,
 .bg-legacy-cta .btn-secondary,
 .btn-secondary.btn-on-dark {
   background: rgba(255, 255, 255, 0.08);
@@ -432,6 +460,7 @@ h6 {
   color: #ffffff;
 }
 
+.bg-footer-gradient .btn-secondary:hover,
 .bg-legacy-cta .btn-secondary:hover,
 .btn-secondary.btn-on-dark:hover {
   background: rgba(255, 255, 255, 0.15);
