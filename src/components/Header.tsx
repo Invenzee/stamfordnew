@@ -14,7 +14,7 @@ export default function Header() {
         <div className="site-container flex items-center justify-between gap-6 py-4">
           <Link href="/" className="flex shrink-0 items-center">
             <Image
-              src="/logo.png"
+              src="/zesty-logo.png"
               alt="Stamford Publishers"
               width={160}
               height={64}
