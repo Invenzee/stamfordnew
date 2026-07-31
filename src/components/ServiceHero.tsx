@@ -1,6 +1,5 @@
 import {
   Check,
-  ChevronDown,
   Mail,
   MessageCircle,
   MessageSquare,
@@ -9,6 +8,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { routes } from "@/data/routes";
 
 export type ServiceHeroFeature = {
   label: string;
@@ -90,13 +90,13 @@ export default function ServiceHero({
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button
-                type="button"
+              <Link
+                href={routes.contact}
                 className="btn btn-secondary btn-md"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                Live Chat
-              </button>
+                Get A Quote
+              </Link>
               <a
                 href="tel:+15625732551"
                 className="btn btn-primary btn-md"
@@ -168,25 +168,16 @@ export default function ServiceHero({
                   >
                     Phone Number
                   </label>
-                  <div className="relative flex items-center">
-                    <div className="absolute left-3 flex items-center gap-1">
-                      <span className="text-base leading-none" aria-hidden="true">
-                        🇵🇰
-                      </span>
-                      <ChevronDown
-                        className="h-3 w-3 text-black/40"
-                        aria-hidden="true"
-                      />
-                    </div>
+                  <div className="relative">
                     <Phone
-                      className="absolute top-1/2 left-14 h-4 w-4 -translate-y-1/2 text-black/40"
+                      className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-black/40"
                       aria-hidden="true"
                     />
                     <input
                       id={`${formIdPrefix}-phone`}
                       type="tel"
                       placeholder="Your phone number"
-                      className="w-full rounded-lg border border-border bg-white py-2.5 pr-3 pl-[4.5rem] font-body text-sm text-black placeholder:text-black/40 focus:border-secondary focus:outline-none"
+                      className="w-full rounded-lg border border-border bg-white py-2.5 pr-3 pl-10 font-body text-sm text-black placeholder:text-black/40 focus:border-secondary focus:outline-none"
                     />
                   </div>
                 </div>

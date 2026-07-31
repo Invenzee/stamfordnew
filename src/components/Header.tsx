@@ -55,10 +55,10 @@ export default function Header() {
                 <span className="hidden sm:inline">+1 562 573 2551</span>
               </a>
               <Link
-                href="/quote"
+                href={routes.contact}
                 className="btn btn-primary btn-md-pill btn-quote hidden sm:block sm:px-5 max-sm:hidden"
               >
-                GET QUOTE
+                GET A QUOTE
               </Link>
               <MobileMenu />
             </div>

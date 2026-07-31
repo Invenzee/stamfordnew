@@ -53,14 +53,6 @@ export default function AboutMission() {
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
                 </div>
-
-                <div
-                  className="absolute -bottom-3 -left-3 rounded-lg border-2 border-accent-gold bg-card-warm px-5 py-3 shadow-md sm:-left-5"
-                >
-                  <span className="font-heading text-lg font-bold tracking-wide text-secondary sm:text-xl">
-                    ABOUT US
-                  </span>
-                </div>
               </div>
             </div>
 

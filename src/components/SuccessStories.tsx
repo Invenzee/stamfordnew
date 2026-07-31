@@ -52,13 +52,13 @@ export default function SuccessStories() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button
-                type="button"
+              <Link
+                href={routes.contact}
                 className="btn btn-secondary btn-md btn-on-dark"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Get A Quote
-              </button>
+              </Link>
               <Link
                 href={routes.contact}
                 className="btn btn-primary btn-md btn-on-dark"

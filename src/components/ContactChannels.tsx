@@ -1,6 +1,5 @@
 import {
   Check,
-  ChevronDown,
   Mail,
   MapPin,
   MessageSquare,
@@ -14,7 +13,7 @@ const channels = [
     number: "01",
     icon: MapPin,
     title: "Our Headquarters",
-    lines: ["515 Camino Del Rio S #318", "San Diego, California, 92108"],
+    lines: ["1001 Wilshire Boulevard #1439", "Los Angeles, CA 90017"],
   },
   {
     number: "02",
@@ -164,25 +163,16 @@ export default function ContactChannels() {
                 >
                   Phone Number
                 </label>
-                <div className="relative flex items-center">
-                  <div className="absolute left-3 flex items-center gap-1">
-                    <span className="text-base leading-none" aria-hidden="true">
-                      🇵🇰
-                    </span>
-                    <ChevronDown
-                      className="h-3 w-3 text-black/40"
-                      aria-hidden="true"
-                    />
-                  </div>
+                <div className="relative">
                   <Phone
-                    className="absolute top-1/2 left-14 h-4 w-4 -translate-y-1/2 text-black/40"
+                    className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-black/40"
                     aria-hidden="true"
                   />
                   <input
                     id="contact-phone"
                     type="tel"
                     placeholder="Your phone number"
-                    className="w-full rounded-lg border border-border bg-white py-2.5 pr-3 pl-[4.5rem] font-body text-sm text-black placeholder:text-black/40 focus:border-secondary focus:outline-none"
+                    className="w-full rounded-lg border border-border bg-white py-2.5 pr-3 pl-10 font-body text-sm text-black placeholder:text-black/40 focus:border-secondary focus:outline-none"
                   />
                 </div>
               </div>

@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { MessageCircle, Phone } from "lucide-react";
+import { routes } from "@/data/routes";
 
 type ServicePageCTAProps = {
   tagline: string;
@@ -69,13 +71,13 @@ export default function ServicePageCTA({
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button
-                type="button"
+              <Link
+                href={routes.contact}
                 className={`${buttonClass} btn-secondary`}
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Get A Quote
-              </button>
+              </Link>
               <a
                 href="tel:+15625732551"
                 className={`${buttonClass} btn-primary`}

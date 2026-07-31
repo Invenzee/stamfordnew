@@ -258,7 +258,7 @@ export default function PrivacyPolicyPage() {
           <a href="mailto:info@stamfordpublishers.com">
             info@stamfordpublishers.com
           </a>{" "}
-          or call us at <a href="tel:+12482328458">+1 (248) 232-8458</a>.
+          or call us at <a href="tel:+15625732551">+1 562 573 2551</a>.
         </p>
 
         <h3>Compliance</h3>
@@ -293,7 +293,7 @@ export default function PrivacyPolicyPage() {
             info@stamfordpublishers.com
           </a>
           <br />
-          Phone: <a href="tel:+12482328458">+1 (248) 232-8458</a>
+          Phone: <a href="tel:+15625732551">+1 562 573 2551</a>
           <br />
           Address: 1001 Wilshire Boulevard #1439, Los Angeles, CA 90017
         </p>

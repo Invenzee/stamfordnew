@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex items-center">
               <Image
-                src="/logo.png"
+                src="/white-logo.png"
                 alt="Stamford Publishers"
                 width={160}
                 height={64}
@@ -115,7 +115,7 @@ export default function Footer() {
                 className="btn btn-secondary btn-footer btn-full btn-on-dark"
               >
                 <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-                Live Chat
+                Get A Quote
               </Link>
             </div>
           </div>

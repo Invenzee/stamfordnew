@@ -134,11 +134,11 @@ export default function MobileMenu() {
                 +1 562 573 2551
               </a>
               <Link
-                href="/quote"
+                href={routes.contact}
                 onClick={close}
                 className="btn btn-primary btn-md-pill btn-quote btn-full"
               >
-                Get Quote
+                Get A Quote
               </Link>
             </div>
           </div>
