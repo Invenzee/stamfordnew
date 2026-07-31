@@ -1,0 +1,172 @@
+"use client";
+
+import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { bookCovers, type BookCover } from "@/data/bookCovers";
+
+export type FeaturedWorkBook = BookCover;
+
+type FeaturedWorkProps = {
+  tagline?: string;
+  heading?: string;
+  description?: string;
+  books?: FeaturedWorkBook[];
+};
+
+const DEFAULT_BOOKS: FeaturedWorkBook[] = bookCovers;
+
+const AUTOPLAY_INTERVAL = 4000;
+
+export default function FeaturedWork({
+  tagline = "Writing Support",
+  heading = "Expert Writing Guidance Aligned with Your Goals",
+  description = "At Stamford Publishers, we offer personalized writing support designed around your ideas, timeline, and publishing goals. From developing your initial concept to refining the final manuscript, our team helps shape your book with clarity, structure, and attention to every important detail.",
+  books = DEFAULT_BOOKS,
+}: FeaturedWorkProps) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [hasMounted, setHasMounted] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const maxIndex = Math.max(0, books.length - visibleCount);
+  const slideCount = maxIndex + 1;
+
+  const updateVisibleCount = useCallback(() => {
+    const width = window.innerWidth;
+    if (width < 640) {
+      setVisibleCount(1);
+    } else if (width < 1024) {
+      setVisibleCount(2);
+    } else {
+      setVisibleCount(4);
+    }
+  }, []);
+
+  const updateOffset = useCallback(() => {
+    const track = trackRef.current;
+    if (!track?.children[activeIndex]) return;
+
+    const card = track.children[activeIndex] as HTMLElement;
+    setOffset(card.offsetLeft);
+  }, [activeIndex]);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMounted) return;
+
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, [hasMounted, updateVisibleCount]);
+
+  useEffect(() => {
+    if (!hasMounted) return;
+
+    setActiveIndex((current) => Math.min(current, maxIndex));
+  }, [hasMounted, maxIndex]);
+
+  useEffect(() => {
+    if (!hasMounted) return;
+
+    updateOffset();
+    window.addEventListener("resize", updateOffset);
+    return () => window.removeEventListener("resize", updateOffset);
+  }, [hasMounted, updateOffset]);
+
+  useEffect(() => {
+    if (!hasMounted || isPaused) return;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current >= maxIndex ? 0 : current + 1));
+    }, AUTOPLAY_INTERVAL);
+
+    return () => window.clearInterval(interval);
+  }, [hasMounted, isPaused, maxIndex]);
+
+  const goToSlide = (index: number) => {
+    setActiveIndex(Math.min(index, maxIndex));
+  };
+
+  return (
+    <section className="bg-primary py-16 lg:py-20">
+      <div className="site-container">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-white" aria-hidden="true" />
+              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-white uppercase">
+                {tagline}
+              </span>
+            </div>
+
+            <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold text-white sm:text-[42px] lg:text-[48px]">
+              {heading}
+            </h2>
+          </div>
+
+          <p className="max-w-xs font-heading text-sm leading-relaxed text-white/90 lg:text-right lg:text-[15px]">
+            {description}
+          </p>
+        </div>
+
+        <div
+          className="mt-12 overflow-hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div
+            ref={trackRef}
+            className="flex gap-4 transition-transform duration-500 ease-out sm:gap-5"
+            style={
+              hasMounted
+                ? { transform: `translateX(-${offset}px)` }
+                : undefined
+            }
+          >
+            {books.map((book) => (
+              <div
+                key={book.id}
+                className="w-[calc((100%-0px)/1)] min-w-[calc((100%-0px)/1)] shrink-0 rounded-2xl bg-primary-dark p-4 shadow-lg sm:w-[calc((100%-1rem)/2)] sm:min-w-[calc((100%-1rem)/2)] sm:p-5 lg:w-[calc((100%-3.75rem)/4)] lg:min-w-[calc((100%-3.75rem)/4)]"
+              >
+                <div className="aspect-[2/3] w-full overflow-hidden rounded-lg bg-black/15">
+                  <Image
+                    src={book.image}
+                    alt={book.alt}
+                    width={400}
+                    height={600}
+                    className="h-full w-full object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 flex items-center justify-center gap-2.5">
+          {Array.from({ length: slideCount }, (_, index) => (
+            <button
+              key={index}
+              type="button"
+              aria-label={`Go to slide ${index + 1}`}
+              {...(hasMounted && activeIndex === index
+                ? { "aria-current": true }
+                : {})}
+              onClick={() => goToSlide(index)}
+              className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                activeIndex === index
+                  ? "bg-secondary"
+                  : "bg-white/30 hover:bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

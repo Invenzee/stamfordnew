@@ -1,0 +1,42 @@
+---
+description: Marketing website theme and styling conventions
+alwaysApply: true
+---
+
+# Stamford Marketing Website
+
+This is a marketing website. Keep UI polished, content-focused, and on-brand.
+
+## Styling
+
+- Use **Tailwind CSS utility classes only** for styling in components.
+- **Never use hex colors (`#...`) in `.jsx` or `.tsx` files.** Use theme classes instead:
+  - `text-primary` / `bg-primary` — primary green
+  - `text-secondary` / `bg-secondary` — secondary blue
+  - `text-black` / `bg-black` / `text-white` / `bg-white`
+  - `text-foreground` / `bg-background`
+- Hex values live in `src/app/globals.css` only.
+
+## Typography
+
+- **Headings:** `font-heading` (Playfair Display)
+- **Body / descriptions:** `font-body` or default (Arial)
+
+## Icons
+
+- Use **Lucide React** (`lucide-react`) for all icons globally.
+- Import icons directly: `import { Phone, ChevronDown } from "lucide-react"`
+- Do not use inline SVGs or other icon libraries.
+- Size with Tailwind classes: `className="h-4 w-4"`
+
+## Examples
+
+```tsx
+// BAD — hex in component
+<h1 className="text-[#63AC48]">Title</h1>
+
+// GOOD — theme classes
+<h1 className="font-heading text-primary text-4xl">Title</h1>
+<p className="font-body text-foreground">Description text</p>
+<button className="bg-secondary text-white">CTA</button>
+```
