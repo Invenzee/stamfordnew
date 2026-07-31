@@ -61,22 +61,14 @@ export default function Footer() {
       <div className="site-container py-16 lg:py-20">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-3">
+            <Link href="/" className="inline-flex items-center">
               <Image
-                src="/logo.svg"
-                alt=""
-                width={48}
-                height={48}
-                className="h-12 w-12 brightness-0 invert"
+                src="/logo.png"
+                alt="Stamford Publishers"
+                width={160}
+                height={64}
+                className="h-14 w-auto"
               />
-              <div className="flex flex-col leading-none">
-                <span className="font-heading text-lg font-semibold tracking-wide text-white">
-                  STAMFORD
-                </span>
-                <span className="mt-1 font-body text-[8px] font-bold tracking-[0.35em] text-white/80">
-                  PUBLISHERS
-                </span>
-              </div>
             </Link>
 
             <p className="mt-6 max-w-sm font-body text-sm leading-relaxed text-white/80">
@@ -113,14 +105,14 @@ export default function Footer() {
             <div className="mt-6 space-y-3">
               <a
                 href="tel:+15625732551"
-                className="flex w-full items-center justify-center gap-2 rounded-lg border border-white/30 bg-footer-cta-call px-4 py-3.5 font-heading text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                className="btn btn-primary btn-footer btn-full btn-on-dark"
               >
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                 +1 562 573 2551
               </a>
               <Link
                 href={routes.contact}
-                className="flex w-full items-center justify-center gap-2 rounded-lg border border-white/30 bg-footer-cta-chat px-4 py-3.5 font-heading text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                className="btn btn-secondary btn-footer btn-full btn-on-dark"
               >
                 <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                 Live Chat

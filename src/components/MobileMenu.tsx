@@ -128,7 +128,7 @@ export default function MobileMenu() {
             <div className="space-y-3 border-t border-black/10 px-5 py-5">
               <a
                 href="tel:+15625732551"
-                className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 font-heading text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                className="btn btn-primary btn-md-pill btn-heading btn-full"
               >
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                 +1 562 573 2551
@@ -136,7 +136,7 @@ export default function MobileMenu() {
               <Link
                 href="/quote"
                 onClick={close}
-                className="flex w-full items-center justify-center rounded-md bg-primary px-4 py-3 font-heading text-[15px] font-bold tracking-wide text-white uppercase transition-opacity hover:opacity-90"
+                className="btn btn-primary btn-md-pill btn-quote btn-full"
               >
                 Get Quote
               </Link>

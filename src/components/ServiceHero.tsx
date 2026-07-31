@@ -39,7 +39,7 @@ export default function ServiceHero({
   callButtonLabel = "Call Now",
 }: ServiceHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-[url('/hero-banner-1.webp')] bg-cover bg-center">
+    <section className="relative overflow-hidden bg-hero">
       <div className="site-container relative py-10 lg:py-14">
         <div className="flex items-start justify-between max-sm:flex-col gap-8">
           <div className="flex w-[65%] max-sm:w-full flex-col items-start text-left">
@@ -92,14 +92,14 @@ export default function ServiceHero({
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <button
                 type="button"
-                className="flex items-center gap-2.5 rounded-lg bg-secondary px-6 py-3.5 font-body text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                className="btn btn-secondary btn-md"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Live Chat
               </button>
               <a
                 href="tel:+15625732551"
-                className="flex items-center gap-2.5 rounded-lg bg-primary px-6 py-3.5 font-body text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                className="btn btn-primary btn-md"
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 {callButtonLabel}
@@ -250,7 +250,7 @@ export default function ServiceHero({
 
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3.5 font-body text-sm font-bold tracking-wide text-white uppercase transition-opacity hover:opacity-90"
+                  className="btn btn-primary btn-submit"
                 >
                   <Check className="h-4 w-4" aria-hidden="true" />
                   Get Started Today

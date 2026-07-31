@@ -17,8 +17,8 @@ export default function ServicePageCTA({
   borderedButtons = false,
 }: ServicePageCTAProps) {
   const buttonClass = borderedButtons
-    ? "flex items-center gap-2.5 rounded-md border border-white/30 px-6 py-3.5 font-body text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
-    : "flex items-center gap-2.5 rounded-md px-6 py-3.5 font-body text-[15px] font-semibold text-white transition-opacity hover:opacity-90";
+    ? "btn btn-md btn-on-dark"
+    : "btn btn-md";
 
   return (
     <section className="relative overflow-hidden bg-legacy-cta">
@@ -71,14 +71,14 @@ export default function ServicePageCTA({
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <button
                 type="button"
-                className={`${buttonClass} bg-secondary`}
+                className={`${buttonClass} btn-secondary`}
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Get A Quote
               </button>
               <a
                 href="tel:+15625732551"
-                className={`${buttonClass} bg-primary`}
+                className={`${buttonClass} btn-primary`}
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 Call Now

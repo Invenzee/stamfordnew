@@ -153,8 +153,8 @@ export default function CoverDesignShowcase() {
               onClick={() => goToSlide(index)}
               className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                 activeIndex === index
-                  ? "bg-accent-navy"
-                  : "bg-white/30 hover:bg-white/50"
+                  ? "bg-secondary"
+                  : "bg-white/30 hover:bg-secondary/60"
               }`}
             />
           ))}

@@ -54,14 +54,14 @@ export default function SuccessStories() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <button
                 type="button"
-                className="flex items-center gap-2.5 rounded-md border border-white/30 bg-secondary px-6 py-3.5 font-body text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                className="btn btn-secondary btn-md btn-on-dark"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Get A Quote
               </button>
               <Link
                 href={routes.contact}
-                className="flex items-center gap-2.5 rounded-md border border-white/30 bg-primary px-6 py-3.5 font-body text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                className="btn btn-primary btn-md btn-on-dark"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 Contact Us

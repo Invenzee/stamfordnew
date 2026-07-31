@@ -219,7 +219,7 @@ export default function ProfessionalServices({
                 key={id}
                 className="group w-[calc((100%-0px)/1)] min-w-[calc((100%-0px)/1)] shrink-0 sm:w-[calc((100%-1rem)/2)] sm:min-w-[calc((100%-1rem)/2)] lg:w-[calc((100%-3.75rem)/4)] lg:min-w-[calc((100%-3.75rem)/4)]"
               >
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-white px-6 py-8 transition-all duration-300 ease-out group-hover:-translate-y-2 group-hover:border-secondary/40 group-hover:shadow-[0_12px_40px_rgba(30,0,255,0.12)]">
+                <div className="flex h-full flex-col rounded-2xl border border-border bg-white px-6 py-8 transition-all duration-300 ease-out group-hover:-translate-y-2 group-hover:border-secondary/40 group-hover:shadow-[0_12px_40px_rgba(104,2,21,0.12)]">
                   <Icon
                     className="h-10 w-10 text-secondary transition-transform duration-300 group-hover:scale-110"
                     strokeWidth={1.5}
@@ -236,7 +236,7 @@ export default function ProfessionalServices({
 
                   <Link
                     href={href}
-                    className="mt-6 inline-flex w-fit items-center justify-center rounded-md bg-primary px-5 py-2.5 font-body text-[11px] font-bold tracking-[0.15em] text-white uppercase transition-colors duration-200 hover:bg-primary-dark"
+                    className="btn btn-primary btn-service mt-6 inline-flex w-fit"
                   >
                     Learn More
                   </Link>

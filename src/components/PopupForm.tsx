@@ -210,7 +210,7 @@ export default function PopupForm() {
 
           <button
             type="submit"
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3.5 font-body text-sm font-bold tracking-wide text-white uppercase transition-opacity hover:opacity-90"
+            className="btn btn-primary btn-submit"
           >
             <Check className="h-4 w-4" aria-hidden="true" />
             Get Started Today
