@@ -128,7 +128,7 @@ export default function MobileMenu() {
             <div className="space-y-3 border-t border-black/10 px-5 py-5">
               <a
                 href="tel:+15625732551"
-                className="btn btn-primary btn-md-pill btn-heading btn-full"
+                className="btn btn-secondary btn-md-pill btn-heading btn-full"
               >
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                 +1 562 573 2551

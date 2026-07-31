@@ -26,15 +26,15 @@ export default function AboutWhyChoose() {
         <div className="text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-10 bg-secondary" aria-hidden="true" />
-            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
               What Sets Us Apart
             </span>
             <span className="h-px w-10 bg-secondary" aria-hidden="true" />
           </div>
 
           <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-            <span className="text-primary">Why Choose</span>{" "}
-            <span className="text-secondary">Stamford Publishers</span>
+            <span className="text-heading">Why Choose</span>{" "}
+            <span className="text-highlight">Stamford Publishers</span>
           </h2>
         </div>
 
@@ -51,7 +51,7 @@ export default function AboutWhyChoose() {
                 {number}
               </span>
 
-              <h3 className="mt-4 font-heading text-xl font-bold text-primary">
+              <h3 className="mt-4 font-heading text-xl font-bold text-heading">
                 {title}
               </h3>
 

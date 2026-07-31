@@ -34,15 +34,15 @@ export default function KeyDifferentiators() {
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
               Our Services
             </span>
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
           </div>
 
           <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-            <span className="text-primary">Comprehensive Publishing</span>{" "}
-            <span className="text-secondary">Services</span>
+            <span className="text-heading">Comprehensive Publishing</span>{" "}
+            <span className="text-highlight">Services</span>
           </h2>
 
           <p className="mt-4 font-heading text-sm leading-relaxed text-black/70 sm:text-[15px]">
@@ -72,7 +72,7 @@ export default function KeyDifferentiators() {
                 />
               </div>
 
-              <h3 className="font-heading text-lg font-bold text-primary">
+              <h3 className="font-heading text-lg font-bold text-heading">
                 {title}
               </h3>
 

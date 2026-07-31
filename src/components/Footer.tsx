@@ -105,14 +105,14 @@ export default function Footer() {
             <div className="mt-6 space-y-3">
               <a
                 href="tel:+15625732551"
-                className="btn btn-primary btn-footer btn-full btn-on-dark"
+                className="btn btn-secondary btn-footer btn-full btn-on-dark"
               >
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                 +1 562 573 2551
               </a>
               <Link
                 href={routes.contact}
-                className="btn btn-secondary btn-footer btn-full btn-on-dark"
+                className="btn btn-primary btn-footer btn-full btn-on-dark"
               >
                 <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                 Get A Quote

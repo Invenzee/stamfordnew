@@ -28,15 +28,15 @@ export default function ResponseCommitment() {
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
               What To Expect
             </span>
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
           </div>
 
           <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-            <span className="text-primary">Our Response</span>{" "}
-            <span className="text-secondary">Commitment</span>
+            <span className="text-heading">Our Response</span>{" "}
+            <span className="text-highlight">Commitment</span>
           </h2>
         </div>
 
@@ -52,7 +52,7 @@ export default function ResponseCommitment() {
                 aria-hidden="true"
               />
 
-              <h3 className="mt-5 font-heading text-lg font-bold text-primary sm:text-xl">
+              <h3 className="mt-5 font-heading text-lg font-bold text-heading sm:text-xl">
                 {title}
               </h3>
 

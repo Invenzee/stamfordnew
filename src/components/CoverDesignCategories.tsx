@@ -52,15 +52,15 @@ export default function CoverDesignCategories() {
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
               Design Categories
             </span>
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
           </div>
 
           <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-            <span className="text-primary">Cover Styles We</span>{" "}
-            <span className="text-secondary">Specialize In</span>
+            <span className="text-heading">Cover Styles We</span>{" "}
+            <span className="text-highlight">Specialize In</span>
           </h2>
         </div>
 
@@ -76,7 +76,7 @@ export default function CoverDesignCategories() {
                 aria-hidden="true"
               />
 
-              <h3 className="mt-4 font-heading text-base font-bold text-primary sm:text-lg">
+              <h3 className="mt-4 font-heading text-base font-bold text-heading sm:text-lg">
                 {title}
               </h3>
 

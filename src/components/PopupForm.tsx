@@ -63,7 +63,7 @@ export default function PopupForm() {
           <X className="h-5 w-5" aria-hidden="true" />
         </button>
 
-        <div className="bg-primary px-6 py-5 pr-14">
+        <div className="bg-highlight px-6 py-5 pr-14">
           <h2
             id="popup-form-title"
             className="font-body text-xl font-bold tracking-wide text-white uppercase"

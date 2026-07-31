@@ -45,12 +45,12 @@ export default function ServiceHero({
           <div className="flex w-[65%] max-sm:w-full flex-col items-start text-left">
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
                 {tagline}
               </span>
             </div>
 
-            <h1 className="mt-5 font-heading text-[32px] leading-[1.1] font-semibold text-primary sm:text-[42px] lg:text-[58px]">
+            <h1 className="mt-5 font-heading text-[32px] leading-[1.1] font-semibold text-heading sm:text-[42px] lg:text-[58px]">
               {heading}
               {headingLine2 ? (
                 <>
@@ -92,14 +92,14 @@ export default function ServiceHero({
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={routes.contact}
-                className="btn btn-secondary btn-md"
+                className="btn btn-primary btn-md"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Get A Quote
               </Link>
               <a
                 href="tel:+15625732551"
-                className="btn btn-primary btn-md"
+                className="btn btn-secondary btn-md"
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 {callButtonLabel}
@@ -109,7 +109,7 @@ export default function ServiceHero({
 
           <div className="relative z-10 w-[35%] max-sm:w-full lg:justify-self-end">
             <div className="relative z-10 overflow-hidden rounded-2xl bg-white/90 shadow-xl backdrop-blur-sm">
-              <div className="bg-primary px-6 py-5">
+              <div className="bg-highlight px-6 py-5">
                 <h2 className="font-body text-xl font-bold tracking-wide text-white uppercase">
                   {formTitle}
                 </h2>

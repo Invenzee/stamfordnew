@@ -24,12 +24,12 @@ export default function GoldStandard() {
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
                 Book Marketing
               </span>
             </div>
 
-            <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold text-primary sm:text-[42px] lg:text-[48px]">
+            <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold text-heading sm:text-[42px] lg:text-[48px]">
               Expand Your Reach with Stamford Publishers
             </h2>
 

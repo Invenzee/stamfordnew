@@ -28,16 +28,16 @@ export default function EditingBeforeAfter() {
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
               The Transformation
             </span>
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
           </div>
 
           <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-            <span className="text-primary">Before</span>{" "}
-            <span className="text-primary">&amp;</span>{" "}
-            <span className="text-secondary">After</span>
+            <span className="text-heading">Before</span>{" "}
+            <span className="text-heading">&amp;</span>{" "}
+            <span className="text-highlight">After</span>
           </h2>
 
           <p className="mt-4 font-heading text-sm leading-relaxed text-black/70 sm:text-[15px]">
@@ -52,12 +52,12 @@ export default function EditingBeforeAfter() {
             <div className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-1.5">
               <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/15">
                 <X
-                  className="h-3 w-3 text-primary"
+                  className="h-3 w-3 text-secondary"
                   strokeWidth={2.5}
                   aria-hidden="true"
                 />
               </span>
-              <span className="font-body text-[10px] font-bold tracking-[0.15em] text-primary uppercase">
+              <span className="font-body text-[10px] font-bold tracking-[0.15em] text-highlight uppercase">
                 Before Editing
               </span>
             </div>

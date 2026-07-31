@@ -32,7 +32,7 @@ export default function AboutMission() {
 
             <div className="relative rounded-3xl bg-white p-5 shadow-lg sm:p-7">
               <div className="relative">
-                <div className="group overflow-hidden rounded-tl-[28px] rounded-br-[28px] border-2 border-accent-navy">
+                <div className="group overflow-hidden rounded-tl-[28px] rounded-br-[28px] border-2 border-primary">
                   <Image
                     src="/about-us.jpg"
                     alt="Team collaborating around a laptop in an office"
@@ -62,7 +62,7 @@ export default function AboutMission() {
               <span className="font-body text-[9px] font-bold tracking-wider text-white uppercase">
                 Proven
               </span>
-              <span className="font-heading text-base font-bold leading-tight text-primary sm:text-lg">
+              <span className="font-heading text-base font-bold leading-tight text-white sm:text-lg">
                 LEGACY
               </span>
               <span className="font-body text-[7px] tracking-wide text-white/80 uppercase sm:text-[8px]">
@@ -75,15 +75,15 @@ export default function AboutMission() {
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
                 Our Mission
               </span>
             </div>
 
             <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-              <span className="text-primary">Dedicated to</span>
+              <span className="text-heading">Dedicated to</span>
               <br />
-              <span className="text-secondary">Author Success</span>
+              <span className="text-highlight">Author Success</span>
             </h2>
 
             <p className="mt-5 font-heading text-base leading-relaxed text-black/80 sm:text-lg">
@@ -112,7 +112,7 @@ export default function AboutMission() {
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-heading text-lg font-bold text-primary">
+                      <h3 className="font-heading text-lg font-bold text-heading">
                         {title}
                       </h3>
                       <p className="mt-2 font-heading text-sm leading-relaxed text-black/70 sm:text-[15px]">

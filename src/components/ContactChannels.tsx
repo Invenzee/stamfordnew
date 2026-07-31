@@ -40,14 +40,14 @@ export default function ContactChannels() {
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
                 Information
               </span>
             </div>
 
             <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-              <span className="text-primary">Direct</span>{" "}
-              <span className="text-secondary">Channels</span>
+              <span className="text-heading">Direct</span>{" "}
+              <span className="text-highlight">Channels</span>
             </h2>
 
             <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-black/60 sm:text-[15px]">
@@ -69,7 +69,7 @@ export default function ContactChannels() {
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-body text-base font-bold text-primary">
+                    <h3 className="font-body text-base font-bold text-heading">
                       {title}
                     </h3>
                     {lines.map((line) =>

@@ -184,15 +184,15 @@ export default function ProfessionalServices({
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
               {tagline}
             </span>
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
           </div>
 
           <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-            <span className="text-primary">{headingPrimary}</span>{" "}
-            <span className="text-secondary">{headingSecondary}</span>
+            <span className="text-heading">{headingPrimary}</span>{" "}
+            <span className="text-highlight">{headingSecondary}</span>
           </h2>
 
           <p className="mt-4 font-body text-sm leading-relaxed text-black/70 sm:text-[15px]">
@@ -219,14 +219,14 @@ export default function ProfessionalServices({
                 key={id}
                 className="group w-[calc((100%-0px)/1)] min-w-[calc((100%-0px)/1)] shrink-0 sm:w-[calc((100%-1rem)/2)] sm:min-w-[calc((100%-1rem)/2)] lg:w-[calc((100%-3.75rem)/4)] lg:min-w-[calc((100%-3.75rem)/4)]"
               >
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-white px-6 py-8 transition-all duration-300 ease-out group-hover:-translate-y-2 group-hover:border-secondary/40 group-hover:shadow-[0_12px_40px_rgba(104,2,21,0.12)]">
+                <div className="flex h-full flex-col rounded-2xl border border-border bg-white px-6 py-8 transition-all duration-300 ease-out group-hover:-translate-y-2 group-hover:border-secondary/40 group-hover:shadow-[0_12px_40px_rgba(233,106,41,0.12)]">
                   <Icon
                     className="h-10 w-10 text-secondary transition-transform duration-300 group-hover:scale-110"
                     strokeWidth={1.5}
                     aria-hidden="true"
                   />
 
-                  <h3 className="mt-5 font-heading text-lg font-bold text-primary">
+                  <h3 className="mt-5 font-heading text-lg font-bold text-heading">
                     {title}
                   </h3>
 

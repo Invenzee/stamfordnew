@@ -49,7 +49,7 @@ export default function Header() {
             <div className="flex items-center gap-2.5 sm:gap-3">
               <a
                 href="tel:+15625732551"
-                className="btn btn-primary btn-md-pill btn-heading hidden sm:flex sm:px-4"
+                className="btn btn-secondary btn-md-pill btn-heading hidden sm:flex sm:px-4"
               >
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span className="hidden sm:inline">+1 562 573 2551</span>

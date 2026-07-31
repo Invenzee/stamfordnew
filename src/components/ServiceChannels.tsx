@@ -28,15 +28,15 @@ export default function ServiceChannels({
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+            <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
               {tagline}
             </span>
             <span className="h-px w-8 bg-secondary" aria-hidden="true" />
           </div>
 
           <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-            <span className="text-primary">{headingPrimary}</span>{" "}
-            <span className="text-secondary">{headingSecondary}</span>
+            <span className="text-heading">{headingPrimary}</span>{" "}
+            <span className="text-highlight">{headingSecondary}</span>
           </h2>
 
           {description ? (
@@ -65,7 +65,7 @@ export default function ServiceChannels({
                 />
               </div>
 
-              <h3 className="mt-5 font-heading text-lg font-bold text-primary">
+              <h3 className="mt-5 font-heading text-lg font-bold text-heading">
                 {title}
               </h3>
 
@@ -74,7 +74,7 @@ export default function ServiceChannels({
               </p>
 
               {tag ? (
-                <span className="mt-6 font-body text-[10px] font-bold tracking-[0.15em] text-secondary uppercase">
+                <span className="mt-6 font-body text-[10px] font-bold tracking-[0.15em] text-highlight uppercase">
                   {tag}
                 </span>
               ) : null}

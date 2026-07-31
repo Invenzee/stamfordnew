@@ -78,7 +78,7 @@ export default function CoverDesignShowcase() {
   };
 
   return (
-    <section className="bg-primary py-16 lg:py-24">
+    <section className="bg-highlight py-16 lg:py-24">
       <div className="site-container">
         <div className="text-center">
           <div className="flex items-center justify-center gap-3">
@@ -91,7 +91,7 @@ export default function CoverDesignShowcase() {
 
           <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
             <span className="text-white">Our Design</span>{" "}
-            <span className="text-accent-navy">Showcase</span>
+            <span className="text-highlight">Showcase</span>
           </h2>
 
           <p className="mx-auto mt-4 max-w-lg font-body text-sm leading-relaxed text-white/85 sm:text-[15px]">
@@ -121,7 +121,7 @@ export default function CoverDesignShowcase() {
                   key={cover.id}
                   className={`w-[calc((100%-0px)/1)] min-w-[calc((100%-0px)/1)] shrink-0 rounded-2xl p-3 transition-all duration-300 sm:w-[calc((100%-1rem)/2)] sm:min-w-[calc((100%-1rem)/2)] sm:p-4 lg:w-[calc((100%-3.75rem)/4)] lg:min-w-[calc((100%-3.75rem)/4)] ${
                     isFocused
-                      ? "bg-accent-navy/30 ring-2 ring-accent-navy shadow-xl"
+                      ? "bg-white/15 ring-2 ring-secondary shadow-xl"
                       : "bg-primary-dark/40 ring-2 ring-white/20 shadow-lg"
                   }`}
                 >

@@ -84,15 +84,15 @@ export default function ServiceGrowthSection({
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-secondary" aria-hidden="true" />
-              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-secondary uppercase">
+              <span className="font-body text-[11px] font-bold tracking-[0.2em] text-highlight uppercase">
                 {tagline}
               </span>
             </div>
 
             <h2 className="mt-5 font-heading text-[36px] leading-tight font-semibold sm:text-[42px] lg:text-[48px]">
-              <span className="text-primary">{headingPrimary}</span>
+              <span className="text-heading">{headingPrimary}</span>
               <br />
-              <span className="text-secondary">{headingSecondary}</span>
+              <span className="text-highlight">{headingSecondary}</span>
             </h2>
 
             <p className="mt-5 font-body text-sm leading-relaxed text-black/70 sm:text-[15px]">
@@ -115,7 +115,7 @@ export default function ServiceGrowthSection({
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-heading text-lg font-bold text-primary">
+                      <h3 className="font-heading text-lg font-bold text-heading">
                         {title}
                       </h3>
                       <p className="mt-2 font-body text-sm leading-relaxed text-black/70 sm:text-[15px]">

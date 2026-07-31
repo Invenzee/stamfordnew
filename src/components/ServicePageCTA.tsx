@@ -73,14 +73,14 @@ export default function ServicePageCTA({
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={routes.contact}
-                className={`${buttonClass} btn-secondary`}
+                className={`${buttonClass} btn-primary`}
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Get A Quote
               </Link>
               <a
                 href="tel:+15625732551"
-                className={`${buttonClass} btn-primary`}
+                className={`${buttonClass} btn-secondary btn-on-dark`}
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 Call Now

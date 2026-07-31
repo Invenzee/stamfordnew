@@ -3,37 +3,48 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #000000;
-  --primary: #680215;
-  --primary-dark: #4d0110;
-  --secondary: #9f6065;
-  --secondary-dark: #855558;
-  --accent-gold: #c9a24d;
-  --accent-navy: #0a1f5c;
-  --muted: #f5f5f5;
-  --card-warm: #faf6f6;
-  --about-section-bg: #faf4f4;
-  --response-section-bg: #f5f0f0;
-  --about-number-faint: #ede4e4;
-  --hero-bg-start: #fdf8f8;
-  --hero-bg-mid: #f8f0f0;
-  --hero-bg-end: #f0e4e4;
-  --hero-bg-accent: #e8d8da;
-  --border: #e0e0e0;
-  --footer-gradient-start: #680215;
-  --footer-gradient-end: #1a0508;
-  --footer-cta-call: #680215;
-  --footer-cta-chat: #9f6065;
-  --footer-heading-line: #9f6065;
+  --foreground: #0f172b;
+  --heading: #0f172b;
+  --heading-dark: #0a1019;
+  --highlight-start: #e96a29;
+  --highlight-end: #e62e56;
+  --primary: #e96a29;
+  --primary-dark: #d45a20;
+  --secondary: #e62e56;
+  --secondary-dark: #c9254a;
+  --accent: #e62e56;
+  --accent-dark: #c9254a;
+  --accent-gold: #e96a29;
+  --accent-navy: #0f172b;
+  --muted: #f5f6f8;
+  --card-warm: #fff8f5;
+  --about-section-bg: #fef6f3;
+  --response-section-bg: #fef4f2;
+  --about-number-faint: #fdeee8;
+  --hero-bg-start: #fff9f7;
+  --hero-bg-mid: #fef3ee;
+  --hero-bg-end: #fde8e8;
+  --hero-bg-accent: #fce4e0;
+  --border: #e2e8f0;
+  --footer-gradient-start: #0f172b;
+  --footer-gradient-end: #080d18;
+  --footer-cta-call: #0f172b;
+  --footer-cta-chat: #e62e56;
+  --footer-heading-line: #e96a29;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: #680215;
+  --color-heading: var(--heading);
+  --color-highlight-start: var(--highlight-start);
+  --color-highlight-end: var(--highlight-end);
+  --color-primary: #e96a29;
   --color-primary-dark: var(--primary-dark);
-  --color-secondary: #9f6065;
+  --color-secondary: #e62e56;
   --color-secondary-dark: var(--secondary-dark);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
   --color-black: #000000;
   --color-white: #ffffff;
   --color-accent-gold: var(--accent-gold);
@@ -78,6 +89,21 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+}
+
+/* Dark sections — headings must stay light (global heading color is for light backgrounds) */
+.bg-legacy-cta,
+.bg-about-hero,
+.bg-contact-hero,
+.bg-policy-hero {
+  color: #ffffff;
+}
+
+.bg-legacy-cta :where(h1, h2, h3, h4, h5, h6),
+.bg-about-hero :where(h1, h2, h3, h4, h5, h6),
+.bg-contact-hero :where(h1, h2, h3, h4, h5, h6),
+.bg-policy-hero :where(h1, h2, h3, h4, h5, h6) {
+  color: #ffffff;
 }
 
 @keyframes float {
@@ -129,11 +155,11 @@ h6 {
 }
 
 .bg-about-hero {
-  background-color: var(--primary);
+  background-color: var(--heading);
   background-image: linear-gradient(
     135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 55%,
+    var(--heading) 0%,
+    var(--heading-dark) 55%,
     var(--footer-gradient-end) 100%
   );
 }
@@ -163,8 +189,8 @@ h6 {
   background: radial-gradient(
     ellipse 95% 60% at 22% 88%,
     transparent 57%,
-    rgba(159, 96, 101, 0.22) 58%,
-    rgba(104, 2, 21, 0.12) 59.5%,
+    rgba(233, 106, 41, 0.18) 58%,
+    rgba(230, 46, 86, 0.1) 59.5%,
     transparent 61%
   );
   pointer-events: none;
@@ -175,23 +201,23 @@ h6 {
 }
 
 .bg-contact-hero {
-  background-color: var(--primary);
+  background-color: var(--heading);
   background-image: linear-gradient(
     115deg,
-    var(--primary) 60%,
-    var(--primary-dark) 60%
+    var(--heading) 60%,
+    var(--heading-dark) 60%
   );
 }
 
 .bg-policy-hero {
-  background-color: var(--primary);
+  background-color: var(--heading);
   background-image: linear-gradient(
     135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 45%,
+    var(--heading) 0%,
+    var(--heading-dark) 45%,
     var(--footer-gradient-end) 100%
   );
-  border-top: 1px solid rgba(159, 96, 101, 0.35);
+  border-top: 1px solid rgba(233, 106, 41, 0.35);
 }
 
 .policy-prose {
@@ -210,14 +236,14 @@ h6 {
   margin-top: 2.5rem;
   font-size: 1.375rem;
   font-weight: 600;
-  color: var(--accent-navy);
+  color: var(--heading);
 }
 
 .policy-prose h3 {
   margin-top: 1.5rem;
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--accent-navy);
+  color: var(--heading);
 }
 
 .policy-prose ul,
@@ -241,7 +267,7 @@ h6 {
 }
 
 .policy-prose a {
-  color: var(--secondary);
+  color: var(--highlight-start);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -260,23 +286,41 @@ h6 {
 .bg-about-badge {
   background: linear-gradient(
     135deg,
-    #9f6065 0%,
-    var(--primary) 45%,
-    var(--primary-dark) 100%
+    var(--highlight-start) 0%,
+    var(--highlight-end) 100%
   );
 }
 
 .bg-legacy-cta {
-  background-color: var(--primary-dark);
+  background-color: var(--heading-dark);
   background-image: linear-gradient(
     160deg,
-    var(--primary) 0%,
-    var(--primary-dark) 45%,
+    var(--heading) 0%,
+    #1a2540 45%,
     var(--footer-gradient-end) 100%
   );
 }
 
-/* Logo-themed buttons — primary #680215, secondary #9f6065 */
+.text-highlight {
+  background: linear-gradient(
+    135deg,
+    var(--highlight-start) 0%,
+    var(--highlight-end) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-highlight {
+  background: linear-gradient(
+    135deg,
+    var(--highlight-start) 0%,
+    var(--highlight-end) 100%
+  );
+}
+
+/* Primary = orange/pink gradient · Headings = #0F172B */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -300,21 +344,29 @@ h6 {
 }
 
 .btn-primary {
-  background-color: var(--primary);
+  background: linear-gradient(
+    135deg,
+    var(--highlight-start) 0%,
+    var(--highlight-end) 100%
+  );
   color: #ffffff;
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-dark);
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--accent-dark) 100%
+  );
 }
 
 .btn-secondary {
-  background-color: var(--secondary);
+  background-color: var(--heading);
   color: #ffffff;
 }
 
 .btn-secondary:hover {
-  background-color: var(--secondary-dark);
+  background-color: var(--heading-dark);
 }
 
 .btn-md {
@@ -371,6 +423,19 @@ h6 {
 
 .btn-on-dark {
   border-color: rgba(255, 255, 255, 0.3);
+}
+
+.bg-legacy-cta .btn-secondary,
+.btn-secondary.btn-on-dark {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+.bg-legacy-cta .btn-secondary:hover,
+.btn-secondary.btn-on-dark:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.55);
 }
 
 .btn-footer {

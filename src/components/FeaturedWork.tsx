@@ -93,7 +93,7 @@ export default function FeaturedWork({
   };
 
   return (
-    <section className="bg-primary py-16 lg:py-20">
+    <section className="bg-highlight py-16 lg:py-20">
       <div className="site-container">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>

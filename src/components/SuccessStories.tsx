@@ -54,14 +54,14 @@ export default function SuccessStories() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={routes.contact}
-                className="btn btn-secondary btn-md btn-on-dark"
+                className="btn btn-primary btn-md btn-on-dark"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Get A Quote
               </Link>
               <Link
                 href={routes.contact}
-                className="btn btn-primary btn-md btn-on-dark"
+                className="btn btn-secondary btn-md btn-on-dark"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 Contact Us
