@@ -56,7 +56,7 @@ export default function Header() {
               </a>
               <Link
                 href="/quote"
-                className="btn btn-primary btn-md-pill btn-quote hidden sm:block sm:px-5"
+                className="btn btn-primary btn-md-pill btn-quote hidden sm:block sm:px-5 max-sm:hidden"
               >
                 GET QUOTE
               </Link>
