@@ -222,7 +222,7 @@ const TESTIMONIALS = [
   {
     quote:
       "Stamford Publishers turned my bedtime story idea into a beautifully illustrated book my kids are proud of. The team understood the audience and guided me every step of the way.",
-    author: "Sarah Mitchell",
+    author: "Adam Mitchell",
     role: "Children's Author",
     image: "/about-1.webp",
   },
@@ -231,7 +231,7 @@ const TESTIMONIALS = [
       "From illustrations to marketing, everything felt professional and personal. My picture book is now reaching families I never thought I could connect with on my own.",
     author: "James Rodriguez",
     role: "Picture Book Author",
-    image: "/about-2.webp",
+    image: "/user.jpg",
   },
 ];
 
