@@ -478,3 +478,46 @@ h6 {
   width: min(var(--width-site), calc(100% - 2 * var(--site-gutter)));
   margin-inline: auto;
 }
+
+/* Standalone landing pages keep the original stamford LP fonts and form styles */
+.lp-standalone {
+  --font-sans: var(--font-poppins), sans-serif;
+  --font-heading: var(--font-raleway), sans-serif;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.lp-standalone h1,
+.lp-standalone h2,
+.lp-standalone h3,
+.lp-standalone h4,
+.lp-standalone h5,
+.lp-standalone h6 {
+  font-family: var(--font-raleway), sans-serif;
+}
+
+.lp-standalone .font-sans {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.form-select {
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px 8px;
+  padding-right: 2.5rem;
+}
+
+.form-select-arrow-dark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23111111' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+}
+
+.form-select-arrow-muted {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23777777' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+}
+
+.form-select-arrow-white {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+}

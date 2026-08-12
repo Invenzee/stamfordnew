@@ -63,6 +63,26 @@ const nextConfig: NextConfig = {
         destination: "/childrens-books",
         permanent: true,
       },
+      {
+        source: "/book-editing-lp",
+        destination: "/editing-proofreading-lp",
+        permanent: true,
+      },
+      {
+        source: "/ghostwriting-lp",
+        destination: "/ghostwriting-services-lp",
+        permanent: true,
+      },
+      {
+        source: "/book-publishing-services-lp",
+        destination: "/lp-book-publishing-services",
+        permanent: true,
+      },
+      {
+        source: "/childrens-book-lp",
+        destination: "/childrens-book-publishing-lp",
+        permanent: true,
+      },
     ];
   },
 };

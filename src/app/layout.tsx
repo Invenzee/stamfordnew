@@ -1,8 +1,24 @@
 import type { Metadata } from "next";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import PopupForm from "@/components/PopupForm";
+import { headers } from "next/headers";
+import { Poppins, Raleway } from "next/font/google";
+import GoogleTag from "@/components/GoogleTag";
+import PpcTracker from "@/components/PpcTracker";
+import SiteChrome from "@/components/SiteChrome";
 import "./globals.css";
+
+const poppins = Poppins({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+const raleway = Raleway({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-raleway",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Stamford Publishers",
@@ -10,18 +26,25 @@ export const metadata: Metadata = {
     "Stamford Publishers - Professional publishing, editing, marketing, and distribution services for authors.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = (await headers()).get("x-pathname") ?? "";
+  const isThankYou = pathname === "/thank-you";
+
   return (
-    <html lang="en" className="h-full antialiased">
+    <html
+      lang="en"
+      className={`${poppins.variable} ${raleway.variable} h-full antialiased`}
+    >
+      <head>
+        <GoogleTag fireLeadConversion={isThankYou} />
+      </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <Header />
-        {children}
-        <Footer />
-        <PopupForm />
+        <PpcTracker />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
