@@ -25,9 +25,12 @@ export const metadata: Metadata = {
   description:
     "Stamford Publishers - Professional publishing, editing, marketing, and distribution services for authors.",
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png" }],
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "any" },
+      { url: "/favicon.png?v=2", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png?v=2",
   },
 };
 
@@ -45,6 +48,9 @@ export default async function RootLayout({
       className={`${poppins.variable} ${raleway.variable} h-full antialiased`}
     >
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.png?v=2" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png?v=2" />
         <GoogleTag fireLeadConversion={isThankYou} />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
