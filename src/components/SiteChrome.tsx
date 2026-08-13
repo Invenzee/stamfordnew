@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import LpMobileCallButton from "@/components/LpMobileCallButton";
 import PopupForm from "@/components/PopupForm";
 import { isStandaloneLpPath } from "@/lib/standalone-lp";
 
@@ -15,7 +16,12 @@ export default function SiteChrome({
   const isStandaloneLp = isStandaloneLpPath(pathname);
 
   if (isStandaloneLp) {
-    return <>{children}</>;
+    return (
+      <>
+        {children}
+        <LpMobileCallButton />
+      </>
+    );
   }
 
   return (
