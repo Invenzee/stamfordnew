@@ -373,7 +373,7 @@ function pillFieldStyle() {
 }
 
 function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
-  return handleLeadFormSubmit(e, "/editing-proofreading-lp");
+  return handleLeadFormSubmit(e, "/Editing/lp");
 }
 
 function PrimaryButton({
@@ -1049,7 +1049,7 @@ export default function BookEditingLpPage() {
               </div>
               <div className="p-6 sm:p-8 md:max-h-[90vh] md:overflow-y-auto">
                 <form
-                  onSubmit={(e) => handleLeadFormSubmit(e, "/editing-proofreading-lp-popup")}
+                  onSubmit={(e) => handleLeadFormSubmit(e, "/Editing/lp-popup")}
                   className="space-y-3"
                 >
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

@@ -393,7 +393,7 @@ const FIELD_CLASS =
 const SELECT_CLASS = `${FIELD_CLASS} form-select form-select-arrow-muted`;
 
 function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
-  return handleLeadFormSubmit(e, "/childrens-book-publishing-lp");
+  return handleLeadFormSubmit(e, "/Kids/lp");
 }
 
 const BTN_BASE =
@@ -830,7 +830,7 @@ export default function ChildrensBookLpPage() {
             </div>
             <div className="p-6 sm:p-8 md:max-h-[90vh] md:overflow-y-auto">
               <form
-                onSubmit={(e) => handleLeadFormSubmit(e, "/childrens-book-publishing-lp-popup")}
+                onSubmit={(e) => handleLeadFormSubmit(e, "/Kids/lp-popup")}
                 className="space-y-3"
               >
                 <input type="text" name="name" placeholder="Name" required className={FIELD_CLASS} />

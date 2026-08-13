@@ -29,7 +29,7 @@ const PHONE_HREF = "tel:+15625732551";
 const EMAIL = "info@stamfordpublishers.com";
 const ADDRESS = "1001 Wilshire Boulevard #1439 Los Angeles, CA 90017";
 const POPUP_DELAY_MS = 30000;
-const POPUP_SESSION_KEY = "book-publishing-services-lp-popup-dismissed";
+const POPUP_SESSION_KEY = "ghostwriting-lp-popup-dismissed";
 
 /* Palette */
 const PRIMARY = "#F24506";
@@ -78,27 +78,23 @@ const PARTNER_LOGOS = [
 
 const AGENCY_POINTS = [
   {
-    lead: "Manuscript Preparation:",
-    body: "Professional copyediting, proofreading, and interior layout formatting for paperback, hardcover, and eBook.",
+    lead: "100% Custom Writing:",
+    body: "No templates or AI generation—every page is written specifically for your project.",
   },
   {
-    lead: "Custom Artwork & Cover Design:",
-    body: "Genre-tailored jacket designs built to capture reader attention instantly.",
+    lead: "Collaborative Process:",
+    body: "Chapter-by-chapter reviews ensure your feedback guides the narrative.",
   },
   {
-    lead: "ISBN & Metadata Setup:",
-    body: "Complete copyright registration guidance, ISBN assignment, and keyword optimization for Amazon KDP, Barnes & Noble, and IngramSpark.",
-  },
-  {
-    lead: "Global Distribution:",
-    body: "Print-on-demand setup ensuring your book is accessible worldwide with zero inventory overhead.",
+    lead: "Complete Confidentiality:",
+    body: "Signed NDAs guarantee that you are recognized as the sole author of your work.",
   },
 ];
 
 const SERVICE_COVERS = [
-  { src: "/book-marketing-lp/Graphic-Google-07.webp", alt: "Published book cover sample" },
-  { src: "/book-marketing-lp/Graphic-Google.webp", alt: "Published book cover sample" },
-  { src: "/childrens-book-lp/Graphic-Google-04-669x1024.webp", alt: "Published book cover sample" },
+  { src: "/childrens-book-lp/Graphic-Google-04-669x1024.webp", alt: "Ghostwritten book cover sample" },
+  { src: "/childrens-book-lp/Graphic-Google-05-669x1024.webp", alt: "Ghostwritten book cover sample" },
+  { src: "/book-marketing-lp/Graphic-Google.webp", alt: "Ghostwritten book cover sample" },
 ];
 
 const PLAN_FEATURES = [
@@ -143,37 +139,52 @@ const PLANS = [
 const TRUST_REASONS = [
   {
     number: "01",
-    title: "Fast & Efficient Workflow",
-    body: "Streamlined publishing timelines ensure your book reaches online stores quickly without sacrificing quality.",
+    title: "Strict Confidentiality & Ownership",
+    body: "We sign Non-Disclosure Agreements (NDAs) before starting. You retain 100% rights, credit, and royalties to your manuscript.",
   },
   {
     number: "02",
-    title: "Complete Ownership & Control",
-    body: "You keep 100% of your copyright and retain all sales royalties.",
+    title: "Collaborative Chapter Deliveries",
+    body: "We submit work in chunks so you can review, provide notes, and approve the direction every step of the way.",
   },
   {
     number: "03",
-    title: "Industry-Standard Production",
-    body: "Our layout artists and editors ensure your book matches the look and feel of major traditional publishing houses.",
+    title: "End-to-End Publishing Capability",
+    body: "Once your ghostwritten manuscript is complete, our team can seamlessly handle editing, layout, cover design, and self-publishing.",
   },
 ];
 
 const FICTION_POINTS = [
   {
-    lead: "400+ Books Published Successfully",
-    body: "",
+    lead: "Romance & Drama:",
+    body: "Emotional depth, rich dialogue, and gripping relationship dynamics.",
   },
   {
-    lead: "86% Authors Return for Subsequent Books",
-    body: "",
+    lead: "Sci-Fi & Fantasy:",
+    body: "Detailed world-building, internal logic, magic systems, and high-stakes adventure.",
   },
   {
-    lead: "3,000+ Dedicated Editors, Designers, and Specialists",
-    body: "",
+    lead: "Mystery & Thrillers:",
+    body: "Pacing, suspense, red herrings, and satisfying plot twists.",
   },
   {
-    lead: "100% Satisfaction Guarantee",
-    body: "",
+    lead: "Children’s Books:",
+    body: "Age-appropriate vocabulary, engaging themes, and storytelling tuned for young minds.",
+  },
+];
+
+const NONFICTION_POINTS = [
+  {
+    lead: "Memoirs & Biographies:",
+    body: "Preserving your life stories, legacy, and genuine personal tone.",
+  },
+  {
+    lead: "Business & Thought Leadership:",
+    body: "Positioning your expertise to build authority and expand your brand.",
+  },
+  {
+    lead: "Self-Help & Personal Growth:",
+    body: "Structuring clear, actionable insights that motivate readers to take action.",
   },
 ];
 
@@ -187,9 +198,34 @@ const SOLUTION_COVERS = [
 
 const FAQ_ITEMS = [
   {
-    question: "What publishing services does Stamford Publishers offer?",
+    question: "What ghostwriting services does Stamford Publishers offer?",
     answer:
-      "Stamford Publishers provides a comprehensive range of publishing services designed to support authors at every stage of their journey. Our services include professional manuscript editing, custom cover design, book formatting for print and digital formats, ISBN assignment, print-on-demand setup, global distribution through major retailers like Amazon and Barnes & Noble, and strategic book marketing support. Whether you're a first-time author or an experienced writer, we tailor our services to meet your specific goals, timeline, and budget, ensuring a smooth and successful publishing experience.",
+      "Stamford Publishers provides comprehensive ghostwriting services for authors, businesses, and professionals across all genres and formats. Our services include full book ghostwriting for fiction and nonfiction, eBook ghostwriting, memoir and biography writing, business and corporate writing, children's book ghostwriting, and content development for blogs and articles. We also offer manuscript development, editing, and revision services to strengthen existing drafts. Our team of professional ghostwriters works closely with you to capture your unique voice, vision, and message, delivering a polished, publication-ready manuscript that reflects your ideas while maintaining your authenticity. Whether you need a complete book written from scratch or assistance developing your existing concepts, we tailor our services to meet your specific needs and goals.",
+  },
+  {
+    question: "How do you capture my voice and writing style?",
+    answer:
+      "We begin with in-depth interviews, voice notes, and any existing drafts you have, then build a voice profile covering tone, vocabulary, pacing, and perspective. Your ghostwriter drafts a sample chapter for approval before writing continues, so the voice on the page is unmistakably yours.",
+  },
+  {
+    question: "Do I keep full ownership and credit for my book?",
+    answer:
+      "Yes. You are the sole author of record. Every project includes a signed NDA and full copyright transfer, so you retain 100% of the credit, rights, and royalties to the finished manuscript.",
+  },
+  {
+    question: "How long does the ghostwriting process take?",
+    answer:
+      "Most full-length books take between three and eight months depending on word count, genre, and research requirements. We agree on a chapter-by-chapter delivery schedule upfront so you always know what to expect and when.",
+  },
+  {
+    question: "What does ghostwriting cost?",
+    answer:
+      "Pricing depends on length, genre, and the depth of research involved. After a free consultation we send a fixed, itemized quote with milestone-based payments — no hidden fees and no surprises once writing begins.",
+  },
+  {
+    question: "Can you also publish and market the book?",
+    answer:
+      "Absolutely. Once your manuscript is approved we can handle editing, interior layout, cover design, ISBN registration, distribution to Amazon and other major retailers, and ongoing book marketing.",
   },
 ];
 
@@ -230,7 +266,7 @@ const LINE_FIELD =
 const LINE_SELECT = `${LINE_FIELD} form-select form-select-arrow-muted`;
 
 function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
-  return handleLeadFormSubmit(e, "/lp-book-publishing-services");
+  return handleLeadFormSubmit(e, "/Ghostwriting/lp");
 }
 
 function PrimaryButton({
@@ -448,7 +484,7 @@ function FaqAnswer({ children }: { children: ReactNode }) {
   );
 }
 
-export default function BookPublishingServicesLpPage() {
+export default function GhostwritingLpPage() {
   const reduceMotion = useReducedMotion();
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -495,7 +531,7 @@ export default function BookPublishingServicesLpPage() {
             className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto bg-black/55 px-4 pt-10 pb-6 backdrop-blur-sm sm:items-center sm:overflow-hidden sm:p-4"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="bps-popup-heading"
+            aria-labelledby="gw-popup-heading"
             initial={reduceMotion ? false : { opacity: 0 }}
             animate={reduceMotion ? undefined : { opacity: 1 }}
             transition={{ duration: 0.3 }}
@@ -519,10 +555,10 @@ export default function BookPublishingServicesLpPage() {
                 style={{ backgroundColor: PRIMARY }}
               >
                 <h2
-                  id="bps-popup-heading"
+                  id="gw-popup-heading"
                   className="mb-3 font-sans text-2xl font-bold leading-tight sm:text-3xl"
                 >
-                  Publish Your Book With Stamford Publishers
+                  Bring Your Book Idea to Life With Expert Ghostwriters
                 </h2>
                 <div className="mb-6 space-y-3 text-sm">
                   <div className="flex items-start gap-3">
@@ -537,7 +573,7 @@ export default function BookPublishingServicesLpPage() {
                   <div className="flex items-start gap-3">
                     <FaEnvelope className="mt-1 h-4 w-4 shrink-0" aria-hidden="true" />
                     <div>
-                      <h3 className="font-bold">Discuss your publishing goals</h3>
+                      <h3 className="font-bold">Discuss your story</h3>
                       <a href={`mailto:${EMAIL}`} className="break-all hover:underline">
                         {EMAIL}
                       </a>
@@ -547,14 +583,14 @@ export default function BookPublishingServicesLpPage() {
                 <div className="mt-auto flex justify-center">
                   <img
                     src="/ghostwriting-lp/form-img.webp"
-                    alt="Book publishing consultation"
+                    alt="Ghostwriting consultation"
                     className="max-h-[200px] w-full max-w-[280px] rounded-xl object-contain"
                   />
                 </div>
               </div>
               <div className="p-6 sm:p-8 md:max-h-[90vh] md:overflow-y-auto">
                 <form
-                  onSubmit={(e) => handleLeadFormSubmit(e, "/lp-book-publishing-services-popup")}
+                  onSubmit={(e) => handleLeadFormSubmit(e, "/Ghostwriting/lp-popup")}
                   className="space-y-4"
                 >
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
@@ -733,14 +769,14 @@ export default function BookPublishingServicesLpPage() {
                   className="mb-5 font-sans text-3xl font-bold leading-[1.15] text-[#111] sm:text-4xl lg:text-[50px]!"
                 >
                   Professional{" "}
-                  <span style={{ color: PRIMARY }}>Self-Publishing &amp; Distribution</span> Services
+                  <span style={{ color: PRIMARY }}>Book &amp; eBook Ghostwriting</span> Services
                 </motion.h1>
                 <motion.p variants={staggerItem} className={`mb-8 max-w-xl ${BODY_TEXT}`}>
-                  At Stamford Publishers, we take the complexity out of self-publishing. From
-                  manuscript editing, formatting, and custom cover design to ISBN assignment,
-                  global distribution, and Amazon optimization, we provide end-to-end publishing
-                  solutions that put your book on the virtual and physical shelves of major
-                  bookstores worldwide
+                  At Stamford Publishers, we bring your story, concepts, and ideas to life with
+                  compelling, publication-ready manuscripts. Our team of experienced book
+                  ghostwriters collaborates closely with you to capture your unique voice, structure
+                  your narrative, and craft a book that resonates with readers—all while you retain
+                  100% of the credit and copyright.
                 </motion.p>
 
                 <motion.div variants={staggerItem}>
@@ -808,7 +844,7 @@ export default function BookPublishingServicesLpPage() {
             <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
               <MotionColumn from="left">
                 <img
-                  src="/book-publishing-service-lp/sec1.webp"
+                  src="/ghostwriting-lp/sec-1.webp"
                   alt="Ghostwriter drafting a manuscript"
                   className="h-[280px] w-full rounded-2xl object-cover shadow-lg transition-transform duration-500 hover:scale-[1.02] sm:h-[380px] lg:h-[600px]"
                   loading="lazy"
@@ -817,16 +853,18 @@ export default function BookPublishingServicesLpPage() {
               <MotionColumn from="right">
                 <ScrollReveal>
                   <h2 id="gw-agency-heading" className={`${SECTION_HEADING} mb-4 lg:text-4xl!`}>
-                    Self-Publishing Made Easy With Stamford Publishers
+                    A Ghostwriting Agency Driven by Experience &amp; Expertise
                   </h2>
                   <p className={`mb-4 ${BODY_TEXT}`}>
-                    Self-publishing is more than just uploading a file online. It requires
-                    industry-standard formatting, high-definition cover design, targeted metadata
-                    optimization, and global distribution logistics to succeed in today’s
-                    competitive market.
+                    With over a decade in the ghostwriting industry, Stamford Publishers has helped
+                    entrepreneurs, visionaries, educators, and storytellers become published authors.
                   </p>
                   <p className={`mb-6 ${BODY_TEXT}`}>
-                    At Stamford Publishers, we guide you through every stage of the process:
+                    We combine thorough research, narrative pacing, and tailored tone matching to
+                    turn your raw notes, outlines, or spoken thoughts into a polished book. Whether
+                    you need a fiction ghostwriter, an eBook specialist, a business
+                    thought-leadership book, or a deeply personal memoir, we deliver manuscripts
+                    built to captivate.
                   </p>
                 </ScrollReveal>
                 <ScrollStagger className="mb-8 list-none space-y-3.5">
@@ -851,28 +889,25 @@ export default function BookPublishingServicesLpPage() {
               <MotionColumn from="left">
                 <ScrollReveal>
                   <h2 id="gw-story-heading" className={`${SECTION_HEADING} mb-4 lg:text-4xl!`}>
-                    Work With Experienced Publishing Specialists
+                    Bringing Your Story to Life
                   </h2>
                   <p className={`mb-4 ${BODY_TEXT}`}>
-                    Partner with the experienced publishing professionals at Stamford Publishers for
-                    complete end-to-end book publishing services.
-                  </p>
-                  <p className={`mb-4 ${BODY_TEXT}`}>
-                    We handle everything from manuscript preparation and professional formatting to
-                    publishing, distribution, and promotional support. Our team works closely with
-                    every author to simplify the publishing process while ensuring your book meets
-                    professional industry standards.
+                    Not everyone has the time or specialized craft to structure plotlines, draft
+                    realistic dialogue, or organize complex research into a seamless book. That
+                    shouldn’t prevent your ideas from reaching the world.
                   </p>
                   <p className={`mb-8 ${BODY_TEXT}`}>
-                    No matter your genre or experience level, we’re committed to helping your book
-                    reach its full potential.
+                    When you partner with Stamford Publishers, we match you with a dedicated
+                    ghostwriter experienced in your specific genre. We turn your outline, voice
+                    notes, or rough drafts into an engaging reading experience—handling the writing
+                    so you can focus on sharing your message.
                   </p>
                   <CtaPair />
                 </ScrollReveal>
               </MotionColumn>
               <MotionColumn from="right">
                 <img
-                  src="/book-publishing-service-lp/sec2.webp"
+                  src="/ghostwriting-lp/sec-2.webp"
                   alt="Notebook, pen, and story outline on a desk"
                   className="h-[240px] w-full rounded-2xl object-cover shadow-lg transition-transform duration-500 hover:scale-[1.02] sm:h-[320px] lg:h-[380px]"
                   loading="lazy"
@@ -890,11 +925,10 @@ export default function BookPublishingServicesLpPage() {
                 <ScrollReveal>
                   <h2 id="gw-services-heading" className={`${SECTION_HEADING} mb-3 lg:text-4xl!`}>
                     Complete Professional{" "}
-                    <span style={{ color: PRIMARY }}>Book Publishing Services</span>
+                    <span style={{ color: PRIMARY }}>Ghostwriting Services</span>
                   </h2>
                   <p className={`mb-8 ${BODY_TEXT}`}>
-                    We edit, design, publish, and promote books to help authors succeed in today’s
-                    competitive publishing market.
+                    We edit, write and illustrate, then publish and promote books.
                   </p>
                   <CtaPair />
                 </ScrollReveal>
@@ -926,11 +960,12 @@ export default function BookPublishingServicesLpPage() {
                 id="gw-pricing-heading"
                 className={`${SECTION_HEADING} mx-auto mb-3 max-w-2xl`}
               >
-                Choose The <span style={{ color: PRIMARY }}>Pricing Plan</span> That’s Right For You
+                Choose The <span style={{ color: PRIMARY }}>Ghostwriting Plan</span> That Fits Your
+                Vision
               </h2>
               <p className="mx-auto max-w-2xl text-sm leading-relaxed text-[#555]">
-                All packages include 100% rights retention, print-on-demand setup, and dedicated
-                project management.
+                All ghostwriting packages include dedicated project management, chapter reviews,
+                professional editing, and full copyright transfer.
               </p>
             </ScrollReveal>
 
@@ -986,7 +1021,7 @@ export default function BookPublishingServicesLpPage() {
           <div className={CONTAINER}>
             <ScrollReveal className="mb-10 text-center sm:mb-14">
               <h2 id="gw-trust-heading" className={`${SECTION_HEADING} mx-auto mb-3 max-w-2xl`}>
-                Why Authors Choose <span style={{ color: PRIMARY }}>Stamford Publishers</span>
+                Why Authors Trust <span style={{ color: PRIMARY }}>Stamford Publishers</span>
               </h2>
               <p className="mx-auto max-w-xl text-sm leading-relaxed text-[#555]">
                 Here’s what makes Stamford Publishers the preferred publishing partner for authors.
@@ -1030,7 +1065,7 @@ export default function BookPublishingServicesLpPage() {
             <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
               <MotionColumn from="left">
                 <img
-                  src="/book-publishing-service-lp/sec3.webp"
+                  src="/ghostwriting-lp/mastery.webp"
                   alt="Stack of published books"
                   className="h-[280px] w-full rounded-2xl object-cover shadow-lg transition-transform duration-500 hover:scale-[1.02] sm:h-[400px] lg:h-[500px]"
                   loading="lazy"
@@ -1039,12 +1074,12 @@ export default function BookPublishingServicesLpPage() {
               <MotionColumn from="right">
                 <ScrollReveal>
                   <h2 id="gw-fiction-heading" className={`${SECTION_HEADING} mb-4 lg:text-4xl!`}>
-                    Over A Decade Of Self-Publishing Expertise
+                    Mastery in Fiction and Nonfiction
                   </h2>
                   <p className={`mb-2 ${BODY_TEXT}`}>
-                    Whether you’re publishing a thrilling fiction novel, an impactful business
-                    guide, a personal memoir, or a colorful children’s book, our specialized team
-                    adapts the publishing workflow to fit your genre’s target market.
+                    Crafting captivating fiction requires vivid imagination, emotional depth, and
+                    precise plot structure. Our ghostwriters excel in bringing immersive worlds and
+                    compelling character arcs to life across popular fiction genres:
                   </p>
                 </ScrollReveal>
                 <ScrollStagger className="mb-8 list-none space-y-3.5">
@@ -1069,29 +1104,27 @@ export default function BookPublishingServicesLpPage() {
               <MotionColumn from="left">
                 <ScrollReveal>
                   <h2 id="gw-nonfiction-heading" className={`${SECTION_HEADING} mb-4 lg:text-4xl!`}>
-                    Let’s Get Your Book Published
+                    Non-Fiction &amp; Memoir Ghostwriting
                   </h2>
-                  <p className={`mb-4 ${BODY_TEXT}`}>
-                    Every successful author’s journey begins with a single completed manuscript.
-                  </p>
-                  <p className={`mb-4 ${BODY_TEXT}`}>
-                    At Stamford Publishers, we take the stress out of self-publishing by providing
-                    end-to-end guidance from initial manuscript formatting to global online
-                    distribution. We help you produce a high-quality, market-ready book that reaches
-                    readers worldwide—all while ensuring you maintain 100% ownership, copyright, and
-                    royalties.
-                  </p>
-                  <p className={`mb-8 ${BODY_TEXT}`}>
-                    Let us help turn your draft into a published reality.
+                  <p className={`mb-6 ${BODY_TEXT}`}>
+                    For non-fiction, credibility, clarity, and authority are key. We combine
+                    meticulous research with accessible writing to elevate your voice:
                   </p>
                 </ScrollReveal>
+                <ScrollStagger className="mb-8 list-none space-y-3.5">
+                  {NONFICTION_POINTS.map((point) => (
+                    <ScrollStaggerItem key={point.lead}>
+                      <LeadPoint lead={point.lead} body={point.body} />
+                    </ScrollStaggerItem>
+                  ))}
+                </ScrollStagger>
                 <ScrollReveal delay={0.1}>
                   <CtaPair />
                 </ScrollReveal>
               </MotionColumn>
               <MotionColumn from="right">
                 <img
-                  src="/book-publishing-service-lp/sec4.webp"
+                  src="/ghostwriting-lp/sec-3.webp"
                   alt="Author reading in a library"
                   className="h-[240px] w-full rounded-2xl object-cover shadow-lg transition-transform duration-500 hover:scale-[1.02] sm:h-[340px] lg:h-[450px]"
                   loading="lazy"
@@ -1112,11 +1145,11 @@ export default function BookPublishingServicesLpPage() {
               <MotionColumn from="left">
                 <h2 id="gw-solution-heading" className={`${SECTION_HEADING} mb-3 lg:text-4xl!`}>
                   A Complete Solution to{" "}
-                  <span style={{ color: PRIMARY }}>eBook &amp; Book Publishing</span> Services
+                  <span style={{ color: PRIMARY }}>Self-Publishing &amp; Ghostwriting</span>{" "}
+                  Services
                 </h2>
                 <p className="mb-8 text-sm leading-relaxed text-[#4A4142] sm:text-[15px]">
-                  Professional publishing solutions designed to help your book reach more readers,
-                  build your author brand, and achieve long-term success.
+                  That Helps You Increase Readers’ Interest &amp; Your Popularity
                 </p>
                 <CtaPair />
               </MotionColumn>
@@ -1268,7 +1301,7 @@ export default function BookPublishingServicesLpPage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white pt-12 pb-0 sm:pt-16" aria-label="Site footer">
+      <footer className="bg-white pt-12 pb-10 sm:pt-16" aria-label="Site footer">
         <div className={CONTAINER}>
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_1.1fr_1.1fr] lg:gap-12">
             <ScrollReveal>
@@ -1375,11 +1408,6 @@ export default function BookPublishingServicesLpPage() {
               </div>
             </ScrollReveal>
           </div>
-        </div>
-        <div className="border-t border-black/10 py-4 text-center">
-          <p className="text-xs text-[#555] sm:text-sm">
-            2026 &copy; Stamford Publishers - All Right Reserved
-          </p>
         </div>
       </footer>
       {popupModal}

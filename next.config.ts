@@ -65,22 +65,47 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/book-editing-lp",
-        destination: "/editing-proofreading-lp",
+        destination: "/Editing/lp",
+        permanent: true,
+      },
+      {
+        source: "/editing-proofreading-lp",
+        destination: "/Editing/lp",
         permanent: true,
       },
       {
         source: "/ghostwriting-lp",
-        destination: "/ghostwriting-services-lp",
+        destination: "/Ghostwriting/lp",
+        permanent: true,
+      },
+      {
+        source: "/ghostwriting-services-lp",
+        destination: "/Ghostwriting/lp",
         permanent: true,
       },
       {
         source: "/book-publishing-services-lp",
-        destination: "/lp-book-publishing-services",
+        destination: "/Publishing/lp",
+        permanent: true,
+      },
+      {
+        source: "/lp-book-publishing-services",
+        destination: "/Publishing/lp",
         permanent: true,
       },
       {
         source: "/childrens-book-lp",
-        destination: "/childrens-book-publishing-lp",
+        destination: "/Kids/lp",
+        permanent: true,
+      },
+      {
+        source: "/childrens-book-publishing-lp",
+        destination: "/Kids/lp",
+        permanent: true,
+      },
+      {
+        source: "/book-marketing-lp",
+        destination: "/Marketing/lp",
         permanent: true,
       },
     ];

@@ -1,12 +1,15 @@
 /** Routes that use standalone landing-page chrome (no global header/footer). */
 export const STANDALONE_LP_PREFIXES = [
-  "/book-marketing-lp",
-  "/childrens-book-publishing-lp",
-  "/editing-proofreading-lp",
-  "/ghostwriting-services-lp",
-  "/lp-book-publishing-services",
+  "/Kids/lp",
+  "/Editing/lp",
+  "/Publishing/lp",
+  "/Ghostwriting/lp",
+  "/Marketing/lp",
 ];
 
 export function isStandaloneLpPath(pathname: string | null): boolean {
-  return STANDALONE_LP_PREFIXES.some((prefix) => pathname?.startsWith(prefix));
+  const path = pathname?.toLowerCase();
+  return STANDALONE_LP_PREFIXES.some((prefix) =>
+    path?.startsWith(prefix.toLowerCase()),
+  );
 }

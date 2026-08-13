@@ -305,7 +305,7 @@ const TESTIMONIALS = [
 ];
 
 function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
-  return handleLeadFormSubmit(e, "/book-marketing-lp");
+  return handleLeadFormSubmit(e, "/Marketing/lp");
 }
 
 function WorksCarousel() {
@@ -595,7 +595,7 @@ export default function BookMarketingLpPage() {
 
           <div className="p-7 sm:p-8 lg:p-10 md:max-h-[90vh] md:overflow-y-auto">
             <form
-              onSubmit={(e) => handleLeadFormSubmit(e, "/book-marketing-lp-popup")}
+              onSubmit={(e) => handleLeadFormSubmit(e, "/Marketing/lp-popup")}
               className="flex flex-col items-center justify-center space-y-5"
             >
               <div className="grid grid-cols-2 gap-3">

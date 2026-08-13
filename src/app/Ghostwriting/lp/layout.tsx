@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   description:
     "Work with experienced book ghostwriters who capture your voice and deliver publication-ready manuscripts. You keep 100% of the credit, rights, and royalties.",
   alternates: {
-    canonical: "https://stamfordpublishers.com/ghostwriting-services-lp",
+    canonical: "https://stamfordpublishers.com/Ghostwriting/lp",
   },
   openGraph: {
     title: "SP - Ghostwriting LP",
     description:
       "Fiction, memoir, business, and eBook ghostwriting with chapter-by-chapter reviews, signed NDAs, and full copyright transfer.",
     type: "website",
-    url: "https://stamfordpublishers.com/ghostwriting-services-lp",
+    url: "https://stamfordpublishers.com/Ghostwriting/lp",
     siteName: "Stamford Publishers",
   },
 };

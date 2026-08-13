@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   description:
     "Turn your manuscript into a masterpiece with professional book editing and proofreading. Genre-specialist editors, line-by-line precision, and guaranteed on-time delivery.",
   alternates: {
-    canonical: "https://stamfordpublishers.com/editing-proofreading-lp",
+    canonical: "https://stamfordpublishers.com/Editing/lp",
   },
   openGraph: {
     title: "SP - Editing LP",
     description:
       "Expert book editing and proofreading — developmental edits, line and copy editing, and precision proofreading that keeps your voice intact.",
     type: "website",
-    url: "https://stamfordpublishers.com/editing-proofreading-lp",
+    url: "https://stamfordpublishers.com/Editing/lp",
     siteName: "Stamford Publishers",
   },
 };

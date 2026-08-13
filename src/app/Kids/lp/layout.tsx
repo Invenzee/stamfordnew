@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   description:
     "Fast & trusted children's book publishing and marketing. Turn your story idea into a beautifully illustrated book that captivates young readers worldwide.",
   alternates: {
-    canonical: "https://stamfordpublishers.com/childrens-book-publishing-lp",
+    canonical: "https://stamfordpublishers.com/Kids/lp",
   },
   openGraph: {
     title: "SP - Kids Book LP",
     description:
       "Professional children's book publishing, illustration, and marketing to help your story reach young readers globally.",
     type: "website",
-    url: "https://stamfordpublishers.com/childrens-book-publishing-lp",
+    url: "https://stamfordpublishers.com/Kids/lp",
     siteName: "Stamford Publishers",
   },
 };

@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   description:
     "Professional book marketing services to boost visibility, reach readers, and grow your author brand. Get a free consultation with Stamford Publishers today.",
   alternates: {
-    canonical: "https://stamfordpublishers.com/book-marketing-lp",
+    canonical: "https://stamfordpublishers.com/Marketing/lp",
   },
   openGraph: {
     title: "SP - Marketing LP",
     description:
       "Strategic book promotion, social media campaigns, and advertising support to help your book reach more readers.",
     type: "website",
-    url: "https://stamfordpublishers.com/book-marketing-lp",
+    url: "https://stamfordpublishers.com/Marketing/lp",
     siteName: "Stamford Publishers",
   },
 };
