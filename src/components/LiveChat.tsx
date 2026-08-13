@@ -1,4 +1,5 @@
 import Script from "next/script";
+import LiveChatBehavior from "@/components/LiveChatBehavior";
 
 export default function LiveChat() {
   return (
@@ -25,6 +26,7 @@ export default function LiveChat() {
           LiveChat
         </a>
       </noscript>
+      <LiveChatBehavior />
     </>
   );
 }
