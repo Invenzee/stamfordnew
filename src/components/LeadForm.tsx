@@ -2,10 +2,11 @@
 
 import { Check, Mail, MessageSquare, Phone, User } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { handleLeadFormSubmit } from "@/lib/submit-form";
 
 type LeadFormProps = {
-  source: string;
+  source?: string;
   idPrefix: string;
   submitLabel: string;
   emailLabel?: string;
@@ -21,9 +22,12 @@ export default function LeadForm({
   messagePlaceholder = "Tell us about your project",
   className = "space-y-4 px-6 py-5",
 }: LeadFormProps) {
+  const pathname = usePathname();
+  const formSource = source ?? pathname ?? "website";
+
   return (
     <form
-      onSubmit={(event) => handleLeadFormSubmit(event, source)}
+      onSubmit={(event) => handleLeadFormSubmit(event, formSource)}
       className={className}
     >
       <div>

@@ -7,7 +7,7 @@ import { routes } from "@/data/routes";
 
 export default function Header() {
   return (
-    <header className="w-full bg-white">
+    <header className="relative z-50 w-full bg-white">
       <div className="h-1 bg-black" />
 
       <div className="border-b border-black/5">

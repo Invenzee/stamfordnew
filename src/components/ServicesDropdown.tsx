@@ -12,7 +12,8 @@ import {
   SquarePen,
   type LucideIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { routes } from "@/data/routes";
 
 export const mainServices = [
@@ -93,18 +94,51 @@ function ServiceItem({
 
 export default function ServicesDropdown() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  const cancelClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+
+  const openMenu = () => {
+    cancelClose();
+    setOpen(true);
+  };
+
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpen(false), 200);
+  };
 
   return (
     <div
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
     >
       <button
         type="button"
         className="font-heading flex items-center gap-1 text-[17px] text-black transition-opacity hover:opacity-70"
         aria-expanded={open}
         aria-haspopup="true"
+        onClick={() => {
+          cancelClose();
+          setOpen((current) => !current);
+        }}
       >
         Services
         <ChevronDown
@@ -113,25 +147,27 @@ export default function ServicesDropdown() {
         />
       </button>
 
-      {open && (
-        <div className="absolute left-0 top-full z-50 pt-2">
-          <div className="min-w-[320px] rounded-[18px] bg-about-section-bg px-2 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-            <div className="flex flex-col">
-              {mainServices.map((service) => (
-                <ServiceItem key={service.href} {...service} />
-              ))}
-            </div>
+      <div
+        className={`absolute left-0 top-full z-50 min-w-[320px] pt-2 ${
+          open ? "visible" : "invisible pointer-events-none"
+        }`}
+      >
+        <div className="rounded-[18px] bg-about-section-bg px-2 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+          <div className="flex flex-col">
+            {mainServices.map((service) => (
+              <ServiceItem key={service.href} {...service} />
+            ))}
+          </div>
 
-            <div className="my-1.5 border-t border-black/10" />
+          <div className="my-1.5 border-t border-black/10" />
 
-            <div className="flex flex-col">
-              {specialtyServices.map((service) => (
-                <ServiceItem key={service.href} {...service} />
-              ))}
-            </div>
+          <div className="flex flex-col">
+            {specialtyServices.map((service) => (
+              <ServiceItem key={service.href} {...service} />
+            ))}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

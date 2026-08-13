@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Check,
   MessageCircle,
@@ -7,7 +5,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import LeadForm from "@/components/LeadForm";
 import { routes } from "@/data/routes";
 
@@ -39,8 +36,6 @@ export default function ServiceHero({
   formIdPrefix,
   callButtonLabel = "Call Now",
 }: ServiceHeroProps) {
-  const pathname = usePathname();
-
   return (
     <section className="relative overflow-hidden bg-hero">
       <div className="site-container relative py-10 lg:py-14">
@@ -122,7 +117,6 @@ export default function ServiceHero({
               </div>
 
               <LeadForm
-                source={pathname}
                 idPrefix={formIdPrefix}
                 submitLabel="Get Started Today"
                 emailLabel="Email Address"

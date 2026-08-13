@@ -46,6 +46,7 @@ export default async function RootLayout({
     <html
       lang="en"
       className={`${poppins.variable} ${raleway.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -53,7 +54,10 @@ export default async function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png?v=2" />
         <GoogleTag fireLeadConversion={isThankYou} />
       </head>
-      <body className="flex min-h-full flex-col bg-background text-foreground">
+      <body
+        className="flex min-h-full flex-col bg-background text-foreground"
+        suppressHydrationWarning
+      >
         <PpcTracker />
         <SiteChrome>{children}</SiteChrome>
       </body>

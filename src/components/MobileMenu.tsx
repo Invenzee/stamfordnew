@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import {
@@ -18,6 +19,12 @@ const navLinks = [
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+    setServicesOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -73,7 +80,6 @@ export default function MobileMenu() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      onClick={close}
                       className="block rounded-md px-3 py-3 font-heading text-[17px] text-black transition-colors hover:bg-black/5"
                     >
                       {link.label}
@@ -101,7 +107,6 @@ export default function MobileMenu() {
                         <li key={service.href}>
                           <Link
                             href={service.href}
-                            onClick={close}
                             className="block rounded-md px-3 py-2.5 font-heading text-[15px] leading-snug text-black/80 transition-colors hover:bg-black/5 hover:text-black"
                           >
                             {service.label}
@@ -112,7 +117,6 @@ export default function MobileMenu() {
                         <li key={service.href}>
                           <Link
                             href={service.href}
-                            onClick={close}
                             className="block rounded-md px-3 py-2.5 font-heading text-[15px] leading-snug text-black/80 transition-colors hover:bg-black/5 hover:text-black"
                           >
                             {service.label}
@@ -135,7 +139,6 @@ export default function MobileMenu() {
               </a>
               <Link
                 href={routes.contact}
-                onClick={close}
                 className="btn btn-primary btn-md-pill btn-quote btn-full"
               >
                 Get A Quote
