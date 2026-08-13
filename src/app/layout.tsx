@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   title: "Stamford Publishers",
   description:
     "Stamford Publishers - Professional publishing, editing, marketing, and distribution services for authors.",
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default async function RootLayout({
