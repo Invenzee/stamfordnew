@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { Mail, MessageCircle } from "lucide-react";
-import Link from "next/link";
-import { routes } from "@/data/routes";
+import { MessageCircle, Phone } from "lucide-react";
+import { ChatButton, QuoteButton } from "@/components/LeadCtas";
 
 export default function SuccessStories() {
   return (
@@ -52,20 +51,20 @@ export default function SuccessStories() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href={routes.contact}
-                className="btn btn-primary btn-md btn-on-dark"
-              >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              <QuoteButton className="btn btn-primary btn-md btn-on-dark">
                 Get A Quote
-              </Link>
-              <Link
-                href={routes.contact}
+              </QuoteButton>
+              <ChatButton className="btn btn-secondary btn-md btn-on-dark">
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                Chat Now
+              </ChatButton>
+              <a
+                href="tel:+15625732551"
                 className="btn btn-secondary btn-md btn-on-dark"
               >
-                <Mail className="h-4 w-4" aria-hidden="true" />
-                Contact Us
-              </Link>
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                Call Now
+              </a>
             </div>
           </div>
 

@@ -177,7 +177,7 @@ export default function RefundPolicyPage() {
             info@stamfordpublishers.com
           </a>
           <br />
-          Phone: <a href="tel:+15625732551">+1 562 573 2551</a>
+          Phone: <a href="tel:+15625732551">(562) 573-2551</a>
           <br />
           Address: 1001 Wilshire Boulevard #1439, Los Angeles, CA 90017
         </p>

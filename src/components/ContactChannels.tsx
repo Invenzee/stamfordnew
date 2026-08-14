@@ -16,7 +16,7 @@ const channels = [
     number: "02",
     icon: Phone,
     title: "Direct Line",
-    lines: ["+1 562 573 2551"],
+    lines: ["(562) 573-2551"],
     href: "tel:+15625732551",
   },
   {

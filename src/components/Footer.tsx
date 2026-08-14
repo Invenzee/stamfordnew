@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, MessageCircle, Phone, Share2 } from "lucide-react";
+import { ChatButton, QuoteButton } from "@/components/LeadCtas";
 import { routes } from "@/data/routes";
 
 const companyLinks = [
@@ -108,15 +109,15 @@ export default function Footer() {
                 className="btn btn-secondary btn-footer btn-full btn-on-dark"
               >
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-                +1 562 573 2551
+                (562) 573-2551
               </a>
-              <Link
-                href={routes.contact}
-                className="btn btn-primary btn-footer btn-full btn-on-dark"
-              >
+              <ChatButton className="btn btn-secondary btn-footer btn-full btn-on-dark">
                 <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Chat Now
+              </ChatButton>
+              <QuoteButton className="btn btn-primary btn-footer btn-full btn-on-dark">
                 Get A Quote
-              </Link>
+              </QuoteButton>
             </div>
           </div>
         </div>

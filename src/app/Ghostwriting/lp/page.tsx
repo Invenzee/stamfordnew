@@ -13,6 +13,7 @@ import {
   staggerItem,
 } from "@/lib/motion";
 import { handleLeadFormSubmit } from "@/lib/submit-form";
+import { OPEN_QUOTE_POPUP_EVENT, openLiveChat, openQuotePopup } from "@/lib/lead-actions";
 import {
   FaBars,
   FaChevronDown,
@@ -24,7 +25,7 @@ import {
   FaXmark,
 } from "react-icons/fa6";
 
-const PHONE_DISPLAY = "(562) 573 2551";
+const PHONE_DISPLAY = "(562) 573-2551";
 const PHONE_HREF = "tel:+15625732551";
 const EMAIL = "info@stamfordpublishers.com";
 const ADDRESS = "1001 Wilshire Boulevard #1439 Los Angeles, CA 90017";
@@ -302,21 +303,23 @@ function DarkButton({
   children,
   href,
   className = "",
+  onClick,
 }: {
   children: ReactNode;
   href?: string;
   className?: string;
+  onClick?: () => void;
 }) {
   const classes = `${BTN_BASE} bg-[#111] text-white hover:bg-black ${className}`;
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} onClick={onClick}>
         {children}
       </a>
     );
   }
   return (
-    <button type="button" className={classes}>
+    <button type="button" className={classes} onClick={onClick}>
       {children}
     </button>
   );
@@ -325,7 +328,8 @@ function DarkButton({
 function CtaPair({ className = "" }: { className?: string }) {
   return (
     <div className={`flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center ${className}`}>
-      <DarkButton href="#contact">Get Started</DarkButton>
+      <DarkButton onClick={openQuotePopup}>Get Started</DarkButton>
+      <DarkButton onClick={openLiveChat}>Chat Now</DarkButton>
       <PrimaryButton href={PHONE_HREF}>Free Consultation</PrimaryButton>
     </div>
   );
@@ -504,15 +508,14 @@ export default function GhostwritingLpPage() {
   }, []);
 
   useEffect(() => {
-    let dismissed = false;
-    try {
-      dismissed = sessionStorage.getItem(POPUP_SESSION_KEY) === "1";
-    } catch {
-      dismissed = false;
-    }
-    if (dismissed) return;
     const timer = window.setTimeout(() => setPopupOpen(true), POPUP_DELAY_MS);
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const open = () => setPopupOpen(true);
+    window.addEventListener(OPEN_QUOTE_POPUP_EVENT, open);
+    return () => window.removeEventListener(OPEN_QUOTE_POPUP_EVENT, open);
   }, []);
 
   const closePopup = () => {
@@ -649,8 +652,8 @@ export default function GhostwritingLpPage() {
         initial={reduceMotion ? false : { y: -24, opacity: 0 }}
         animate={reduceMotion ? undefined : { y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
-          headerScrolled ? "bg-white shadow-md" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-sm transition-all duration-300 ${
+          headerScrolled ? "shadow-md" : ""
         }`}
       >
         <div className={`${CONTAINER} py-3`}>
@@ -683,11 +686,17 @@ export default function GhostwritingLpPage() {
 
             <div className="flex items-center gap-3 sm:gap-5">
               <PrimaryButton
-                href="#contact"
+                onClick={openQuotePopup}
                 className="hidden px-5 py-2.5 text-xs sm:inline-flex sm:text-sm"
               >
-                Free Consultation
+                Get A Quote
               </PrimaryButton>
+              <DarkButton
+                onClick={openLiveChat}
+                className="hidden px-5 py-2.5 text-xs sm:inline-flex sm:text-sm"
+              >
+                Chat Now
+              </DarkButton>
               <a
                 href={PHONE_HREF}
                 className="hidden text-sm font-semibold text-[#111] transition-opacity duration-300 hover:opacity-70 md:inline"
@@ -738,6 +747,26 @@ export default function GhostwritingLpPage() {
                   >
                     {PHONE_DISPLAY}
                   </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileNavOpen(false);
+                      openLiveChat();
+                    }}
+                    className="block w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-[#111]"
+                  >
+                    Chat Now
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileNavOpen(false);
+                      openQuotePopup();
+                    }}
+                    className="block w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-[#F24506]"
+                  >
+                    Get A Quote
+                  </button>
                 </div>
               </motion.nav>
             )}
@@ -999,8 +1028,9 @@ export default function GhostwritingLpPage() {
                         </li>
                       ))}
                     </ul>
-                    <a
-                      href="#contact"
+                    <button
+                      type="button"
+                      onClick={openQuotePopup}
                       className={`${BTN_BASE} mt-auto w-full text-xs uppercase tracking-wide hover:brightness-95`}
                       style={{
                         backgroundColor: plan.buttonColor,
@@ -1008,7 +1038,7 @@ export default function GhostwritingLpPage() {
                       }}
                     >
                       Buy Your Plan
-                    </a>
+                    </button>
                   </article>
                 </ScrollStaggerItem>
               ))}

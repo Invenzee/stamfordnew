@@ -14,6 +14,7 @@ import {
   staggerItem,
 } from "@/lib/motion";
 import { handleLeadFormSubmit } from "@/lib/submit-form";
+import { OPEN_QUOTE_POPUP_EVENT, openLiveChat, openQuotePopup } from "@/lib/lead-actions";
 import {
   FaCheck,
   FaChevronDown,
@@ -381,24 +382,38 @@ function PrimaryButton({
   href,
   type = "button",
   className = "",
+  onClick,
 }: {
   children: ReactNode;
   href?: string;
   type?: "button" | "submit";
   className?: string;
+  onClick?: () => void;
 }) {
   const classes = `${BTN_BASE} text-[#111] hover:brightness-95 ${className}`;
   const style = { backgroundColor: PRIMARY };
   if (href) {
     return (
-      <a href={href} className={classes} style={style}>
+      <a href={href} className={classes} style={style} onClick={onClick}>
         {children}
       </a>
     );
   }
   return (
-    <button type={type} className={classes} style={style}>
+    <button type={type} className={classes} style={style} onClick={onClick}>
       {children}
+    </button>
+  );
+}
+
+function ChatNowButton({ className = "" }: { className?: string }) {
+  return (
+    <button
+      type="button"
+      onClick={openLiveChat}
+      className={`${BTN_BASE} bg-[#111] text-white hover:bg-black ${className}`}
+    >
+      Chat Now
     </button>
   );
 }
@@ -888,7 +903,8 @@ function GenreShowcase() {
             {activeGenre.body}
           </p>
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <PrimaryButton href="#contact">Get Started</PrimaryButton>
+            <PrimaryButton onClick={openQuotePopup}>Get Started</PrimaryButton>
+            <ChatNowButton />
             <PhoneBlock />
           </div>
         </div>
@@ -936,7 +952,8 @@ function MidPageCta() {
           <MotionColumn from="right" className="lg:py-10">
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:items-center sm:gap-6 lg:items-start lg:justify-start">
               <PhoneBlock onDark />
-              <PrimaryButton href="#contact">Get Started</PrimaryButton>
+              <ChatNowButton />
+              <PrimaryButton onClick={openQuotePopup}>Get Started</PrimaryButton>
             </div>
           </MotionColumn>
         </div>
@@ -963,15 +980,14 @@ export default function BookEditingLpPage() {
   }, []);
 
   useEffect(() => {
-    let dismissed = false;
-    try {
-      dismissed = sessionStorage.getItem(POPUP_SESSION_KEY) === "1";
-    } catch {
-      dismissed = false;
-    }
-    if (dismissed) return;
     const timer = window.setTimeout(() => setPopupOpen(true), POPUP_DELAY_MS);
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const open = () => setPopupOpen(true);
+    window.addEventListener(OPEN_QUOTE_POPUP_EVENT, open);
+    return () => window.removeEventListener(OPEN_QUOTE_POPUP_EVENT, open);
   }, []);
 
   const closePopup = () => {
@@ -1130,8 +1146,7 @@ export default function BookEditingLpPage() {
         initial={reduceMotion ? false : { y: -24, opacity: 0 }}
         animate={reduceMotion ? undefined : { y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${headerScrolled ? "bg-white shadow-md" : "bg-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-sm transition-all duration-300 ${headerScrolled ? "shadow-md" : ""}`}
       >
         <div className={`${CONTAINER} py-3`}>
           <div className="flex items-center justify-between gap-3 sm:gap-4">
@@ -1153,7 +1168,8 @@ export default function BookEditingLpPage() {
               <div className="hidden sm:block">
                 <PhoneBlock />
               </div>
-              <PrimaryButton href="#contact" className="px-4 py-2.5 text-xs sm:px-6 sm:text-sm">
+              <ChatNowButton className="hidden px-4 py-2.5 text-xs sm:inline-flex sm:px-6 sm:text-sm" />
+              <PrimaryButton onClick={openQuotePopup} className="px-4 py-2.5 text-xs sm:px-6 sm:text-sm">
                 Get Started
               </PrimaryButton>
             </div>
@@ -1272,7 +1288,8 @@ export default function BookEditingLpPage() {
                 </div>
                 <ScrollReveal delay={0.1}>
                   <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
-                    <PrimaryButton href="#contact">Get Started</PrimaryButton>
+                    <PrimaryButton onClick={openQuotePopup}>Get Started</PrimaryButton>
+                    <ChatNowButton />
                     <PhoneBlock />
                   </div>
                 </ScrollReveal>

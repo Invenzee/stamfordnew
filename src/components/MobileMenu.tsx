@@ -8,6 +8,7 @@ import {
   mainServices,
   specialtyServices,
 } from "@/components/ServicesDropdown";
+import { ChatButton, QuoteButton } from "@/components/LeadCtas";
 import { routes } from "@/data/routes";
 
 const navLinks = [
@@ -135,14 +136,14 @@ export default function MobileMenu() {
                 className="btn btn-secondary btn-md-pill btn-heading btn-full"
               >
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-                +1 562 573 2551
+                (562) 573-2551
               </a>
-              <Link
-                href={routes.contact}
-                className="btn btn-primary btn-md-pill btn-quote btn-full"
-              >
+              <ChatButton className="btn btn-secondary btn-md-pill btn-heading btn-full">
+                Chat Now
+              </ChatButton>
+              <QuoteButton className="btn btn-primary btn-md-pill btn-quote btn-full">
                 Get A Quote
-              </Link>
+              </QuoteButton>
             </div>
           </div>
         </>

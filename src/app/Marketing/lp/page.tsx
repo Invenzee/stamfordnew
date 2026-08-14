@@ -13,11 +13,12 @@ import {
   FaXmark,
 } from "react-icons/fa6";
 import { handleLeadFormSubmit } from "@/lib/submit-form";
+import { OPEN_QUOTE_POPUP_EVENT, openLiveChat, openQuotePopup } from "@/lib/lead-actions";
 
-const PHONE = "+1 562 573 2551";
+const PHONE = "(562) 573-2551";
 const PHONE_HREF = "tel:+15625732551";
 const EMAIL = "info@stamfordpublishers.com";
-const POPUP_DELAY_MS = 2000;
+const POPUP_DELAY_MS = 30000;
 const POPUP_SESSION_KEY = "book-marketing-lp-popup-dismissed";
 
 const GENRE_OPTIONS = [
@@ -247,7 +248,7 @@ function LpButton({
 
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} onClick={onClick}>
         <span
           className="absolute inset-0 bg-[#111] rounded-[inherit] scale-x-0 origin-left transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-x-100"
           aria-hidden="true"
@@ -514,19 +515,17 @@ export default function BookMarketingLpPage() {
   }, []);
 
   useEffect(() => {
-    let dismissed = false;
-    try {
-      dismissed = sessionStorage.getItem(POPUP_SESSION_KEY) === "1";
-    } catch {
-      dismissed = false;
-    }
-    if (dismissed) return;
-
     const timer = window.setTimeout(() => {
       setPopupOpen(true);
     }, POPUP_DELAY_MS);
 
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const open = () => setPopupOpen(true);
+    window.addEventListener(OPEN_QUOTE_POPUP_EVENT, open);
+    return () => window.removeEventListener(OPEN_QUOTE_POPUP_EVENT, open);
   }, []);
 
   const closePopup = () => {
@@ -656,10 +655,7 @@ export default function BookMarketingLpPage() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${headerScrolled
-            ? "bg-white border-b border-[#e5e5e5] shadow-sm"
-            : "bg-transparent border-b border-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 w-full bg-white border-b border-[#e5e5e5] transition-all duration-300 ${headerScrolled ? "shadow-sm" : ""}`}
       >
         <div className="relative max-w-[1140px] mx-auto w-full px-4 py-5">
           <div className="flex items-center justify-between gap-3">
@@ -676,9 +672,14 @@ export default function BookMarketingLpPage() {
               </span>
             </a>
 
-            <LpButton href="#lp-hero-form" className="shrink-0 text-xs sm:text-sm px-4 py-2.5 sm:px-6 z-10 rounded-full font-semibold normal-case">
-              Get Started
-            </LpButton>
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 z-10">
+              <LpButton onClick={openLiveChat} className="hidden lg:inline-flex text-xs sm:text-sm px-4 py-2.5 sm:px-6 rounded-full font-semibold normal-case">
+                Chat Now
+              </LpButton>
+              <LpButton onClick={openQuotePopup} className="shrink-0 text-xs sm:text-sm px-4 py-2.5 sm:px-6 rounded-full font-semibold normal-case">
+                Get Started
+              </LpButton>
+            </div>
           </div>
 
           <a
@@ -851,8 +852,11 @@ export default function BookMarketingLpPage() {
                     className="md:hidden w-full max-h-[180px] object-contain object-center mb-4"
                   />
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
-                    <LpButton href="#lp-hero-form" className="px-6 py-3 rounded-full font-semibold text-sm normal-case">
+                    <LpButton onClick={openQuotePopup} className="px-6 py-3 rounded-full font-semibold text-sm normal-case">
                       Get A Quote
+                    </LpButton>
+                    <LpButton onClick={openLiveChat} className="px-6 py-3 rounded-full font-semibold text-sm normal-case">
+                      Chat Now
                     </LpButton>
                     <a href={PHONE_HREF} className="flex items-center gap-3 group transition-all duration-300">
                       <span className="flex items-center justify-center w-10 h-10 rounded-full bg-[#ffc800] shrink-0 group-hover:bg-[#111] transition-colors duration-300">
@@ -950,8 +954,11 @@ export default function BookMarketingLpPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 lg:mt-14">
-              <LpButton href="#lp-hero-form" className="px-6 py-3 rounded-full text-sm uppercase tracking-wide">
+              <LpButton onClick={openQuotePopup} className="px-6 py-3 rounded-full text-sm uppercase tracking-wide">
                 Get A Quote
+              </LpButton>
+              <LpButton onClick={openLiveChat} className="px-6 py-3 rounded-full text-sm uppercase tracking-wide">
+                Chat Now
               </LpButton>
               <a href={PHONE_HREF} className="flex items-center gap-3 text-sm font-semibold text-[#111] transition-all duration-300 hover:opacity-80">
                 <span className="flex items-center justify-center w-10 h-10 rounded-full bg-[#ffc800] shrink-0 transition-colors duration-300 group-hover:bg-[#111]">
@@ -1213,13 +1220,14 @@ export default function BookMarketingLpPage() {
           </div>
         </div>
 
-        <a
-          href="#lp-hero-form"
+        <button
+          type="button"
+          onClick={openLiveChat}
           className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#0084ff] text-white shadow-[0_4px_20px_rgba(0,132,255,0.45)] hover:bg-[#111] transition-all duration-300 hover:scale-105"
           aria-label="Chat with us"
         >
           <FaComments className="w-6 h-6" aria-hidden="true" />
-        </a>
+        </button>
       </footer>
 
       {popupMounted && popupModal ? createPortal(popupModal, document.body) : null}
@@ -1259,7 +1267,7 @@ function PricingPlanCard({ name, features }: { name: string; features: string[] 
           <h3 className="text-center text-xl sm:text-2xl lg:text-3xl font-bold text-[#111] mb-4 transition-all duration-300">{name}</h3>
 
           <LpButton
-            href="#lp-hero-form"
+            onClick={openLiveChat}
             className="w-full rounded-full text-white text-sm font-light p-2 mb-5 normal-case"
           >
             Chat Now to Avail Discounted Pricing
@@ -1277,7 +1285,7 @@ function PricingPlanCard({ name, features }: { name: string; features: string[] 
           </ul>
 
           <LpButton
-            href="#lp-hero-form"
+            onClick={openQuotePopup}
             className="w-full rounded-full font-semibold text-[15px] py-2 px-6 mb-5 normal-case"
           >
             Get Started
@@ -1364,8 +1372,11 @@ function WhyMarketingSection({ sectionId }: { sectionId: string }) {
                 and ongoing optimization so your book doesn&apos;t just exist online, it gets discovered.
               </p>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
-                <LpButton href="#lp-hero-form" className="px-6 py-3 rounded-full font-semibold text-sm normal-case">
+                <LpButton onClick={openQuotePopup} className="px-6 py-3 rounded-full font-semibold text-sm normal-case">
                   Get A Quote
+                </LpButton>
+                <LpButton onClick={openLiveChat} className="px-6 py-3 rounded-full font-semibold text-sm normal-case">
+                  Chat Now
                 </LpButton>
                 <a href={PHONE_HREF} className="flex items-center gap-3 group transition-all duration-300">
                   <span className="flex items-center justify-center w-10 h-10 rounded-full bg-[#ffc800] shrink-0 group-hover:bg-[#111] transition-colors duration-300">

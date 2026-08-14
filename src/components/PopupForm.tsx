@@ -2,16 +2,27 @@
 
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import LeadForm from "@/components/LeadForm";
+import { OPEN_QUOTE_POPUP_EVENT } from "@/lib/lead-actions";
 
-const POPUP_DELAY_MS = 2000;
+const POPUP_DELAY_MS = 30000;
 
 export default function PopupForm() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    setIsOpen(false);
+    if (pathname === "/thank-you") return;
     const timer = window.setTimeout(() => setIsOpen(true), POPUP_DELAY_MS);
     return () => window.clearTimeout(timer);
+  }, [pathname]);
+
+  useEffect(() => {
+    const open = () => setIsOpen(true);
+    window.addEventListener(OPEN_QUOTE_POPUP_EVENT, open);
+    return () => window.removeEventListener(OPEN_QUOTE_POPUP_EVENT, open);
   }, []);
 
   useEffect(() => {
@@ -34,7 +45,7 @@ export default function PopupForm() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="popup-form-title"

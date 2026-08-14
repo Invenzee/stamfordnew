@@ -1,7 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { MessageCircle, Phone } from "lucide-react";
-import { routes } from "@/data/routes";
+import { ChatButton, QuoteButton } from "@/components/LeadCtas";
 
 type ServicePageCTAProps = {
   tagline: string;
@@ -71,13 +70,13 @@ export default function ServicePageCTA({
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href={routes.contact}
-                className={`${buttonClass} btn-primary`}
-              >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              <QuoteButton className={`${buttonClass} btn-primary`}>
                 Get A Quote
-              </Link>
+              </QuoteButton>
+              <ChatButton className={`${buttonClass} btn-secondary btn-on-dark`}>
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                Chat Now
+              </ChatButton>
               <a
                 href="tel:+15625732551"
                 className={`${buttonClass} btn-secondary btn-on-dark`}

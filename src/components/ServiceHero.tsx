@@ -4,9 +4,8 @@ import {
   Phone,
   type LucideIcon,
 } from "lucide-react";
-import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
-import { routes } from "@/data/routes";
+import { ChatButton, QuoteButton } from "@/components/LeadCtas";
 
 export type ServiceHeroFeature = {
   label: string;
@@ -88,13 +87,13 @@ export default function ServiceHero({
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href={routes.contact}
-                className="btn btn-primary btn-md"
-              >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              <QuoteButton className="btn btn-primary btn-md">
                 Get A Quote
-              </Link>
+              </QuoteButton>
+              <ChatButton className="btn btn-secondary btn-md">
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                Chat Now
+              </ChatButton>
               <a
                 href="tel:+15625732551"
                 className="btn btn-secondary btn-md"

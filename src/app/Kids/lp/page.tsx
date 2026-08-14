@@ -15,6 +15,7 @@ import {
   staggerItem,
 } from "@/lib/motion";
 import { handleLeadFormSubmit } from "@/lib/submit-form";
+import { OPEN_QUOTE_POPUP_EVENT, openLiveChat, openQuotePopup } from "@/lib/lead-actions";
 import {
   FaBookOpen,
   FaBook,
@@ -37,11 +38,11 @@ import {
   FaMinus,
 } from "react-icons/fa6";
 
-const PHONE = "+1 562 573 2551";
+const PHONE = "(562) 573-2551";
 const PHONE_HREF = "tel:+15625732551";
 const PHONE_DISPLAY = "(562) 573-2551";
 const EMAIL = "info@stamfordpublishers.com";
-const POPUP_DELAY_MS = 2000;
+const POPUP_DELAY_MS = 30000;
 const POPUP_SESSION_KEY = "childrens-book-lp-popup-dismissed";
 
 /* Colors from reference image */
@@ -415,7 +416,7 @@ function PurpleButton({
   const classes = `${BTN_BASE} bg-gradient-to-r from-[#9C27B0] to-[#AB47BC] text-white hover:from-[#7B1FA2] hover:to-[#9C27B0] ${className}`;
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} onClick={onClick}>
         {children}
       </a>
     );
@@ -431,36 +432,47 @@ function BlackButton({
   children,
   href,
   className = "",
+  onClick,
 }: {
   children: ReactNode;
   href?: string;
   className?: string;
+  onClick?: () => void;
 }) {
   const classes = `${BTN_BASE} bg-[#111] text-white hover:bg-[#333] ${className}`;
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} onClick={onClick}>
         {children}
       </a>
     );
   }
-  return <button type="button" className={classes}>{children}</button>;
+  return <button type="button" className={classes} onClick={onClick}>{children}</button>;
 }
 
 function BlueButton({
   children,
   href,
   className = "",
+  onClick,
 }: {
   children: ReactNode;
   href?: string;
   className?: string;
+  onClick?: () => void;
 }) {
   const classes = `${BTN_BASE} bg-[#42A5F5] text-white hover:bg-[#1E88E5] ${className}`;
+  if (href) {
+    return (
+      <a href={href} className={classes} onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
   return (
-    <a href={href} className={classes}>
+    <button type="button" className={classes} onClick={onClick}>
       {children}
-    </a>
+    </button>
   );
 }
 
@@ -744,15 +756,14 @@ export default function ChildrensBookLpPage() {
   }, []);
 
   useEffect(() => {
-    let dismissed = false;
-    try {
-      dismissed = sessionStorage.getItem(POPUP_SESSION_KEY) === "1";
-    } catch {
-      dismissed = false;
-    }
-    if (dismissed) return;
     const timer = window.setTimeout(() => setPopupOpen(true), POPUP_DELAY_MS);
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const open = () => setPopupOpen(true);
+    window.addEventListener(OPEN_QUOTE_POPUP_EVENT, open);
+    return () => window.removeEventListener(OPEN_QUOTE_POPUP_EVENT, open);
   }, []);
 
   const closePopup = () => {
@@ -878,6 +889,9 @@ export default function ChildrensBookLpPage() {
             </a>
 
             <div className="flex items-center gap-2 sm:gap-3">
+              <BlackButton onClick={openLiveChat} className="hidden px-3 py-2 text-[11px] sm:inline-flex sm:px-4 sm:py-2.5 sm:text-sm">
+                Chat Now
+              </BlackButton>
               <PurpleButton href={PHONE_HREF} className="px-3 py-2 text-[11px] sm:px-4 sm:py-2.5 sm:text-sm">
                 <span className="inline">{PHONE}</span>
               </PurpleButton>
@@ -935,10 +949,10 @@ export default function ChildrensBookLpPage() {
                 </motion.ul>
 
                 <motion.div variants={staggerItem} className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                  <BlackButton href="#hero-form" className="w-full sm:w-auto">
+                  <BlackButton onClick={openQuotePopup} className="w-full sm:w-auto">
                     Get Illustration For Children&apos;s Books
                   </BlackButton>
-                  <PurpleButton href="#contact" className="w-full sm:w-auto">
+                  <PurpleButton onClick={openLiveChat} className="w-full sm:w-auto">
                     Talk To The Expert
                   </PurpleButton>
                 </motion.div>
@@ -1008,7 +1022,7 @@ export default function ChildrensBookLpPage() {
                   ))}
                 </ScrollStagger>
                 <ScrollReveal delay={0.1}>
-                  <BlackButton href="#contact" className="w-full sm:w-auto">
+                  <BlackButton onClick={openQuotePopup} className="w-full sm:w-auto">
                     Get Illustration For Children&apos;s Books
                   </BlackButton>
                 </ScrollReveal>
@@ -1066,10 +1080,10 @@ export default function ChildrensBookLpPage() {
                 </ScrollStagger>
                 <ScrollReveal delay={0.1}>
                   <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                    <BlackButton href="#contact" className="w-full sm:w-auto">
+                    <BlackButton onClick={openLiveChat} className="w-full sm:w-auto">
                       Hire Our Expert
                     </BlackButton>
-                    <PurpleButton href="#hero-form" className="w-full sm:w-auto">
+                    <PurpleButton onClick={openQuotePopup} className="w-full sm:w-auto">
                       Claim Free Consultation
                     </PurpleButton>
                   </div>
@@ -1141,10 +1155,10 @@ export default function ChildrensBookLpPage() {
                 Partner with Stamford Publishers&apos; expert children&apos;s book team and get 25% OFF full publishing and illustration packages. Let&apos;s turn your manuscript into a beautifully illustrated book young readers will love.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-                <BlueButton href="#hero-form" className="w-full sm:w-auto">
+                <BlueButton onClick={openQuotePopup} className="w-full sm:w-auto">
                   Get Kids Book Illustration
                 </BlueButton>
-                <PurpleButton href="#contact" className="w-full sm:w-auto">
+                <PurpleButton onClick={openLiveChat} className="w-full sm:w-auto">
                   Talk To An Expert
                 </PurpleButton>
               </div>
@@ -1191,7 +1205,7 @@ export default function ChildrensBookLpPage() {
                   <p className="mb-6 text-sm leading-relaxed text-[#222]">
                     Take advantage of our limited-time offer and get 25% OFF complete children&apos;s book publishing packages. From manuscript editing and custom illustration to formatting and global distribution, we handle everything under one roof.
                   </p>
-                  <PurpleButton href="#hero-form" className="w-full sm:w-auto">
+                  <PurpleButton onClick={openQuotePopup} className="w-full sm:w-auto">
                     Get Kids Book Illustration
                   </PurpleButton>
                 </ScrollReveal>
@@ -1263,7 +1277,7 @@ export default function ChildrensBookLpPage() {
                   <p className="mb-6 text-sm leading-relaxed text-[#222]">
                     Bring your characters off the manuscript page and onto the shelves. Claim 25% OFF full-service publishing and work with experienced editors, illustrators, and self-publishing strategists.
                   </p>
-                  <BlackButton href="#contact" className="w-full sm:w-auto">
+                  <BlackButton onClick={openLiveChat} className="w-full sm:w-auto">
                     Chat With Expert
                   </BlackButton>
                 </ScrollReveal>
