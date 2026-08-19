@@ -3,35 +3,14 @@
 import { useEffect } from "react";
 
 const CLEAR_WINDOW_MS = 1500;
-const DESKTOP_MQ = "(min-width: 768px)";
 
 export default function ZendeskBehavior() {
   useEffect(() => {
-    function isDesktop() {
-      return window.matchMedia(DESKTOP_MQ).matches;
-    }
-
-    function syncLauncherForViewport() {
-      if (typeof window.zE !== "function") return;
-      try {
-        if (isDesktop()) {
-          window.zE("webWidget", "hide");
-        } else {
-          window.zE("webWidget", "show");
-        }
-      } catch {
-        // Widget may not be ready yet.
-      }
-    }
-
     function initZendeskChat() {
       if (typeof window.zE === "function") {
         window.zE(function () {
-          syncLauncherForViewport();
-
-          if (!isDesktop()) {
-            window.zE?.("webWidget", "open");
-          }
+          window.zE?.("webWidget", "show");
+          window.zE?.("webWidget", "open");
 
           window.zE?.(
             "webWidget:on",
@@ -43,10 +22,6 @@ export default function ZendeskBehavior() {
               }
             },
           );
-
-          window.zE?.("webWidget:on", "close", function () {
-            syncLauncherForViewport();
-          });
         });
       } else {
         window.setTimeout(initZendeskChat, 300);
@@ -54,10 +29,6 @@ export default function ZendeskBehavior() {
     }
 
     initZendeskChat();
-
-    const mq = window.matchMedia(DESKTOP_MQ);
-    const onViewportChange = () => syncLauncherForViewport();
-    mq.addEventListener("change", onViewportChange);
 
     function getWidgetDoc() {
       const frame = document.querySelector(
@@ -156,38 +127,22 @@ export default function ZendeskBehavior() {
       }
     }, 200);
 
-    function hideLauncherOnDesktopCss() {
-      let style = document.getElementById("bb-zd-mobile-only");
-      if (!style) {
-        style = document.createElement("style");
-        style.id = "bb-zd-mobile-only";
-        document.head.appendChild(style);
+    // Ensure launcher stays visible after async widget load
+    let showTries = 0;
+    const showTimer = window.setInterval(function () {
+      if (typeof window.zE === "function") {
+        try {
+          window.zE("webWidget", "show");
+        } catch {
+          // ignore
+        }
       }
-      style.textContent =
-        "@media (min-width: 768px){" +
-        "iframe#launcher," +
-        "#launcher," +
-        ".zEWidget-launcher," +
-        "div[data-product='web_widget'] iframe#launcher{" +
-        "display:none!important;visibility:hidden!important;pointer-events:none!important;" +
-        "}" +
-        "}";
-    }
-
-    hideLauncherOnDesktopCss();
-    syncLauncherForViewport();
-
-    let bootTries = 0;
-    const bootTimer = window.setInterval(function () {
-      hideLauncherOnDesktopCss();
-      syncLauncherForViewport();
-      if (++bootTries > 40) window.clearInterval(bootTimer);
+      if (++showTries > 40) window.clearInterval(showTimer);
     }, 250);
 
     return () => {
-      mq.removeEventListener("change", onViewportChange);
       window.clearInterval(clearBoot);
-      window.clearInterval(bootTimer);
+      window.clearInterval(showTimer);
       document.getElementById("bb-zd-mobile-only")?.remove();
     };
   }, []);
