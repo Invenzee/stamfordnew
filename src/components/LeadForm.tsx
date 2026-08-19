@@ -1,7 +1,6 @@
 "use client";
 
 import { Check, Mail, MessageSquare, Phone, User } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { handleLeadFormSubmit } from "@/lib/submit-form";
 
@@ -114,48 +113,11 @@ export default function LeadForm({
           <textarea
             id={`${idPrefix}-message`}
             name="message"
-            required
             rows={4}
             placeholder={messagePlaceholder}
             className="w-full resize-none rounded-lg border border-border bg-white py-2.5 pr-3 pl-10 font-body text-sm text-black placeholder:text-black/40 focus:border-secondary focus:outline-none"
           />
         </div>
-      </div>
-
-      <div className="space-y-2.5 pt-1">
-        <label className="flex items-start gap-2">
-          <input
-            type="checkbox"
-            name="agree_terms"
-            required
-            className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-primary"
-          />
-          <span className="font-body text-[10px] leading-relaxed text-black/70">
-            I agree to the{" "}
-            <Link href="/terms-of-service" className="text-secondary underline">
-              Terms &amp; Conditions
-            </Link>{" "}
-            and{" "}
-            <Link href="/privacy-policy" className="text-secondary underline">
-              Privacy Policy
-            </Link>
-            .
-          </span>
-        </label>
-        <label className="flex items-start gap-2">
-          <input
-            type="checkbox"
-            name="sms_consent"
-            value="yes"
-            className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-primary"
-          />
-          <span className="font-body text-[10px] leading-relaxed text-black/70">
-            By submitting, you consent to receive SMS notifications, alerts
-            &amp; occasional marketing communication from Stamford Publishers.
-            Message frequency varies. Message &amp; data rates may apply. You
-            can reply STOP to unsubscribe at any time.
-          </span>
-        </label>
       </div>
 
       <button type="submit" className="btn btn-primary btn-submit">

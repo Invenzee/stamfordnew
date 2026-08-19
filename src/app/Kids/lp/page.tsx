@@ -668,7 +668,7 @@ function HeroLeadForm({ id }: { id?: string }) {
           required
           className={HERO_FORM_FIELD}
         />
-        <select name="genre" required className={HERO_FORM_SELECT} defaultValue="Audiobook">
+        <select name="genre" className={HERO_FORM_SELECT} defaultValue="Audiobook">
           {GENRE_OPTIONS.map((genre) => (
             <option key={genre} value={genre}>
               {genre === "Audiobook" ? "Audio Book" : genre}
@@ -680,13 +680,11 @@ function HeroLeadForm({ id }: { id?: string }) {
         type="text"
         name="bookTitle"
         placeholder="Book Title"
-        required
         className={HERO_FORM_FIELD}
       />
       <textarea
         name="aboutBook"
         placeholder="Tell Us About Your Book"
-        required
         rows={5}
         className={`${HERO_FORM_FIELD} min-h-[100px] resize-y`}
       />
@@ -706,7 +704,7 @@ function LeadForm({ id, submitLabel = "Submit Now" }: { id?: string; submitLabel
       <input type="text" name="name" placeholder="Name" required className={FIELD_CLASS} />
       <input type="email" name="email" placeholder="Email" required className={FIELD_CLASS} />
       <input type="tel" name="phone" placeholder="Phone" required className={FIELD_CLASS} />
-      <select name="service" required className={SELECT_CLASS} defaultValue="">
+      <select name="service" className={SELECT_CLASS} defaultValue="">
         <option value="" disabled>
           Select a Service
         </option>
@@ -718,7 +716,6 @@ function LeadForm({ id, submitLabel = "Submit Now" }: { id?: string; submitLabel
       <textarea
         name="message"
         placeholder="Tell us about your book project"
-        required
         rows={4}
         className={`${FIELD_CLASS} resize-y min-h-[100px]`}
       />
@@ -850,7 +847,6 @@ export default function ChildrensBookLpPage() {
                 <textarea
                   name="message"
                   placeholder="Tell us about your children's book"
-                  required
                   rows={4}
                   className={`${FIELD_CLASS} resize-y`}
                 />

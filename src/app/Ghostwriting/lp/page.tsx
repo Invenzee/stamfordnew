@@ -439,7 +439,7 @@ function LeadForm({ id }: { id?: string }) {
           required
           className={LINE_FIELD}
         />
-        <select name="genre" required defaultValue="Audio Book" className={LINE_SELECT}>
+        <select name="genre" defaultValue="Audio Book" className={LINE_SELECT}>
           {GENRE_OPTIONS.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -451,13 +451,11 @@ function LeadForm({ id }: { id?: string }) {
         type="text"
         name="bookTitle"
         placeholder="Book Title"
-        required
         className={LINE_FIELD}
       />
       <textarea
         name="aboutBook"
         placeholder="Tell Us About Your Book"
-        required
         rows={4}
         className={`${LINE_FIELD} min-h-[90px] resize-y`}
       />
@@ -608,7 +606,7 @@ export default function GhostwritingLpPage() {
                       required
                       className={LINE_FIELD}
                     />
-                    <select name="genre" required defaultValue="Audio Book" className={LINE_SELECT}>
+                    <select name="genre" defaultValue="Audio Book" className={LINE_SELECT}>
                       {GENRE_OPTIONS.map((option) => (
                         <option key={option} value={option}>
                           {option}
@@ -620,13 +618,11 @@ export default function GhostwritingLpPage() {
                     type="text"
                     name="bookTitle"
                     placeholder="Book Title"
-                    required
                     className={LINE_FIELD}
                   />
                   <textarea
                     name="aboutBook"
                     placeholder="Tell Us About Your Book"
-                    required
                     rows={4}
                     className={`${LINE_FIELD} min-h-[90px] resize-y`}
                   />

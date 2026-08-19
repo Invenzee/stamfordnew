@@ -620,7 +620,7 @@ export default function BookMarketingLpPage() {
                   required
                   className={POPUP_FIELD_CLASS}
                 />
-                <select name="genre" required className={POPUP_SELECT_CLASS} defaultValue="Audiobook">
+                <select name="genre" className={POPUP_SELECT_CLASS} defaultValue="Audiobook">
                   {GENRE_OPTIONS.map((g) => (
                     <option key={g} value={g}>
                       {g === "Audiobook" ? "Audio Book" : g}
@@ -632,13 +632,11 @@ export default function BookMarketingLpPage() {
                 type="text"
                 name="bookTitle"
                 placeholder="Book Title"
-                required
                 className={POPUP_FIELD_CLASS}
               />
               <textarea
                 name="aboutBook"
                 placeholder="Tell Us About Your Book"
-                required
                 rows={5}
                 className={`${POPUP_FIELD_CLASS} min-h-[130px] resize-y`}
               />
@@ -745,12 +743,12 @@ export default function BookMarketingLpPage() {
                 <input type="tel" name="phone" placeholder="Your Phone" required className={HERO_FIELD_CLASS} />
               </div>
               <div className="grid sm:grid-cols-[1fr_1fr_1.4fr] gap-3">
-                <select name="timeline" required className={HERO_SELECT_CLASS} defaultValue="3 Months">
+                <select name="timeline" className={HERO_SELECT_CLASS} defaultValue="3 Months">
                   {TIMELINE_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>
                   ))}
                 </select>
-                <select name="published" required className={HERO_SELECT_CLASS} defaultValue="Yes">
+                <select name="published" className={HERO_SELECT_CLASS} defaultValue="Yes">
                   {PUBLISHED_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>
                   ))}
@@ -1166,14 +1164,14 @@ export default function BookMarketingLpPage() {
                   required
                   className={FOOTER_FIELD_CLASS}
                 />
-                <select name="timeline" required className={FOOTER_SELECT_CLASS} defaultValue="3 Months">
+                <select name="timeline" className={FOOTER_SELECT_CLASS} defaultValue="3 Months">
                   {TIMELINE_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}
                     </option>
                   ))}
                 </select>
-                <select name="published" required className={FOOTER_SELECT_CLASS} defaultValue="Yes">
+                <select name="published" className={FOOTER_SELECT_CLASS} defaultValue="Yes">
                   {PUBLISHED_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}

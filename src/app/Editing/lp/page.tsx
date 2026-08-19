@@ -566,7 +566,6 @@ function HeroLeadForm({ id }: { id?: string }) {
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         <select
           name="genre"
-          required
           defaultValue=""
           className={PILL_SELECT}
           style={pillFieldStyle()}
@@ -582,7 +581,6 @@ function HeroLeadForm({ id }: { id?: string }) {
         </select>
         <select
           name="service"
-          required
           defaultValue=""
           className={PILL_SELECT}
           style={pillFieldStyle()}
@@ -640,7 +638,6 @@ function ContactLeadForm({ id }: { id?: string }) {
         />
         <select
           name="genre"
-          required
           defaultValue=""
           className={PILL_SELECT}
           style={pillFieldStyle()}
@@ -658,7 +655,6 @@ function ContactLeadForm({ id }: { id?: string }) {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <select
           name="service"
-          required
           defaultValue=""
           className={PILL_SELECT}
           style={pillFieldStyle()}
@@ -1097,7 +1093,6 @@ export default function BookEditingLpPage() {
                     />
                     <select
                       name="genre"
-                      required
                       defaultValue=""
                       className={PILL_SELECT}
                       style={pillFieldStyle()}
@@ -1114,7 +1109,6 @@ export default function BookEditingLpPage() {
                   </div>
                   <select
                     name="service"
-                    required
                     defaultValue=""
                     className={PILL_SELECT}
                     style={pillFieldStyle()}
