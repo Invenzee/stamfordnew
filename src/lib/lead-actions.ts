@@ -5,21 +5,20 @@ export function openQuotePopup() {
 }
 
 export function openLiveChat() {
-  const open = () => {
-    window.zE?.("webWidget", "show");
-    window.zE?.("webWidget", "open");
+  const maximize = () => {
+    window.LiveChatWidget?.call("maximize");
   };
 
-  if (typeof window.zE === "function") {
-    open();
+  if (window.LiveChatWidget) {
+    maximize();
     return;
   }
 
   let tries = 0;
   const timer = window.setInterval(() => {
-    if (typeof window.zE === "function") {
+    if (window.LiveChatWidget) {
       window.clearInterval(timer);
-      open();
+      maximize();
     } else if (++tries > 50) {
       window.clearInterval(timer);
     }
