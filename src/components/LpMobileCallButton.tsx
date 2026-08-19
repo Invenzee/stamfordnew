@@ -12,6 +12,11 @@ export default function LpMobileCallButton() {
     return null;
   }
 
+  // Marketing LP already has a header call control on mobile.
+  if (pathname?.toLowerCase().startsWith("/marketing/lp")) {
+    return null;
+  }
+
   const theme = getLpCallTheme(pathname);
 
   return (
