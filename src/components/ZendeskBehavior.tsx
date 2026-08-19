@@ -9,8 +9,8 @@ export default function ZendeskBehavior() {
     function initZendeskChat() {
       if (typeof window.zE === "function") {
         window.zE(function () {
+          // Launcher stays visible; do not auto-open on page load.
           window.zE?.("webWidget", "show");
-          window.zE?.("webWidget", "open");
 
           window.zE?.(
             "webWidget:on",
