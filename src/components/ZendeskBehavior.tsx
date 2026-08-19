@@ -6,12 +6,56 @@ const CLEAR_WINDOW_MS = 1500;
 
 export default function ZendeskBehavior() {
   useEffect(() => {
+    let chatOpen = false;
+
+    const hasGuard = () => !!(history.state && history.state.zendeskOpen);
+
+    const pushGuard = () => {
+      if (!hasGuard()) {
+        history.pushState({ zendeskOpen: true }, "", window.location.href);
+      }
+    };
+
+    const pushGuardWithRetry = () => {
+      pushGuard();
+      window.setTimeout(pushGuard, 300);
+      window.setTimeout(pushGuard, 1000);
+    };
+
+    const closeWidget = () => {
+      chatOpen = false;
+      if (typeof window.zE === "function") {
+        try {
+          window.zE("webWidget", "close");
+        } catch {
+          // ignore
+        }
+      }
+    };
+
+    const onPopState = () => {
+      if (!chatOpen) return;
+      closeWidget();
+    };
+
+    window.addEventListener("popstate", onPopState);
+
     function initZendeskChat() {
       if (typeof window.zE === "function") {
         window.zE(function () {
           // Launcher stays visible; do not auto-open on page load.
           window.zE?.("webWidget", "show");
 
+          window.zE?.("webWidget:on", "open", function () {
+            chatOpen = true;
+            pushGuardWithRetry();
+          });
+
+          window.zE?.("webWidget:on", "close", function () {
+            chatOpen = false;
+          });
+
+          // Agent message / unread → open chat (same idea as LiveChat agent reply)
           window.zE?.(
             "webWidget:on",
             "chat:unreadMessages",
@@ -19,6 +63,8 @@ export default function ZendeskBehavior() {
               if (number > 0) {
                 window.zE?.("webWidget", "show");
                 window.zE?.("webWidget", "open");
+                chatOpen = true;
+                pushGuardWithRetry();
               }
             },
           );
@@ -127,7 +173,6 @@ export default function ZendeskBehavior() {
       }
     }, 200);
 
-    // Ensure launcher stays visible after async widget load
     let showTries = 0;
     const showTimer = window.setInterval(function () {
       if (typeof window.zE === "function") {
@@ -141,6 +186,7 @@ export default function ZendeskBehavior() {
     }, 250);
 
     return () => {
+      window.removeEventListener("popstate", onPopState);
       window.clearInterval(clearBoot);
       window.clearInterval(showTimer);
       document.getElementById("bb-zd-mobile-only")?.remove();
