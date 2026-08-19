@@ -1164,12 +1164,12 @@ export default function BookEditingLpPage() {
               />
             </a>
 
-            <div className="flex items-center gap-3 sm:gap-6">
-              <div className="hidden sm:block">
-                <PhoneBlock />
-              </div>
-              <ChatNowButton className="hidden px-4 py-2.5 text-xs sm:inline-flex sm:px-6 sm:text-sm" />
-              <PrimaryButton onClick={openQuotePopup} className="px-4 py-2.5 text-xs sm:px-6 sm:text-sm">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <ChatNowButton className="shrink-0 px-4 py-2.5 text-xs sm:px-5 sm:text-sm" />
+              <PrimaryButton
+                onClick={openQuotePopup}
+                className="hidden lg:inline-flex shrink-0 px-5 py-2.5 text-sm"
+              >
                 Get Started
               </PrimaryButton>
             </div>

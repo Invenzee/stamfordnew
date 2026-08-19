@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import {
-  FaComments,
   FaEnvelope,
   FaFacebookF,
   FaInstagram,
@@ -657,44 +656,37 @@ export default function BookMarketingLpPage() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 w-full bg-white border-b border-[#e5e5e5] transition-all duration-300 ${headerScrolled ? "shadow-sm" : ""}`}
       >
-        <div className="relative max-w-[1140px] mx-auto w-full px-4 py-5">
-          <div className="flex items-center justify-between gap-3">
+        <div className="max-w-[1140px] mx-auto w-full px-4 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-3 sm:gap-4">
             <a
-              href={PHONE_HREF}
-              className="flex items-center gap-2 text-sm font-medium text-[#111] min-w-0 z-10 transition-all duration-300 hover:opacity-80"
+              href="#"
+              className="shrink-0 transition-opacity duration-300 hover:opacity-80"
+              aria-label="Stamford Publishers"
             >
-              <span className="flex items-center justify-center w-9 h-9 rounded-full bg-[#ffc800] shrink-0 transition-colors duration-300 hover:bg-[#111] group">
-                <FaPhone className="w-3.5 h-3.5 transition-colors duration-300 group-hover:text-white" aria-hidden="true" />
-              </span>
-              <span className="hidden sm:block">
-                <span className="text-[#666] text-xs block leading-tight">Call Now</span>
-                <span className="font-semibold">{PHONE}</span>
-              </span>
+              <img
+                src="/book-marketing-lp/logo.webp"
+                alt="Stamford Publishers"
+                width={100}
+                height={100}
+                className="h-10 sm:h-12 lg:h-14 w-auto transition-all duration-300"
+              />
             </a>
 
-            <div className="flex items-center gap-2 sm:gap-3 shrink-0 z-10">
-              <LpButton onClick={openLiveChat} className="hidden lg:inline-flex text-xs sm:text-sm px-4 py-2.5 sm:px-6 rounded-full font-semibold normal-case">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <LpButton
+                onClick={openLiveChat}
+                className="shrink-0 whitespace-nowrap text-xs sm:text-sm px-4 py-2.5 sm:px-5 rounded-full font-semibold normal-case"
+              >
                 Chat Now
               </LpButton>
-              <LpButton onClick={openQuotePopup} className="shrink-0 text-xs sm:text-sm px-4 py-2.5 sm:px-6 rounded-full font-semibold normal-case">
+              <LpButton
+                onClick={openQuotePopup}
+                className="hidden lg:inline-flex shrink-0 whitespace-nowrap text-sm px-5 py-2.5 rounded-full font-semibold normal-case"
+              >
                 Get Started
               </LpButton>
             </div>
           </div>
-
-          <a
-            href="#"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 hover:opacity-80"
-            aria-label="Stamford Publishers"
-          >
-            <img
-              src="/book-marketing-lp/logo.webp"
-              alt="Stamford Publishers"
-              width={100}
-              height={100}
-              className="h-12 sm:h-14 lg:h-16 w-auto transition-all duration-300"
-            />
-          </a>
         </div>
       </header>
 
@@ -1220,14 +1212,6 @@ export default function BookMarketingLpPage() {
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={openLiveChat}
-          className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#0084ff] text-white shadow-[0_4px_20px_rgba(0,132,255,0.45)] hover:bg-[#111] transition-all duration-300 hover:scale-105"
-          aria-label="Chat with us"
-        >
-          <FaComments className="w-6 h-6" aria-hidden="true" />
-        </button>
       </footer>
 
       {popupMounted && popupModal ? createPortal(popupModal, document.body) : null}

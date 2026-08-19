@@ -888,12 +888,18 @@ export default function ChildrensBookLpPage() {
               />
             </a>
 
-            <div className="flex items-center gap-2 sm:gap-3">
-              <BlackButton onClick={openLiveChat} className="hidden px-3 py-2 text-[11px] sm:inline-flex sm:px-4 sm:py-2.5 sm:text-sm">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <BlackButton
+                onClick={openLiveChat}
+                className="shrink-0 px-3 py-2 text-[11px] sm:px-4 sm:py-2.5 sm:text-sm"
+              >
                 Chat Now
               </BlackButton>
-              <PurpleButton href={PHONE_HREF} className="px-3 py-2 text-[11px] sm:px-4 sm:py-2.5 sm:text-sm">
-                <span className="inline">{PHONE}</span>
+              <PurpleButton
+                onClick={openQuotePopup}
+                className="hidden lg:inline-flex shrink-0 px-4 py-2.5 text-sm"
+              >
+                Get Started
               </PurpleButton>
             </div>
           </div>

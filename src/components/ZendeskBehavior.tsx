@@ -2,15 +2,37 @@
 
 import { useEffect } from "react";
 
-const COLOR = "#000080";
 const CLEAR_WINDOW_MS = 1500;
+const DESKTOP_MQ = "(min-width: 768px)";
 
 export default function ZendeskBehavior() {
   useEffect(() => {
+    function isDesktop() {
+      return window.matchMedia(DESKTOP_MQ).matches;
+    }
+
+    function syncLauncherForViewport() {
+      if (typeof window.zE !== "function") return;
+      try {
+        if (isDesktop()) {
+          window.zE("webWidget", "hide");
+        } else {
+          window.zE("webWidget", "show");
+        }
+      } catch {
+        // Widget may not be ready yet.
+      }
+    }
+
     function initZendeskChat() {
       if (typeof window.zE === "function") {
         window.zE(function () {
-          window.zE?.("webWidget", "open");
+          syncLauncherForViewport();
+
+          if (!isDesktop()) {
+            window.zE?.("webWidget", "open");
+          }
+
           window.zE?.(
             "webWidget:on",
             "chat:unreadMessages",
@@ -21,6 +43,10 @@ export default function ZendeskBehavior() {
               }
             },
           );
+
+          window.zE?.("webWidget:on", "close", function () {
+            syncLauncherForViewport();
+          });
         });
       } else {
         window.setTimeout(initZendeskChat, 300);
@@ -28,6 +54,10 @@ export default function ZendeskBehavior() {
     }
 
     initZendeskChat();
+
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const onViewportChange = () => syncLauncherForViewport();
+    mq.addEventListener("change", onViewportChange);
 
     function getWidgetDoc() {
       const frame = document.querySelector(
@@ -126,117 +156,39 @@ export default function ZendeskBehavior() {
       }
     }, 200);
 
-    function applyZeSettings() {
-      if (typeof window.zE !== "function") return false;
-      try {
-        window.zE("webWidget", "updateSettings", {
-          webWidget: {
-            color: {
-              theme: COLOR,
-              launcher: COLOR,
-              launcherText: "#FFFFFF",
-              button: COLOR,
-              header: COLOR,
-              resultLists: COLOR,
-              articleLinks: COLOR,
-            },
-          },
-        });
-        return true;
-      } catch {
-        return false;
-      }
-    }
-
-    function getFrameDoc(selector: string) {
-      const frame = document.querySelector(selector) as HTMLIFrameElement | null;
-      if (!frame) return null;
-      try {
-        return frame.contentDocument || frame.contentWindow?.document || null;
-      } catch {
-        return null;
-      }
-    }
-
-    function injectCss(doc: Document | null, cssText: string, styleId: string) {
-      if (!doc?.head) return false;
-      let style = doc.getElementById(styleId);
+    function hideLauncherOnDesktopCss() {
+      let style = document.getElementById("bb-zd-mobile-only");
       if (!style) {
-        style = doc.createElement("style");
-        style.id = styleId;
-        doc.head.appendChild(style);
+        style = document.createElement("style");
+        style.id = "bb-zd-mobile-only";
+        document.head.appendChild(style);
       }
-      style.textContent = cssText;
-      return true;
-    }
-
-    function paintWidget() {
-      const css =
-        ".u-userLauncherColor:not([disabled]){" +
-        "background-color:" +
-        COLOR +
-        " !important;" +
-        "color:#fff !important;" +
-        "fill:#fff !important;" +
+      style.textContent =
+        "@media (min-width: 768px){" +
+        "iframe#launcher," +
+        "#launcher," +
+        ".zEWidget-launcher," +
+        "div[data-product='web_widget'] iframe#launcher{" +
+        "display:none!important;visibility:hidden!important;pointer-events:none!important;" +
         "}" +
-        "header," +
-        '[data-testid="widget-title"],' +
-        ".HeaderView-sc-1gl8kno-0," +
-        ".gJLDHj{" +
-        "background:" +
-        COLOR +
-        " !important;" +
-        "background-color:" +
-        COLOR +
-        " !important;" +
-        "color:#fff !important;" +
         "}";
-
-      injectCss(getFrameDoc("iframe#launcher"), css, "bb-zd-navy");
-      injectCss(getFrameDoc("iframe#webWidget"), css, "bb-zd-navy");
     }
 
-    function bootColor() {
-      applyZeSettings();
-      paintWidget();
-    }
+    hideLauncherOnDesktopCss();
+    syncLauncherForViewport();
 
-    let colorTries = 0;
-    const colorTimer = window.setInterval(function () {
-      bootColor();
-      if (++colorTries > 60) window.clearInterval(colorTimer);
-    }, 200);
-
-    bootColor();
-
-    let bindTries = 0;
-    const bindTimer = window.setInterval(function () {
-      if (typeof window.zE !== "function") {
-        if (++bindTries > 100) window.clearInterval(bindTimer);
-        return;
-      }
-      try {
-        window.zE("webWidget:on", "open", function () {
-          applyZeSettings();
-          let i = 0;
-          const t = window.setInterval(function () {
-            paintWidget();
-            if (++i > 20) window.clearInterval(t);
-          }, 100);
-        });
-        window.zE("webWidget:on", "chat:unreadMessages", function () {
-          paintWidget();
-        });
-        window.clearInterval(bindTimer);
-      } catch {
-        if (++bindTries > 100) window.clearInterval(bindTimer);
-      }
-    }, 200);
+    let bootTries = 0;
+    const bootTimer = window.setInterval(function () {
+      hideLauncherOnDesktopCss();
+      syncLauncherForViewport();
+      if (++bootTries > 40) window.clearInterval(bootTimer);
+    }, 250);
 
     return () => {
+      mq.removeEventListener("change", onViewportChange);
       window.clearInterval(clearBoot);
-      window.clearInterval(colorTimer);
-      window.clearInterval(bindTimer);
+      window.clearInterval(bootTimer);
+      document.getElementById("bb-zd-mobile-only")?.remove();
     };
   }, []);
 

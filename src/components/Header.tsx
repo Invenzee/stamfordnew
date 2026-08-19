@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Phone } from "lucide-react";
 import { ChatButton, QuoteButton } from "@/components/LeadCtas";
 import MobileMenu from "@/components/MobileMenu";
 import ServicesDropdown from "@/components/ServicesDropdown";
@@ -49,17 +48,10 @@ export default function Header() {
               </nav>
 
               <div className="flex items-center gap-2.5 sm:gap-3">
-                <a
-                  href="tel:+15625732551"
-                  className="btn btn-secondary btn-md-pill btn-heading hidden sm:flex sm:px-4"
-                >
-                  <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span className="hidden sm:inline">(562) 573-2551</span>
-                </a>
-                <ChatButton className="btn btn-secondary btn-md-pill btn-heading hidden lg:flex sm:px-4">
+                <ChatButton className="btn btn-secondary btn-md-pill btn-heading px-4">
                   Chat Now
                 </ChatButton>
-                <QuoteButton className="btn btn-primary btn-md-pill btn-quote hidden sm:block sm:px-5 max-sm:hidden">
+                <QuoteButton className="btn btn-primary btn-md-pill btn-quote hidden lg:block px-5">
                   GET A QUOTE
                 </QuoteButton>
                 <MobileMenu />

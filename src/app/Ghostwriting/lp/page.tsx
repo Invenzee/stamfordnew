@@ -684,25 +684,19 @@ export default function GhostwritingLpPage() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-3 sm:gap-5">
-              <PrimaryButton
-                onClick={openQuotePopup}
-                className="hidden px-5 py-2.5 text-xs sm:inline-flex sm:text-sm"
-              >
-                Get A Quote
-              </PrimaryButton>
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <DarkButton
                 onClick={openLiveChat}
-                className="hidden px-5 py-2.5 text-xs sm:inline-flex sm:text-sm"
+                className="shrink-0 px-4 py-2.5 text-xs sm:px-5 sm:text-sm"
               >
                 Chat Now
               </DarkButton>
-              <a
-                href={PHONE_HREF}
-                className="hidden text-sm font-semibold text-[#111] transition-opacity duration-300 hover:opacity-70 md:inline"
+              <PrimaryButton
+                onClick={openQuotePopup}
+                className="hidden lg:inline-flex shrink-0 px-5 py-2.5 text-sm"
               >
-                {PHONE_DISPLAY}
-              </a>
+                Get A Quote
+              </PrimaryButton>
               <button
                 type="button"
                 onClick={() => setMobileNavOpen((prev) => !prev)}
