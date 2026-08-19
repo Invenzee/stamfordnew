@@ -1,7 +1,13 @@
+/** Temporarily disabled — Zendesk is active in layout. */
+/*
 import Script from "next/script";
 import LiveChatBehavior from "@/components/LiveChatBehavior";
+*/
 
 export default function LiveChat() {
+  return null;
+
+  /*
   return (
     <>
       <Script id="livechat-snippet" strategy="afterInteractive">
@@ -29,4 +35,5 @@ export default function LiveChat() {
       <LiveChatBehavior />
     </>
   );
+  */
 }

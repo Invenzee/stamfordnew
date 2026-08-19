@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Poppins, Raleway } from "next/font/google";
 import GoogleTag from "@/components/GoogleTag";
-import LiveChat from "@/components/LiveChat";
+// import LiveChat from "@/components/LiveChat";
 import PpcTracker from "@/components/PpcTracker";
 import SiteChrome from "@/components/SiteChrome";
-// import ZendeskWidget from "@/components/ZendeskWidget";
+import ZendeskWidget from "@/components/ZendeskWidget";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -62,8 +62,8 @@ export default async function RootLayout({
       >
         <PpcTracker />
         <SiteChrome>{children}</SiteChrome>
-        <LiveChat />
-        {/* <ZendeskWidget /> */}
+        {/* <LiveChat /> */}
+        <ZendeskWidget />
       </body>
     </html>
   );
