@@ -74,12 +74,14 @@ function ConsultationForm({
   cardId,
   animated = false,
   plain = false,
+  selectedPackage,
 }: {
   source?: string;
   idPrefix?: string;
   cardId?: string;
   animated?: boolean;
   plain?: boolean;
+  selectedPackage?: { name: string; price: string };
 }) {
   const [invalid, setInvalid] = useState<Record<string, boolean>>({});
 
@@ -123,9 +125,20 @@ function ConsultationForm({
   return (
     <div className={wrapClass} id={cardId}>
       <h2 id={`${idPrefix}-heading`}>{FORM.heading}</h2>
-      <p className={s.formSub}>{FORM.sub}</p>
+      <p className={s.formSub}>
+        {selectedPackage
+          ? `You selected the ${selectedPackage.name} package (${selectedPackage.price}). Tell us about your book and we will confirm the next steps.`
+          : FORM.sub}
+      </p>
 
       <form onSubmit={onSubmit} noValidate>
+        {selectedPackage ? (
+          <input
+            type="hidden"
+            name="package"
+            value={`${selectedPackage.name} — ${selectedPackage.price}`}
+          />
+        ) : null}
         <div className={cx("name")}>
           <label htmlFor={`${idPrefix}-name`}>Full name</label>
           <input
@@ -215,6 +228,11 @@ function ConsultationForm({
 /* ------------------------------------------------------------------ */
 export default function ChristianLanding() {
   const [popupOpen, setPopupOpen] = useState(false);
+  const [packagePopupOpen, setPackagePopupOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<{
+    name: string;
+    price: string;
+  } | null>(null);
   const [popupMounted, setPopupMounted] = useState(false);
 
   useEffect(() => {
@@ -244,6 +262,16 @@ export default function ChristianLanding() {
     } catch {
       // ignore
     }
+  };
+
+  const openPackagePopup = (pkg: { name: string; price: string }) => {
+    setSelectedPackage(pkg);
+    setPackagePopupOpen(true);
+  };
+
+  const closePackagePopup = () => {
+    setPackagePopupOpen(false);
+    setSelectedPackage(null);
   };
 
   const popupModal =
@@ -323,10 +351,44 @@ export default function ChristianLanding() {
         )
       : null;
 
+  const packagePopupModal =
+    packagePopupOpen && popupMounted && selectedPackage
+      ? createPortal(
+          <div
+            className="fixed inset-0 z-[210] flex items-start justify-center overflow-y-auto bg-black/55 px-4 pt-10 pb-6 backdrop-blur-sm sm:items-center sm:overflow-hidden sm:p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="package-popup-heading"
+          >
+            <div
+              className={`${s.theme} relative my-auto w-full max-w-[520px] rounded-2xl bg-[#fbf6ea] p-6 shadow-[0_24px_64px_rgba(0,0,0,0.28)] sm:p-8 md:max-h-[90vh] md:overflow-y-auto`}
+            >
+              <button
+                type="button"
+                onClick={closePackagePopup}
+                className="absolute top-3 right-3 z-20 flex h-8 w-8 items-center justify-center rounded-md bg-[#0d1836] text-[#f1e7d2] hover:bg-[#22376f]"
+                aria-label="Close popup"
+              >
+                <FaXmark className="h-3.5 w-3.5" />
+              </button>
+
+              <ConsultationForm
+                source="/Christian/lp-package"
+                idPrefix="package-popup"
+                plain
+                selectedPackage={selectedPackage}
+              />
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
+
   return (
     <div className={s.page}>
       <RibbonBookmark />
       {popupModal}
+      {packagePopupModal}
 
       {/* ---------------- header ---------------- */}
       <header className={s.header}>
@@ -601,14 +663,17 @@ export default function ChristianLanding() {
                     <li key={i}>{i}</li>
                   ))}
                 </ul>
-                <a
+                <button
+                  type="button"
                   className={
                     p.featured ? `${s.btn} ${s.btnGold}` : `${s.btn} ${s.btnInk}`
                   }
-                  href="#consultation"
+                  onClick={() =>
+                    openPackagePopup({ name: p.name, price: p.price })
+                  }
                 >
                   {p.cta}
-                </a>
+                </button>
               </article>
             ))}
 
