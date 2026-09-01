@@ -1,77 +1,180 @@
 "use client";
 
 import { useEffect } from "react";
+import { OPEN_ZENDESK_EVENT } from "@/lib/lead-actions";
 
 const CLEAR_WINDOW_MS = 1500;
+
+function zeCall(...args: unknown[]) {
+  if (typeof window.zE !== "function") return;
+  try {
+    window.zE(...args);
+  } catch {
+    // Classic vs Messaging APIs differ; ignore unsupported commands.
+  }
+}
+
+function closeZendeskWidget() {
+  zeCall("messenger", "close");
+  zeCall("webWidget", "close");
+}
+
+function isLauncherFrame(frame: HTMLIFrameElement) {
+  const id = frame.id.toLowerCase();
+  const title = frame.title.toLowerCase();
+  const name = frame.name.toLowerCase();
+  return (
+    id === "launcher" ||
+    name === "launcher" ||
+    title.includes("launcher") ||
+    title.includes("unread message")
+  );
+}
+
+/** True when the conversation panel is on screen, not just the launcher bubble. */
+function isChatPanelOpen() {
+  const frames = document.querySelectorAll("iframe");
+  for (const frame of frames) {
+    if (!(frame instanceof HTMLIFrameElement) || isLauncherFrame(frame)) {
+      continue;
+    }
+
+    const id = frame.id.toLowerCase();
+    const title = frame.title.toLowerCase();
+    const name = frame.name.toLowerCase();
+    const isWidget =
+      id === "webwidget" ||
+      name === "webwidget" ||
+      title.includes("messaging window") ||
+      title.includes("zendesk");
+
+    if (!isWidget) continue;
+
+    const style = window.getComputedStyle(frame);
+    if (
+      style.display === "none" ||
+      style.visibility === "hidden" ||
+      style.opacity === "0" ||
+      style.pointerEvents === "none"
+    ) {
+      continue;
+    }
+
+    const box = frame.getBoundingClientRect();
+    if (box.width > 240 && box.height > 240) return true;
+  }
+  return false;
+}
 
 export default function ZendeskBehavior() {
   useEffect(() => {
     let chatOpen = false;
+    /** Extra history entry is on the stack so Back closes chat instead of leaving. */
+    let guardActive = false;
+    /** Ignore the popstate we create ourselves when dropping the guard. */
+    let suppressPop = false;
+    let bound = false;
+    const timeouts: number[] = [];
+    const intervals: number[] = [];
 
-    const hasGuard = () => !!(history.state && history.state.zendeskOpen);
-
-    const pushGuard = () => {
-      if (!hasGuard()) {
-        history.pushState({ zendeskOpen: true }, "", window.location.href);
-      }
+    const later = (fn: () => void, ms: number) => {
+      timeouts.push(window.setTimeout(fn, ms));
     };
 
-    const pushGuardWithRetry = () => {
-      pushGuard();
-      window.setTimeout(pushGuard, 300);
-      window.setTimeout(pushGuard, 1000);
+    const ensureGuard = () => {
+      if (!chatOpen || guardActive) return;
+      const prev =
+        history.state && typeof history.state === "object" ? history.state : {};
+      history.pushState(
+        { ...prev, zendeskOpen: true },
+        "",
+        window.location.href,
+      );
+      guardActive = true;
     };
 
-    const closeWidget = () => {
+    const ensureGuardWithRetry = () => {
+      ensureGuard();
+      later(ensureGuard, 300);
+      later(ensureGuard, 1000);
+    };
+
+    const releaseGuardSilently = () => {
+      if (!guardActive) return;
+      suppressPop = true;
+      guardActive = false;
+      history.back();
+    };
+
+    const markOpen = () => {
+      chatOpen = true;
+      ensureGuardWithRetry();
+    };
+
+    const markClosed = () => {
       chatOpen = false;
-      if (typeof window.zE === "function") {
-        try {
-          window.zE("webWidget", "close");
-        } catch {
-          // ignore
-        }
-      }
+      // Widget closed from its own UI: drop the extra history entry so the
+      // next Back press navigates normally. Skip if Back already consumed it.
+      releaseGuardSilently();
     };
 
     const onPopState = () => {
-      if (!chatOpen) return;
-      closeWidget();
+      if (suppressPop) {
+        suppressPop = false;
+        return;
+      }
+
+      const panelOpen = chatOpen || guardActive || isChatPanelOpen();
+      if (!panelOpen) return;
+
+      chatOpen = false;
+      guardActive = false;
+      closeZendeskWidget();
     };
 
     window.addEventListener("popstate", onPopState);
+    window.addEventListener(OPEN_ZENDESK_EVENT, markOpen);
+
+    function bindWidgetEvents() {
+      if (bound || typeof window.zE !== "function") return false;
+      bound = true;
+
+      zeCall("messenger:on", "open", markOpen);
+      zeCall("messenger:on", "close", markClosed);
+      zeCall("messenger:on", "unreadMessages", (count: number) => {
+        if (count > 0) {
+          zeCall("messenger", "open");
+          markOpen();
+        }
+      });
+
+      zeCall("webWidget", "show");
+      zeCall("webWidget:on", "open", markOpen);
+      zeCall("webWidget:on", "close", markClosed);
+      zeCall("webWidget:on", "chat:unreadMessages", (number: number) => {
+        if (number > 0) {
+          zeCall("webWidget", "show");
+          zeCall("webWidget", "open");
+          markOpen();
+        }
+      });
+
+      return true;
+    }
 
     function initZendeskChat() {
       if (typeof window.zE === "function") {
-        window.zE(function () {
-          // Launcher stays visible; do not auto-open on page load.
-          window.zE?.("webWidget", "show");
-
-          window.zE?.("webWidget:on", "open", function () {
-            chatOpen = true;
-            pushGuardWithRetry();
+        try {
+          window.zE(function () {
+            bindWidgetEvents();
           });
-
-          window.zE?.("webWidget:on", "close", function () {
-            chatOpen = false;
-          });
-
-          // Agent message / unread → open chat (same idea as LiveChat agent reply)
-          window.zE?.(
-            "webWidget:on",
-            "chat:unreadMessages",
-            function (number: number) {
-              if (number > 0) {
-                window.zE?.("webWidget", "show");
-                window.zE?.("webWidget", "open");
-                chatOpen = true;
-                pushGuardWithRetry();
-              }
-            },
-          );
-        });
-      } else {
-        window.setTimeout(initZendeskChat, 300);
+        } catch {
+          // ignore
+        }
+        bindWidgetEvents();
+        return;
       }
+      later(initZendeskChat, 300);
     }
 
     initZendeskChat();
@@ -105,9 +208,7 @@ export default function ZendeskBehavior() {
       )?.set;
       if (!setter) return false;
       setter.call(box, "");
-      box.dispatchEvent(
-        new doc.defaultView!.Event("input", { bubbles: true }),
-      );
+      box.dispatchEvent(new doc.defaultView!.Event("input", { bubbles: true }));
       return true;
     }
 
@@ -172,23 +273,21 @@ export default function ZendeskBehavior() {
         window.clearInterval(clearBoot);
       }
     }, 200);
+    intervals.push(clearBoot);
 
     let showTries = 0;
     const showTimer = window.setInterval(function () {
-      if (typeof window.zE === "function") {
-        try {
-          window.zE("webWidget", "show");
-        } catch {
-          // ignore
-        }
-      }
+      zeCall("webWidget", "show");
+      bindWidgetEvents();
       if (++showTries > 40) window.clearInterval(showTimer);
     }, 250);
+    intervals.push(showTimer);
 
     return () => {
       window.removeEventListener("popstate", onPopState);
-      window.clearInterval(clearBoot);
-      window.clearInterval(showTimer);
+      window.removeEventListener(OPEN_ZENDESK_EVENT, markOpen);
+      for (const id of intervals) window.clearInterval(id);
+      for (const id of timeouts) window.clearTimeout(id);
       document.getElementById("bb-zd-mobile-only")?.remove();
     };
   }, []);

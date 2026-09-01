@@ -79,7 +79,7 @@ export default function Hero() {
                 className="btn btn-secondary btn-md"
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
-                Call Now
+                Call (562) 573-2551
               </a>
             </div>
           </div>

@@ -1104,12 +1104,12 @@ export default function BookMarketingLpPage() {
                 <div>
                   <p className="text-sm text-[#111] mb-0.5">Find Us</p>
                   <a
-                    href="https://maps.google.com/?q=1001+Wilshire+Boulevard+%231439+Los+Angeles+CA+90017"
+                    href="https://maps.google.com/?q=640+St+Paul+Ave+Los+Angeles+CA+90017"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-bold text-[#111] hover:opacity-80 transition-opacity leading-snug"
                   >
-                    1001 Wilshire Boulevard #1439
+                    640 St Paul Ave
                     <br />
                     Los Angeles, CA 90017
                   </a>

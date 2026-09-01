@@ -33,7 +33,7 @@ export default function ServiceHero({
   formTitle,
   formSubtitle,
   formIdPrefix,
-  callButtonLabel = "Call Now",
+  callButtonLabel = "(562) 573-2551",
 }: ServiceHeroProps) {
   return (
     <section className="relative overflow-hidden bg-hero">

@@ -133,7 +133,7 @@ export default function BookPublishingPage() {
         formTitle="Let's Get Started"
         formSubtitle="Special Offer: Up to 30% Off"
         formIdPrefix="publishing"
-        callButtonLabel="Call Now"
+        callButtonLabel="(562) 573-2551"
       />
       <ServiceGrowthSection
         imageSrc="/publishing.jpg"

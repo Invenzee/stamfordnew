@@ -127,7 +127,7 @@ export default function ChildrensBooksPage() {
         formTitle="Let's Get Started"
         formSubtitle="Special Offer: Up to 30% Off"
         formIdPrefix="childrens-books"
-        callButtonLabel="Call Now"
+        callButtonLabel="(562) 573-2551"
       />
       <ServiceGrowthSection
         imageSrc="/children-books.jpg"

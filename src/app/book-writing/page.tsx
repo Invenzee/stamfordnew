@@ -127,7 +127,7 @@ export default function BookWritingPage() {
         formTitle="Let's Get Started"
         formSubtitle="Special Offer: Up to 30% Off"
         formIdPrefix="writing"
-        callButtonLabel="Call Now"
+        callButtonLabel="(562) 573-2551"
       />
       <ServiceGrowthSection
         imageSrc="/writing.jpg"

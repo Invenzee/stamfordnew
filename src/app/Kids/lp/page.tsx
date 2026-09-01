@@ -278,7 +278,7 @@ const FOOTER_QUICK_LINKS = [
   { label: "Contact Us", href: "#contact" },
 ];
 
-const FOOTER_ADDRESS = "1001 Wilshire Boulevard #1439 Los Angeles, CA 90017";
+const FOOTER_ADDRESS = "640 St Paul Ave, Los Angeles, CA 90017";
 
 const FOOTER_BADGES = {
   trustpilot: "/book-marketing-lp/trustpilot-1.webp",

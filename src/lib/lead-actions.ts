@@ -1,4 +1,5 @@
 export const OPEN_QUOTE_POPUP_EVENT = "open-quote-popup";
+export const OPEN_ZENDESK_EVENT = "open-zendesk-chat";
 
 export function openQuotePopup() {
   window.dispatchEvent(new Event(OPEN_QUOTE_POPUP_EVENT));
@@ -6,8 +7,18 @@ export function openQuotePopup() {
 
 export function openLiveChat() {
   const open = () => {
-    window.zE?.("webWidget", "show");
-    window.zE?.("webWidget", "open");
+    window.dispatchEvent(new Event(OPEN_ZENDESK_EVENT));
+    try {
+      window.zE?.("messenger", "open");
+    } catch {
+      // ignore
+    }
+    try {
+      window.zE?.("webWidget", "show");
+      window.zE?.("webWidget", "open");
+    } catch {
+      // ignore
+    }
   };
 
   if (typeof window.zE === "function") {

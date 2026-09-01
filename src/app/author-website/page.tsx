@@ -127,7 +127,7 @@ export default function AuthorWebsitePage() {
         formTitle="Let's Get Started"
         formSubtitle="Special Offer: Up to 30% Off"
         formIdPrefix="author-website"
-        callButtonLabel="Call Now"
+        callButtonLabel="(562) 573-2551"
       />
       <ServiceGrowthSection
         imageSrc="/author-website.jpg"

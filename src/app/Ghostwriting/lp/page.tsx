@@ -28,7 +28,7 @@ import {
 const PHONE_DISPLAY = "(562) 573-2551";
 const PHONE_HREF = "tel:+15625732551";
 const EMAIL = "info@stamfordpublishers.com";
-const ADDRESS = "1001 Wilshire Boulevard #1439 Los Angeles, CA 90017";
+const ADDRESS = "640 St Paul Ave, Los Angeles, CA 90017";
 const POPUP_DELAY_MS = 30000;
 const POPUP_SESSION_KEY = "ghostwriting-lp-popup-dismissed";
 

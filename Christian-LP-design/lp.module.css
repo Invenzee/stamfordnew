@@ -7,8 +7,7 @@
    rest of stamfordpublishers.com.
    ============================================================ */
 
-.page,
-.theme {
+.page {
   --lapis: #16265a;
   --lapisDeep: #0d1836;
   --lapisSoft: #22376f;
@@ -24,9 +23,7 @@
   --measure: 62ch;
   --shellWidth: 1180px;
   --radius: 3px;
-}
 
-.page {
   background: var(--parchment);
   color: var(--ink);
   font-family: var(--font-display), Georgia, "Times New Roman", serif;
@@ -153,17 +150,12 @@
 /* ---------------- header ---------------- */
 
 .header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 50;
   background: rgba(13, 24, 54, 0.96);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(194, 154, 69, 0.22);
-}
-.headerSpacer {
-  height: 74px;
 }
 .headerIn {
   display: flex;
@@ -364,11 +356,7 @@
   color: var(--ink);
   scroll-margin-top: 96px;
 }
-.formPlain {
-  color: var(--ink);
-}
-.formCard h2,
-.formPlain h2 {
+.formCard h2 {
   font-weight: 500;
   font-size: 1.6rem;
   line-height: 1.22;

@@ -127,7 +127,7 @@ export default function EbookWritingPage() {
         formTitle="Let's Get Started"
         formSubtitle="Special Offer: Up to 30% Off"
         formIdPrefix="ebook-writing"
-        callButtonLabel="Call Now"
+        callButtonLabel="(562) 573-2551"
       />
       <ServiceGrowthSection
         imageSrc="/ebook.jpg"

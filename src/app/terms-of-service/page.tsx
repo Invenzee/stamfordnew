@@ -254,7 +254,7 @@ export default function TermsOfServicePage() {
           or call us at <a href="tel:+15625732551">(562) 573-2551</a>.
         </p>
         <p>
-          Address: 1001 Wilshire Boulevard #1439, Los Angeles, CA 90017
+          Address: 640 St Paul Ave, Los Angeles, CA 90017
         </p>
         <p>
           Your use of our services is also governed by our{" "}

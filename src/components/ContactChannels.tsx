@@ -10,7 +10,7 @@ const channels = [
     number: "01",
     icon: MapPin,
     title: "Our Headquarters",
-    lines: ["1001 Wilshire Boulevard #1439", "Los Angeles, CA 90017"],
+    lines: ["640 St Paul Ave", "Los Angeles, CA 90017"],
   },
   {
     number: "02",

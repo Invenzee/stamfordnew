@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
-import { FaEnvelope, FaPhone, FaXmark } from "react-icons/fa6";
-import { OPEN_QUOTE_POPUP_EVENT } from "@/lib/lead-actions";
-import { submitLeadForm } from "@/lib/submit-form";
 import s from "./lp.module.css";
 import {
   BRAND,
@@ -25,8 +21,7 @@ import {
   FOOTER,
 } from "./content";
 
-const POPUP_DELAY_MS = 20000;
-const POPUP_SESSION_KEY = "christian-lp-popup-dismissed";
+type Status = "idle" | "sending" | "sent" | "error";
 
 /* ------------------------------------------------------------------ */
 /* Ribbon bookmark. The one bold flourish on the page: it grows as you  */
@@ -68,33 +63,15 @@ function RibbonBookmark() {
 /* ------------------------------------------------------------------ */
 /* Consultation form                                                    */
 /* ------------------------------------------------------------------ */
-function ConsultationForm({
-  source = "/Christian/lp",
-  idPrefix = "f",
-  cardId,
-  animated = false,
-  plain = false,
-}: {
-  source?: string;
-  idPrefix?: string;
-  cardId?: string;
-  animated?: boolean;
-  plain?: boolean;
-}) {
+function ConsultationForm() {
+  const [status, setStatus] = useState<Status>("idle");
   const [invalid, setInvalid] = useState<Record<string, boolean>>({});
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
+    const data = new FormData(e.currentTarget);
 
-    // Honeypot: bots fill this, humans never see it
-    if (String(data.get("company") ?? "").trim()) {
-      window.location.href = "/thank-you";
-      return;
-    }
-
-    const required = ["name", "email", "phone"];
+    const required = ["name", "email", "phone", "bookType", "stage"];
     const missing: Record<string, boolean> = {};
     required.forEach((k) => {
       if (!String(data.get(k) ?? "").trim()) missing[k] = true;
@@ -102,87 +79,82 @@ function ConsultationForm({
     setInvalid(missing);
     if (Object.keys(missing).length) return;
 
+    setStatus("sending");
     try {
-      await submitLeadForm(form, source);
-    } catch (error) {
-      window.alert(
-        error instanceof Error && error.message
-          ? error.message
-          : "Failed to submit form. Please try again.",
-      );
+      const res = await fetch("/api/christian-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(data.entries())),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("sent");
+
+      // Fire your analytics conversion here.
+      // window.dataLayer?.push({ event: "christian_lp_lead" });
+    } catch {
+      setStatus("error");
     }
   }
 
   const cx = (key: string) =>
     invalid[key] ? `${s.field} ${s.fieldInvalid}` : s.field;
 
-  const wrapClass = plain
-    ? s.formPlain
-    : `${s.formCard}${animated ? ` ${s.rise} ${s.rise2}` : ""}`;
-
   return (
-    <div className={wrapClass} id={cardId}>
-      <h2 id={`${idPrefix}-heading`}>{FORM.heading}</h2>
+    <div className={`${s.formCard} ${s.rise} ${s.rise2}`} id="consultation">
+      <h2>{FORM.heading}</h2>
       <p className={s.formSub}>{FORM.sub}</p>
 
       <form onSubmit={onSubmit} noValidate>
         <div className={cx("name")}>
-          <label htmlFor={`${idPrefix}-name`}>Full name</label>
+          <label htmlFor="f-name">Full name</label>
           <input
-            id={`${idPrefix}-name`}
+            id="f-name"
             name="name"
             type="text"
             autoComplete="name"
             placeholder="Ruth Callahan"
-            required
           />
         </div>
 
         <div className={s.fieldRow}>
           <div className={cx("email")}>
-            <label htmlFor={`${idPrefix}-email`}>Email address</label>
+            <label htmlFor="f-email">Email address</label>
             <input
-              id={`${idPrefix}-email`}
+              id="f-email"
               name="email"
               type="email"
               autoComplete="email"
               placeholder="you@church.org"
-              required
             />
           </div>
           <div className={cx("phone")}>
-            <label htmlFor={`${idPrefix}-phone`}>Phone number</label>
+            <label htmlFor="f-phone">Phone number</label>
             <input
-              id={`${idPrefix}-phone`}
+              id="f-phone"
               name="phone"
               type="tel"
               autoComplete="tel"
               placeholder="(562) 555 0134"
-              required
             />
           </div>
         </div>
 
         <div className={cx("bookType")}>
-          <label htmlFor={`${idPrefix}-type`}>What are you writing?</label>
-          <select id={`${idPrefix}-type`} name="bookType" defaultValue="">
+          <label htmlFor="f-type">What are you writing?</label>
+          <select id="f-type" name="bookType" defaultValue="">
             <option value="">Choose the closest match</option>
             {FORM.bookTypes.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
+              <option key={t}>{t}</option>
             ))}
           </select>
         </div>
 
         <div className={cx("stage")}>
-          <label htmlFor={`${idPrefix}-stage`}>Where it stands today</label>
-          <select id={`${idPrefix}-stage`} name="stage" defaultValue="">
+          <label htmlFor="f-stage">Where it stands today</label>
+          <select id="f-stage" name="stage" defaultValue="">
             <option value="">Choose one</option>
             {FORM.stages.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
+              <option key={t}>{t}</option>
             ))}
           </select>
         </div>
@@ -200,11 +172,28 @@ function ConsultationForm({
         <button
           className={`${s.btn} ${s.btnInk} ${s.btnBlock}`}
           type="submit"
+          disabled={status === "sending" || status === "sent"}
         >
-          {FORM.submit}
+          {status === "sending"
+            ? "Sending"
+            : status === "sent"
+              ? "Request received"
+              : FORM.submit}
         </button>
 
         <p className={s.formNote}>{FORM.note}</p>
+
+        {status === "sent" && (
+          <p className={s.formStatus} role="status">
+            {FORM.success}
+          </p>
+        )}
+        {status === "error" && (
+          <p className={`${s.formStatus} ${s.formError}`} role="alert">
+            That did not go through. Please call {BRAND.phoneDisplay} and we
+            will take your details over the phone.
+          </p>
+        )}
       </form>
     </div>
   );
@@ -214,119 +203,9 @@ function ConsultationForm({
 /* Page                                                                 */
 /* ------------------------------------------------------------------ */
 export default function ChristianLanding() {
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [popupMounted, setPopupMounted] = useState(false);
-
-  useEffect(() => {
-    setPopupMounted(true);
-  }, []);
-
-  useEffect(() => {
-    try {
-      if (sessionStorage.getItem(POPUP_SESSION_KEY) === "1") return;
-    } catch {
-      // ignore
-    }
-    const timer = window.setTimeout(() => setPopupOpen(true), POPUP_DELAY_MS);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const open = () => setPopupOpen(true);
-    window.addEventListener(OPEN_QUOTE_POPUP_EVENT, open);
-    return () => window.removeEventListener(OPEN_QUOTE_POPUP_EVENT, open);
-  }, []);
-
-  const closePopup = () => {
-    setPopupOpen(false);
-    try {
-      sessionStorage.setItem(POPUP_SESSION_KEY, "1");
-    } catch {
-      // ignore
-    }
-  };
-
-  const popupModal =
-    popupOpen && popupMounted
-      ? createPortal(
-          <div
-            className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto bg-black/55 px-4 pt-10 pb-6 backdrop-blur-sm sm:items-center sm:overflow-hidden sm:p-4"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="christian-popup-heading"
-          >
-            <div className={`${s.theme} relative my-auto grid w-full max-w-[920px] rounded-2xl bg-[#fbf6ea] shadow-[0_24px_64px_rgba(0,0,0,0.28)] md:max-h-[90vh] md:grid-cols-[42%_58%] md:overflow-hidden`}>
-              <button
-                type="button"
-                onClick={closePopup}
-                className="absolute top-3 right-3 z-20 flex h-8 w-8 items-center justify-center rounded-md bg-[#0d1836] text-[#f1e7d2] hover:bg-[#22376f] sm:top-4 sm:right-4"
-                aria-label="Close popup"
-              >
-                <FaXmark className="h-3.5 w-3.5" />
-              </button>
-
-              <div className="flex min-h-[280px] flex-col bg-[#16265a] p-6 pr-12 text-[#f1e7d2] lg:p-8">
-                <h2
-                  id="christian-popup-heading"
-                  className="mb-3 font-serif text-2xl font-normal leading-tight sm:text-3xl"
-                >
-                  Entrust your manuscript to people who read Scripture the way
-                  you do
-                </h2>
-                <div className="mb-6 space-y-3 text-sm">
-                  <div className="flex items-start gap-3">
-                    <FaPhone
-                      className="mt-1 h-4 w-4 shrink-0 text-[#c29a45]"
-                      aria-hidden="true"
-                    />
-                    <div>
-                      <h3 className="font-semibold text-[#e4ce93]">Call Us</h3>
-                      <a href={BRAND.phoneHref} className="hover:underline">
-                        {BRAND.phoneDisplay}
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <FaEnvelope
-                      className="mt-1 h-4 w-4 shrink-0 text-[#c29a45]"
-                      aria-hidden="true"
-                    />
-                    <div>
-                      <h3 className="font-semibold text-[#e4ce93]">
-                        Discuss your book
-                      </h3>
-                      <a
-                        href="mailto:info@stamfordpublishers.com"
-                        className="break-all hover:underline"
-                      >
-                        info@stamfordpublishers.com
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-auto text-sm leading-relaxed text-[#f1e7d2]/80">
-                  Fifteen minutes, at no cost. Tell us where the manuscript
-                  stands and we will tell you what it needs next.
-                </p>
-              </div>
-
-              <div className="p-6 sm:p-8 md:max-h-[90vh] md:overflow-y-auto">
-                <ConsultationForm
-                  source="/Christian/lp-popup"
-                  idPrefix="popup"
-                  plain
-                />
-              </div>
-            </div>
-          </div>,
-          document.body,
-        )
-      : null;
-
   return (
     <div className={s.page}>
       <RibbonBookmark />
-      {popupModal}
 
       {/* ---------------- header ---------------- */}
       <header className={s.header}>
@@ -352,7 +231,6 @@ export default function ChristianLanding() {
           </a>
         </div>
       </header>
-      <div className={s.headerSpacer} aria-hidden="true" />
 
       {/* ---------------- hero ---------------- */}
       <section className={`${s.hero} ${s.onBlue}`} id="top">
@@ -384,9 +262,7 @@ export default function ChristianLanding() {
             <p className={`${s.rubric} ${s.rise}`}>{HERO.rubric}</p>
 
             <h1 className={`${s.display} ${s.rise} ${s.rise2}`}>
-              {HERO.headingLine1}
-              <br />
-              {HERO.headingLine2}
+              {HERO.headingTop}
               <em>{HERO.headingBottom}</em>
             </h1>
 
@@ -413,10 +289,7 @@ export default function ChristianLanding() {
             </ul>
           </div>
 
-          <ConsultationForm
-            cardId="consultation"
-            animated
-          />
+          <ConsultationForm />
         </div>
       </section>
 

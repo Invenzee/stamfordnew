@@ -179,7 +179,7 @@ export default function RefundPolicyPage() {
           <br />
           Phone: <a href="tel:+15625732551">(562) 573-2551</a>
           <br />
-          Address: 1001 Wilshire Boulevard #1439, Los Angeles, CA 90017
+          Address: 640 St Paul Ave, Los Angeles, CA 90017
         </p>
       </PolicyContent>
     </main>
