@@ -14,7 +14,7 @@ export default function PopupForm() {
 
   useEffect(() => {
     setIsOpen(false);
-    if (pathname === "/thank-you") return;
+    if (pathname === "/thank-you" || pathname === "/submit-your-manuscript") return;
     const timer = window.setTimeout(() => setIsOpen(true), POPUP_DELAY_MS);
     return () => window.clearTimeout(timer);
   }, [pathname]);

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChatButton, QuoteButton } from "@/components/LeadCtas";
+import { ChatButton } from "@/components/LeadCtas";
 import MobileMenu from "@/components/MobileMenu";
 import ServicesDropdown from "@/components/ServicesDropdown";
 import { routes } from "@/data/routes";
@@ -51,9 +51,12 @@ export default function Header() {
                 <ChatButton className="btn btn-secondary btn-md-pill btn-heading px-4">
                   Chat Now
                 </ChatButton>
-                <QuoteButton className="btn btn-primary btn-md-pill btn-quote hidden lg:block px-5">
-                  GET A QUOTE
-                </QuoteButton>
+                <Link
+                  href={routes.manuscript}
+                  className="btn btn-primary btn-md-pill btn-quote hidden whitespace-nowrap lg:inline-flex px-4 xl:px-5"
+                >
+                  Submit Manuscript
+                </Link>
                 <MobileMenu />
               </div>
             </div>

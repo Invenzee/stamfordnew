@@ -2,6 +2,7 @@ export const routes = {
   home: "/",
   about: "/about-us",
   contact: "/contact-us",
+  manuscript: "/submit-your-manuscript",
   services: {
     editing: "/book-editing",
     coverDesign: "/book-cover-design",

@@ -8,7 +8,7 @@ import {
   mainServices,
   specialtyServices,
 } from "@/components/ServicesDropdown";
-import { ChatButton, QuoteButton } from "@/components/LeadCtas";
+import { ChatButton } from "@/components/LeadCtas";
 import { routes } from "@/data/routes";
 
 const navLinks = [
@@ -141,9 +141,12 @@ export default function MobileMenu() {
               <ChatButton className="btn btn-secondary btn-md-pill btn-heading btn-full">
                 Chat Now
               </ChatButton>
-              <QuoteButton className="btn btn-primary btn-md-pill btn-quote btn-full">
-                Get A Quote
-              </QuoteButton>
+              <Link
+                href={routes.manuscript}
+                className="btn btn-primary btn-md-pill btn-quote btn-full"
+              >
+                Submit Manuscript
+              </Link>
             </div>
           </div>
         </>
