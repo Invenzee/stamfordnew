@@ -108,6 +108,11 @@ const nextConfig: NextConfig = {
         destination: "/Marketing/lp",
         permanent: true,
       },
+      {
+        source: "/christian-book-publishing",
+        destination: "/Christian/lp",
+        permanent: true,
+      },
     ];
   },
 };

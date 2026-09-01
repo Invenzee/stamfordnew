@@ -5,6 +5,7 @@ export const STANDALONE_LP_PREFIXES = [
   "/Publishing/lp",
   "/Ghostwriting/lp",
   "/Marketing/lp",
+  "/Christian/lp",
 ];
 
 export const LP_CALL_THEMES: Record<string, { bg: string; icon: string }> = {
@@ -13,6 +14,7 @@ export const LP_CALL_THEMES: Record<string, { bg: string; icon: string }> = {
   "/publishing/lp": { bg: "#F24506", icon: "#ffffff" },
   "/ghostwriting/lp": { bg: "#F24506", icon: "#ffffff" },
   "/marketing/lp": { bg: "#ffc800", icon: "#111111" },
+  "/christian/lp": { bg: "#C29A45", icon: "#1a1200" },
 };
 
 export function isStandaloneLpPath(pathname: string | null): boolean {
