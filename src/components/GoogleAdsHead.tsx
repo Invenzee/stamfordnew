@@ -1,38 +1,45 @@
-export default function GoogleTag({
-  fireLeadConversion = false,
-}: {
-  fireLeadConversion?: boolean;
-}) {
+type GoogleAdsHeadProps = {
+  includeLeadConversion?: boolean;
+};
+
+export default function GoogleAdsHead({
+  includeLeadConversion = false,
+}: GoogleAdsHeadProps) {
   return (
     <>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18251893341" />
+      {/* Google tag (gtag.js) */}
       <script
         async
+        src="https://www.googletagmanager.com/gtag/js?id=AW-18251893341"
+      />
+      <script
         dangerouslySetInnerHTML={{
           __html: `
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
   gtag('config', 'AW-18251893341');
 `,
         }}
       />
-      {fireLeadConversion ? (
-        <script
-          async
-          dangerouslySetInnerHTML={{
-            __html: `
+      {includeLeadConversion ? (
+        <>
+          {/* Event snippet for Submit lead form (1) conversion page */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
   gtag('event', 'conversion', {
       'send_to': 'AW-18251893341/TUvJCI-tv9McEN2Ul_9D',
       'value': 1.0,
       'currency': 'USD'
   });
 `,
-          }}
-        />
+            }}
+          />
+        </>
       ) : null}
       <script
-        async
         dangerouslySetInnerHTML={{
           __html: `
   gtag('config', 'AW-18251893341/FFlUCJie1dMcEN2Ul_9D', {
@@ -41,8 +48,9 @@ export default function GoogleTag({
 `,
         }}
       />
+      {/* Event snippet for Click to call conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. */}
       <script
-        async
         dangerouslySetInnerHTML={{
           __html: `
 function gtag_report_conversion(url) {
