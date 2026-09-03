@@ -56,7 +56,7 @@
   font-weight: 450;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -297,37 +297,17 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
   margin-right: auto;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-width: 0;
 }
 
-.brandName {
-  font-family: var(--f-display);
-  font-size: 1.14rem;
-  font-weight: 700;
-  color: var(--semolina);
-  letter-spacing: -0.012em;
-  font-variation-settings: "opsz" 24;
-  white-space: nowrap;
-}
-
-.brandDiv {
-  width: 1px;
-  height: 16px;
-  background: rgba(246, 239, 223, 0.28);
-  align-self: center;
-  flex: none;
-}
-
-.brandUnit {
-  font-size: var(--t-xs);
-  font-weight: 600;
-  color: var(--marigold);
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+.brandLogo {
+  height: 40px;
+  width: auto;
+  display: block;
+  max-width: min(160px, 46vw);
 }
 
 .mastNav {
@@ -406,25 +386,19 @@
 
 @media (max-width: 640px) {
   .mastheadIn {
-    min-height: 54px;
+    min-height: 56px;
     gap: 12px;
   }
   .masthead .btn {
     padding: 10px 14px;
     font-size: var(--t-xs);
   }
-  .brandDiv,
-  .brandUnit {
-    display: none;
+  .brandLogo {
+    height: 32px;
   }
 }
 
 @media (max-width: 400px) {
-  .brandName {
-    font-size: 0.98rem;
-    white-space: normal;
-    line-height: 1.15;
-  }
   .masthead .btn {
     padding: 10px 12px;
   }
@@ -1673,6 +1647,17 @@
   font-size: var(--t-sm);
 }
 
+.mobar .btnGhostLight {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.mobar .btnGhostLight:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
 @media (max-width: 760px) {
   .mobar {
     display: flex;
@@ -1750,6 +1735,20 @@
   }
   .kicker::after {
     flex-basis: 28px;
+  }
+}
+
+:global(.cookbook-lp) {
+  overflow-x: clip;
+}
+
+@media (max-width: 760px) {
+  :global(body.cookbook-lp-active iframe#launcher),
+  :global(body.cookbook-lp-active iframe[title*="Launcher" i]),
+  :global(body.cookbook-lp-active iframe[title*="launch messaging" i]),
+  :global(body.cookbook-lp-active iframe[title*="unread" i]),
+  :global(body.cookbook-lp-active iframe[title*="Close message" i]) {
+    bottom: 88px !important;
   }
 }
 

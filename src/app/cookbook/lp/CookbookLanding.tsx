@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { PHONE_CONVERSION_NUMBER, PHONE_HREF } from "@/lib/google-ads";
 import { submitLeadForm } from "@/lib/submit-form";
@@ -350,9 +351,31 @@ export default function CookbookLanding() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
+    document.body.classList.add("cookbook-lp-active");
+    const applyChatOffset = () => {
+      const mobile = window.matchMedia("(max-width: 760px)").matches;
+      try {
+        window.zE?.("webWidget", "updateSettings", {
+          webWidget: {
+            offset: {
+              vertical: mobile ? "92px" : "0px",
+              horizontal: "12px",
+              mobile: { vertical: "92px", horizontal: "12px" },
+            },
+          },
+        });
+      } catch {
+        // Classic and messaging widgets differ; CSS offset still applies.
+      }
+    };
+    applyChatOffset();
+    const chatTimer = window.setInterval(applyChatOffset, 1500);
+
     return () => {
       html.style.scrollBehavior = previous;
       window.removeEventListener("scroll", onScroll);
+      document.body.classList.remove("cookbook-lp-active");
+      window.clearInterval(chatTimer);
     };
   }, []);
 
@@ -365,9 +388,14 @@ export default function CookbookLanding() {
       <header className={cx("masthead", stuck && "mastheadStuck")} id="masthead">
         <div className={cx("shell", "mastheadIn")}>
           <Link className={s.brand} href="/">
-            <span className={s.brandName}>Stamford Publishers</span>
-            <span className={s.brandDiv} />
-            <span className={s.brandUnit}>Cookbooks</span>
+            <Image
+              src="/white-logo.png"
+              alt="Stamford Publishers"
+              width={160}
+              height={48}
+              className={s.brandLogo}
+              priority
+            />
           </Link>
 
           <nav className={s.mastNav} aria-label="Section links">

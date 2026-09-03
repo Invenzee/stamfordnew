@@ -3,5 +3,5 @@ export default function CookbookLpLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className="lp-standalone min-h-screen">{children}</div>;
+  return <div className="lp-standalone cookbook-lp min-h-screen">{children}</div>;
 }
