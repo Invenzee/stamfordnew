@@ -116,6 +116,15 @@
   font-variation-settings: "opsz" 24;
 }
 
+.page p,
+.page li,
+.page h1,
+.page h2,
+.page h3,
+.page h4 {
+  overflow-wrap: break-word;
+}
+
 .page p {
   margin: 0 0 1em;
 }
@@ -150,6 +159,7 @@
   max-width: var(--shell);
   margin-inline: auto;
   padding-inline: var(--gutter);
+  min-width: 0;
 }
 
 .skip {
@@ -281,6 +291,7 @@
   align-items: center;
   gap: 32px;
   min-height: 68px;
+  min-width: 0;
 }
 
 .brand {
@@ -289,8 +300,8 @@
   gap: 12px;
   text-decoration: none;
   margin-right: auto;
-  flex: 0 0 auto;
-  white-space: nowrap;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .brandName {
@@ -383,16 +394,20 @@
     display: none;
   }
   .mastheadIn {
-    gap: 20px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .mastTel {
+    display: none;
   }
 }
 
 @media (max-width: 640px) {
   .mastheadIn {
     min-height: 54px;
-  }
-  .mastTel {
-    display: none;
+    gap: 12px;
   }
   .masthead .btn {
     padding: 10px 14px;
@@ -401,6 +416,17 @@
   .brandDiv,
   .brandUnit {
     display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .brandName {
+    font-size: 0.98rem;
+    white-space: normal;
+    line-height: 1.15;
+  }
+  .masthead .btn {
+    padding: 10px 12px;
   }
 }
 
@@ -454,6 +480,7 @@
   grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
   gap: clamp(28px, 4vw, 60px);
   align-items: center;
+  min-width: 0;
 }
 
 :global(.lp-standalone) .hero h1,
@@ -509,10 +536,31 @@
 @media (max-width: 960px) {
   .heroIn {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
   }
+  :global(.lp-standalone) .hero h1,
   .hero h1 {
     max-width: 18ch;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 36px 0 40px;
+  }
+  :global(.lp-standalone) .hero h1,
+  .hero h1 {
+    max-width: none;
+  }
+  .heroCta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .heroCta .btn {
+    width: 100%;
+  }
+  .specimen {
+    padding: 10px 0;
   }
 }
 
@@ -744,10 +792,25 @@
   text-align: center;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 560px) {
   .pageCols {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+  .pageStats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .pageStats div {
+    border-left: 0;
+    padding: 8px 0;
+  }
+  .pageStats div:nth-child(even) {
+    padding-left: 12px;
+    border-left: 1px solid var(--rule);
+  }
+  .pageStats div:nth-child(n + 3) {
+    border-top: 1px solid var(--rule);
   }
 }
 
@@ -821,6 +884,23 @@
   .strip dl > div:nth-child(odd) {
     border-left: 0;
     padding-left: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .strip dl {
+    grid-template-columns: 1fr;
+  }
+  .strip dl > div {
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .strip dl > div:nth-child(-n + 2) {
+    border-top: 1px solid rgba(246, 239, 223, 0.13);
+  }
+  .strip dl > div:first-child {
+    border-top: 0;
   }
 }
 
@@ -1434,7 +1514,7 @@
   gap: 14px;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 640px) {
   .grid2 {
     grid-template-columns: 1fr;
   }
@@ -1598,7 +1678,78 @@
     display: flex;
   }
   .page {
-    padding-bottom: 68px;
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+  .band {
+    padding: 40px 0;
+  }
+  .bandHead {
+    margin-bottom: 28px;
+  }
+  .faq summary {
+    font-size: 0.95rem;
+    padding: 16px 34px 16px 0;
+  }
+  .faq summary::after {
+    top: 22px;
+  }
+  .close {
+    padding: 40px 0 48px;
+  }
+  .closeTel {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  .closeTel strong {
+    font-size: 1.15rem;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    font-size: 16px;
+  }
+  .form {
+    padding: 20px 16px;
+  }
+  .foot {
+    padding: 36px 0 28px;
+  }
+  .footIn {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .specs li {
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+  .compareCol {
+    padding: 20px 16px;
+  }
+  .svcItem {
+    padding: 20px 16px;
+  }
+  .bindCard {
+    padding: 18px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btnLg {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
+  .heroMarks {
+    gap: 10px 14px;
+  }
+  .method li {
+    gap: 12px;
+    padding: 16px 0;
+  }
+  .methodN {
+    font-size: 1.7rem;
+  }
+  .kicker::after {
+    flex-basis: 28px;
   }
 }
 
