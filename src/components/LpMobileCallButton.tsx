@@ -8,7 +8,7 @@ import { getLpCallTheme, isStandaloneLpPath } from "@/lib/standalone-lp";
 export default function LpMobileCallButton() {
   const pathname = usePathname();
 
-  if (!isStandaloneLpPath(pathname)) {
+  if (!isStandaloneLpPath(pathname) || pathname?.toLowerCase().startsWith("/cookbook/lp")) {
     return null;
   }
 

@@ -29,6 +29,7 @@ const ROUTES: Array<{
   { path: "/Publishing/lp", changeFrequency: "monthly", priority: 0.7 },
   { path: "/Editing/lp", changeFrequency: "monthly", priority: 0.7 },
   { path: "/Kids/lp", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/cookbook/lp", changeFrequency: "monthly", priority: 0.7 },
   { path: "/privacy-policy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/terms-of-service", changeFrequency: "yearly", priority: 0.3 },
   { path: "/refund-policy", changeFrequency: "yearly", priority: 0.3 },
