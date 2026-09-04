@@ -11,6 +11,18 @@ export function useSelfPubEffects(rootRef: React.RefObject<HTMLElement | null>) 
     const root = rootRef.current;
     if (!root) return;
 
+    const sticky = root.querySelector<HTMLElement>(".sp-sticky");
+    const setStickyHeight = () => {
+      if (!sticky) return;
+      root.style.setProperty("--sp-sticky-h", `${sticky.offsetHeight}px`);
+    };
+    setStickyHeight();
+    const stickyRo =
+      sticky && "ResizeObserver" in window
+        ? new ResizeObserver(setStickyHeight)
+        : null;
+    if (sticky && stickyRo) stickyRo.observe(sticky);
+
     /* Lift Zendesk launcher above the sticky mobile dock */
     const applyZendeskOffset = () => {
       const mobile = window.matchMedia("(max-width: 760px)").matches;
@@ -44,7 +56,10 @@ export function useSelfPubEffects(rootRef: React.RefObject<HTMLElement | null>) 
       }
     }, 250);
 
-    const onResize = () => applyZendeskOffset();
+    const onResize = () => {
+      applyZendeskOffset();
+      setStickyHeight();
+    };
     window.addEventListener("resize", onResize);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -239,6 +254,7 @@ export function useSelfPubEffects(rootRef: React.RefObject<HTMLElement | null>) 
       window.removeEventListener("resize", onResize);
       ioReveal?.disconnect();
       ioCount?.disconnect();
+      stickyRo?.disconnect();
       root.removeEventListener("click", onOpt);
       root.removeEventListener("click", onBack);
       root.querySelector("#quizReset")?.removeEventListener("click", onReset);

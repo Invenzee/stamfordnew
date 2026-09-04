@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState, type CSSProperties } from "react";
+import Image from "next/image";
 import { Manrope, Source_Serif_4 } from "next/font/google";
 import { PHONE_CONVERSION_NUMBER, PHONE_HREF } from "@/lib/google-ads";
 import { useSelfPubEffects } from "./useSelfPubEffects";
@@ -26,23 +27,23 @@ const TESTIMONIALS = [
   {
     quote:
       "My manuscript sat untouched for two years because I did not know what step two was. They read it, told me plainly what it needed, and it was on Amazon four months later.",
-    initials: "DM",
     name: "Debut author",
     genre: "Memoir",
+    image: "/about-1.webp",
   },
   {
     quote:
       "The distribution reach was the surprise. I expected Amazon. I did not expect to find my book in three county library systems by the end of the year.",
-    initials: "RH",
     name: "Published author",
     genre: "Historical fiction",
+    image: "/quote-2.webp",
   },
   {
     quote:
       "They handled the parts I did not understand, ISBNs, copyright filing, trim sizes, so I could stay in the part I am actually good at, which is writing.",
-    initials: "JC",
     name: "First-time author",
     genre: "Business",
+    image: "/user.jpg",
   },
 ] as const;
 
@@ -544,7 +545,9 @@ export default function SelfPublishingLpClient() {
           </span>
           <blockquote>{item.quote}</blockquote>
           <figcaption>
-            <span className="av" aria-hidden="true">{item.initials}</span>
+            <span className="av">
+              <Image src={item.image} alt={item.name} width={46} height={46} className="av-img" />
+            </span>
             <span>
               <b>{item.name}</b>
               <span>{item.genre}</span>

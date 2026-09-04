@@ -53,13 +53,22 @@
 .sp-lp{
   margin:0; background:var(--white); color:var(--text);
   font-family:var(--fb); font-size:16px; line-height:1.72;
-  overflow-x:clip; -webkit-font-smoothing:antialiased;
+  overflow-x:visible; -webkit-font-smoothing:antialiased;
 }
 img{ max-width:100%; display:block; }
 :focus-visible{ outline:3px solid var(--blue-500); outline-offset:3px; border-radius:6px; }
 
 .shell{ width:100%; max-width:var(--shell); margin-inline:auto; padding-inline:22px; }
-.sp-lp section[id], .sp-lp #quote{ scroll-margin-top:120px; }
+.sp-lp section[id], .sp-lp #quote{ scroll-margin-top:calc(var(--sp-sticky-h, 118px) + 12px); }
+
+/* html/body overflow-x:clip creates a scroll containing block and kills sticky/fixed headers */
+html:has(.sp-lp),
+body:has(.sp-lp){
+  overflow-x:visible;
+}
+body:has(.sp-lp){
+  display:block;
+}
 
 /* ---------- type ---------- */
 h1,h2,h3,h4,h5{ font-family:var(--fh); font-weight:800; margin:0; letter-spacing:-.028em; line-height:1.1; }
@@ -130,10 +139,17 @@ h1,h2,h3,h4,h5{ font-family:var(--fh); font-weight:800; margin:0; letter-spacing
 .promo a{ color:#fff; }
 
 .sp-sticky{
-  position:sticky; top:0; z-index:90;
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:200;
+  width:100%;
   background:rgba(255,255,255,.96);
   backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
   box-shadow:0 1px 0 var(--line);
+}
+.sp-lp-root{
+  padding-top:var(--sp-sticky-h, 118px);
 }
 .hdr{
   position:relative; top:auto; z-index:auto;
@@ -460,7 +476,7 @@ h1,h2,h3,h4,h5{ font-family:var(--fh); font-weight:800; margin:0; letter-spacing
   width:46px; height:46px; flex:none; border-radius:50%;
   display:grid !important; place-items:center;
   font-family:var(--fh); font-weight:800; font-size:.95rem; color:#fff;
-  overflow:hidden; position:relative; background:var(--g-brand);
+  overflow:hidden; position:relative; background:var(--mist-2);
 }
 .av-img{ width:46px !important; height:46px !important; object-fit:cover; border-radius:50%; }
 .tst figcaption > span:not(.av){
@@ -621,7 +637,7 @@ body:has(.sp-modal) .dock{ display:none !important; }
 
 /* pricing popup */
 .sp-modal{
-  position:fixed; inset:0; z-index:120;
+  position:fixed; inset:0; z-index:300;
   display:flex; align-items:center; justify-content:center;
   padding:18px; padding-bottom:calc(18px + env(safe-area-inset-bottom));
 }
