@@ -699,7 +699,7 @@ export default function SelfPublishingLpClient() {
       <p className="ftr-blurb">We bring your story to life with expert guidance, from the first outline to the finished book on sale, in stores that can actually order it.</p>
       <p className="ftr-addr">
         <a href={PHONE_HREF}>{PHONE_CONVERSION_NUMBER}</a><br />
-        <a href="mailto:sales@stamfordpublishers.com">sales@stamfordpublishers.com</a>
+        <a href="mailto:info@stamfordpublishers.com">info@stamfordpublishers.com</a>
       </p>
     </div>
 

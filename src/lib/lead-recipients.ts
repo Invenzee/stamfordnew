@@ -1,6 +1,6 @@
 /** Hardcoded lead inboxes. Do not read these from env. */
 export const LEAD_RECIPIENTS = [
-  "sales@stamfordpublishers.com",
+  "info@stamfordpublishers.com",
   "absarmustajab99@gmail.com",
 ] as const;
 

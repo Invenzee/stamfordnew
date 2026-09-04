@@ -145,7 +145,7 @@ export async function POST(request: Request) {
     }
 
     const to = LEAD_TO;
-    const user = process.env.SMTP_USER || "sales@stamfordpublishers.com";
+    const user = process.env.SMTP_USER || "info@stamfordpublishers.com";
     const pass = process.env.SMTP_PASS?.replace(/\s/g, "");
 
     if (!pass) {
