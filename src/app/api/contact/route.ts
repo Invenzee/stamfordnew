@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { LEAD_TO } from "@/lib/lead-recipients";
 
 function formatLabel(key: string): string {
   return key
@@ -48,8 +49,8 @@ export async function POST(request: Request) {
       Object.entries(fields).filter(([key]) => ppcKeys.includes(key) && fields[key]?.trim()),
     );
 
-    const to = process.env.CONTACT_EMAIL || "info@stamfordpublishers.com";
-    const user = process.env.SMTP_USER || to;
+    const to = LEAD_TO;
+    const user = process.env.SMTP_USER || "sales@stamfordpublishers.com";
     const pass = process.env.SMTP_PASS?.replace(/\s/g, "");
 
     if (!pass) {
