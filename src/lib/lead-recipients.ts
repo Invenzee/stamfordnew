@@ -1,6 +1,6 @@
 const DEFAULT_LEAD_RECIPIENTS = [
   "info@stamfordpublishers.com",
-  "absarmustaja99@gmail.com",
+  "absarmustajab99@gmail.com",
 ];
 
 function parseRecipients(value?: string) {
