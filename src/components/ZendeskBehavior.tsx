@@ -3,8 +3,17 @@
 import { useEffect } from "react";
 import { OPEN_ZENDESK_EVENT } from "@/lib/lead-actions";
 
+/**
+ * Zendesk draws the chat bubble. This file only controls how it behaves:
+ * phone Back closes chat instead of leaving the site, unread messages open
+ * the window, the bubble stays visible, and leftover text is cleared from
+ * the typing box (without wiping what the visitor is actively writing).
+ */
+
+/** How long to keep retrying leftover-text cleanup after open/close/new message. */
 const CLEAR_WINDOW_MS = 1500;
 
+/** Safe Zendesk talker: send a command, or stay quiet if Zendesk is not ready. */
 function zeCall(...args: unknown[]) {
   if (typeof window.zE !== "function") return;
   try {
@@ -14,11 +23,13 @@ function zeCall(...args: unknown[]) {
   }
 }
 
+/** Close the conversation window (covers both new messenger and old widget). */
 function closeZendeskWidget() {
   zeCall("messenger", "close");
   zeCall("webWidget", "close");
 }
 
+/** Ignore the small round chat button — that is not “chat is open.” */
 function isLauncherFrame(frame: HTMLIFrameElement) {
   const id = frame.id.toLowerCase();
   const title = frame.title.toLowerCase();
@@ -31,7 +42,7 @@ function isLauncherFrame(frame: HTMLIFrameElement) {
   );
 }
 
-/** True when the conversation panel is on screen, not just the launcher bubble. */
+/** True when the big conversation panel is on screen, not just the launcher bubble. */
 function isChatPanelOpen() {
   const frames = document.querySelectorAll("iframe");
   for (const frame of frames) {
@@ -81,6 +92,7 @@ export default function ZendeskBehavior() {
       timeouts.push(window.setTimeout(fn, ms));
     };
 
+    /** Phone Back-button lock: add a fake history step so Back does not leave the site. */
     const ensureGuard = () => {
       if (!chatOpen || guardActive) return;
       const prev =
@@ -93,12 +105,14 @@ export default function ZendeskBehavior() {
       guardActive = true;
     };
 
+    /** Try the lock now and again shortly after — chat can load slowly. */
     const ensureGuardWithRetry = () => {
       ensureGuard();
       later(ensureGuard, 300);
       later(ensureGuard, 1000);
     };
 
+    /** Visitor closed chat with Zendesk’s X: drop the extra history step quietly. */
     const releaseGuardSilently = () => {
       if (!guardActive) return;
       suppressPop = true;
@@ -106,11 +120,13 @@ export default function ZendeskBehavior() {
       history.back();
     };
 
+    /** Chat is open — turn on the Back-button lock. */
     const markOpen = () => {
       chatOpen = true;
       ensureGuardWithRetry();
     };
 
+    /** Chat is closed — remove the lock so the next Back leaves the page normally. */
     const markClosed = () => {
       chatOpen = false;
       // Widget closed from its own UI: drop the extra history entry so the
@@ -118,6 +134,7 @@ export default function ZendeskBehavior() {
       releaseGuardSilently();
     };
 
+    /** Phone/browser Back: if chat is open, close it and stay on this page. */
     const onPopState = () => {
       if (suppressPop) {
         suppressPop = false;
@@ -133,8 +150,10 @@ export default function ZendeskBehavior() {
     };
 
     window.addEventListener("popstate", onPopState);
+    // Site “Chat Now” buttons fire this so the same Back-button lock turns on.
     window.addEventListener(OPEN_ZENDESK_EVENT, markOpen);
 
+    /** Hook Zendesk open/close, and auto-open the window when a new message arrives. */
     function bindWidgetEvents() {
       if (bound || typeof window.zE !== "function") return false;
       bound = true;
@@ -162,6 +181,7 @@ export default function ZendeskBehavior() {
       return true;
     }
 
+    /** Wait until Zendesk finishes loading, then connect the behaviors above. */
     function initZendeskChat() {
       if (typeof window.zE === "function") {
         try {
@@ -179,6 +199,7 @@ export default function ZendeskBehavior() {
 
     initZendeskChat();
 
+    /** Reach inside Zendesk’s mini-page so we can see the typing box. */
     function getWidgetDoc() {
       const frame = document.querySelector(
         "iframe#webWidget",
@@ -191,6 +212,7 @@ export default function ZendeskBehavior() {
       }
     }
 
+    /** Empty leftover text in the typing box, but never while the visitor is writing. */
     function clearComposer() {
       const doc = getWidgetDoc();
       if (!doc) return false;
@@ -212,6 +234,7 @@ export default function ZendeskBehavior() {
       return true;
     }
 
+    /** Notice when the visitor is typing (or hitting Enter to send) so we don’t erase it. */
     function markTyping() {
       const doc = getWidgetDoc();
       if (!doc) return;
@@ -230,6 +253,7 @@ export default function ZendeskBehavior() {
       });
     }
 
+    /** Keep clearing leftover text for a short burst — Zendesk sometimes pastes it back in. */
     function clearRepeatedly() {
       const start = Date.now();
       const timer = window.setInterval(function () {
@@ -241,6 +265,7 @@ export default function ZendeskBehavior() {
       }, 100);
     }
 
+    /** Run leftover-text cleanup when chat opens, closes, or gets a new unread message. */
     function bindClearHandlers() {
       if (typeof window.zE !== "function") return false;
       try {
@@ -267,6 +292,7 @@ export default function ZendeskBehavior() {
       return true;
     }
 
+    // Keep trying until Zendesk is ready enough to attach the text-clearing behavior.
     let clearTries = 0;
     const clearBoot = window.setInterval(function () {
       if (bindClearHandlers() || ++clearTries > 100) {
@@ -275,6 +301,7 @@ export default function ZendeskBehavior() {
     }, 200);
     intervals.push(clearBoot);
 
+    // Keep the chat bubble visible after the page loads so it does not stay hidden.
     let showTries = 0;
     const showTimer = window.setInterval(function () {
       zeCall("webWidget", "show");
@@ -283,6 +310,7 @@ export default function ZendeskBehavior() {
     }, 250);
     intervals.push(showTimer);
 
+    /** Stop listeners and repeating checks when leaving this page. */
     return () => {
       window.removeEventListener("popstate", onPopState);
       window.removeEventListener(OPEN_ZENDESK_EVENT, markOpen);

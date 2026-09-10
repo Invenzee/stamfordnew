@@ -32,6 +32,7 @@ export async function POST(request: Request) {
       "utm_term",
       "utm_content",
       "utm_id",
+      "coupon",
       "campaignid",
       "adgroupid",
       "keyword",

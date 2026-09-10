@@ -10,6 +10,7 @@ const PPC_PARAM_KEYS = [
   "utm_term",
   "utm_content",
   "utm_id",
+  "coupon",
   "campaignid",
   "adgroupid",
   "keyword",
