@@ -1,8 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, MessageCircle, Phone, Share2 } from "lucide-react";
+import { ChevronRight, MessageCircle, Phone } from "lucide-react";
+import { FaFacebookF, FaInstagram } from "react-icons/fa6";
 import { ChatButton, QuoteButton } from "@/components/LeadCtas";
 import { routes } from "@/data/routes";
+
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61592814706675",
+    icon: FaFacebookF,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/stamfordpublishers/",
+    icon: FaInstagram,
+  },
+];
 
 const companyLinks = [
   { label: "Home", href: routes.home },
@@ -80,15 +94,20 @@ export default function Footer() {
               ideas to life.
             </p>
 
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:border-white hover:bg-white/10"
-              aria-label="Visit us on Facebook"
-            >
-              <Share2 className="h-4 w-4" aria-hidden="true" />
-            </a>
+            <div className="mt-6 flex items-center gap-3">
+              {socialLinks.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:border-white hover:bg-white/10"
+                  aria-label={`Visit us on ${label}`}
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                </a>
+              ))}
+            </div>
           </div>
 
           <FooterLinkColumn title="Quick Links" links={companyLinks} />

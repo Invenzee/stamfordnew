@@ -356,8 +356,8 @@ const TESTIMONIALS = [
 ];
 
 const SOCIAL_LINKS = [
-  { icon: FaFacebookF, label: "Facebook", href: "https://facebook.com" },
-  { icon: FaInstagram, label: "Instagram", href: "https://instagram.com" },
+  { icon: FaFacebookF, label: "Facebook", href: "https://www.facebook.com/profile.php?id=61592814706675" },
+  { icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/stamfordpublishers/" },
   { icon: FaLinkedinIn, label: "LinkedIn", href: "https://linkedin.com" },
 ];
 

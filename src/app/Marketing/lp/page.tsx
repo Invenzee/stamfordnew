@@ -1118,7 +1118,7 @@ export default function BookMarketingLpPage() {
 
               <div className="flex items-center gap-3 pt-2">
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/profile.php?id=61592814706675"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -1127,7 +1127,7 @@ export default function BookMarketingLpPage() {
                   <FaFacebookF className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/stamfordpublishers/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
