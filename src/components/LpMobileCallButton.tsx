@@ -11,7 +11,8 @@ export default function LpMobileCallButton() {
   if (
     !isStandaloneLpPath(pathname) ||
     pathname?.toLowerCase().startsWith("/cookbook/lp") ||
-    pathname?.toLowerCase().startsWith("/self-publishing/lp")
+    pathname?.toLowerCase().startsWith("/self-publishing/lp") ||
+    pathname?.toLowerCase().startsWith("/book-events")
   ) {
     return null;
   }
