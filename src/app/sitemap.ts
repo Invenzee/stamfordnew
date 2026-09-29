@@ -31,6 +31,7 @@ const ROUTES: Array<{
   { path: "/Kids/lp", changeFrequency: "monthly", priority: 0.7 },
   { path: "/cookbook/lp", changeFrequency: "monthly", priority: 0.7 },
   { path: "/self-publishing/lp", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/book-events", changeFrequency: "weekly", priority: 0.8 },
   { path: "/privacy-policy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/terms-of-service", changeFrequency: "yearly", priority: 0.3 },
   { path: "/refund-policy", changeFrequency: "yearly", priority: 0.3 },

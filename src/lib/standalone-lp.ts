@@ -8,6 +8,7 @@ export const STANDALONE_LP_PREFIXES = [
   "/Christian/lp",
   "/cookbook/lp",
   "/self-publishing/lp",
+  "/book-events",
 ];
 
 export const LP_CALL_THEMES: Record<string, { bg: string; icon: string }> = {
